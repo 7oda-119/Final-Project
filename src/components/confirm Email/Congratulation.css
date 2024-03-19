@@ -1,0 +1,21 @@
+.congrate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.congrate .cong{
+    margin-top: 30px;
+}
+.congrate button{
+    padding: 10px;
+    border-radius: 5px;
+    width: 110px;
+    background-color: #512da8;
+    color: #fff;
+    border: none;
+    transition: ease-in 0.2s;
+}
+.congrate button:active{
+    transform: scale(1.05);
+}
