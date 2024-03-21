@@ -1,19 +1,19 @@
 
 import { Route, Routes } from 'react-router';
 import './App.css';
-import Navbar from './components/home/Navbar';
-import SignIn from './components/sign in/SignIn';
-import Home from './components/home/Home';
-import Choose from './components/client or freelancer/Choose';
-import ClientSignUp from './components/client sign up/ClientSignUp';
-import FreelanceSignUp from './components/freelancer sign up/FreelanceSignUp';
-import Done from './components/done Registration/Done';
-import Forget from './components/forget Password/Forget';
-import Congratulation from './components/confirm Email/Congratulation';
-import FreelancerProfile from './components/freelancerProfile/FreelancerProfile';
+import Navbar from './Auth/home/Navbar';
+import SignIn from './Auth/sign in/SignIn';
+import Home from './Auth/home/Home';
+import Choose from './Auth/client or freelancer/Choose';
+import ClientSignUp from './Auth/client sign up/ClientSignUp';
+import FreelanceSignUp from './Auth/freelancer sign up/FreelanceSignUp';
+import Done from './Auth/done Registration/Done';
+import Forget from './Auth/forget Password/Forget';
+import Congratulation from './Auth/confirm Email/Congratulation';
+import FreelancerProfile from './Auth/freelancerProfile/FreelancerProfile';
 import Account from './accounts/account info/Account';
 import ConfirmPass from './accounts/confirmed password/ConfirmPass';
-import ResetPassword from './components/resetPassword/ResetPassword';
+import ResetPassword from './Auth/resetPassword/ResetPassword';
 
 
 function App() {

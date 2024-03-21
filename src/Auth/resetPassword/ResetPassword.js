@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../Api/Api';
 function ResetPassword() {
   const location = useLocation();
   const { email, token } = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
 
 
     const handlePasswordChange = (e) => {
@@ -23,7 +23,7 @@ function ResetPassword() {
     const handleSubmit = async (e) => {
       e.preventDefault()
       try{
-        await axios.post('https://localhost:7115/api/Auth/Reset-Password', {password, confirmPassword, token, email})
+        await axios.post(`${baseUrl}/resetPassword`, {password, confirmPassword, token, email})
         toast('The reset password has been successfully')
         console.log(token)
         console.log(email)

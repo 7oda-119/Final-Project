@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../Api/Api';
 function Forget() {
     const navigate = useNavigate();
     function haveNoAcc(){
@@ -24,7 +25,7 @@ function Forget() {
         setError(''); // Reset the error state
     
         try {
-            const res = await axios.post(`https://localhost:7115/api/Auth/Forgot-Password?email=${email}`)
+            const res = await axios.post(`${baseUrl}/Forgot-Password?email=${email}`)
             toast.success("Check your email");
         } catch (error) {
           console.log(error);

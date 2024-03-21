@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '../../Api/Api';
 
 function SignIn() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ function SignIn() {
         setError(''); // Reset the error state
     
         try {
-          const response = await axios.post('https://localhost:7115/api/Auth/Login', { email, password });
+          const response = await axios.post(`${baseUrl}/api/Auth/Login`, { email, password });
           toast('Login successful!');
           //token
           console.log(response.data)     
