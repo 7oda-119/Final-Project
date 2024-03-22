@@ -32,12 +32,8 @@ function SignIn() {
         setError(''); // Reset the error state
     
         try {
-          const response = await axios.post(`${baseUrl}/api/Auth/Login`, { email, password });
+          await axios.post(`${baseUrl}/Login`, { email, password });
           toast('Login successful!');
-          //token
-          console.log(response.data)     
-          //info     
-          console.log(response.config.data)          
           
         } catch (error) {
           setError(error.response.data)

@@ -6,7 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../Api/Api';
 function ResetPassword() {
   const location = useLocation();
-  const { email, token } = new URLSearchParams(location.search);
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+  const email = params.get('email');
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -29,7 +31,7 @@ function ResetPassword() {
         console.log(email)
         console.log(password)
         console.log(confirmPassword)
-        navigate('/sigin')
+        navigate('/signin')
       }catch(err){
         console.log(err)
       }
