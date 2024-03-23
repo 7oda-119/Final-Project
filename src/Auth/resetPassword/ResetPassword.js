@@ -7,12 +7,12 @@ import { baseUrl } from '../../Api/Api';
 function ResetPassword() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const token = params.get('token');
-  const email = params.get('email');
+  const token = params.get('token').replace(/\s/g, '+');
+  const email = decodeURIComponent(params.get('email'));
+  
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -22,10 +22,12 @@ function ResetPassword() {
         setConfirmPassword(e.target.value);
     };
 
+
     const handleSubmit = async (e) => {
       e.preventDefault()
       try{
-        await axios.post(`${baseUrl}/resetPassword`, {password, confirmPassword, token, email})
+        const response = await axios.post(`${baseUrl}/resetPassword`, {password, confirmPassword, token, email})
+        console.log(response )
         toast('The reset password has been successfully')
         console.log(token)
         console.log(email)
@@ -33,7 +35,7 @@ function ResetPassword() {
         console.log(confirmPassword)
         navigate('/signin')
       }catch(err){
-        console.log(err)
+        console.log(err.response.data)
       }
 
     }

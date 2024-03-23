@@ -5,23 +5,25 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { baseUrl } from '../../Api/Api';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Congratulation() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const token = params.get('token');
-  const email = params.get('email');
+  const token = params.get('token').replace(/\s/g, '+');
+  const encodedToken = encodeURIComponent(token);
+  const email = decodeURIComponent(params.get('email'));
   
   const handleConfirm = async () => {
     try {
-      await axios.post(`${baseUrl}/Confirm-Email`, { token, email });
-      // Redirect to the login page or show a success message
+      const response = await axios.post(`${baseUrl}/Confirm-Email?token=${encodedToken}&email=${email}`);
+      toast(response.data)
       console.log(token)
       console.log(email)
       navigate('/signin')
     } catch (error) {
-      // Show an error message
+      console.log(error)
     }
   };
 
