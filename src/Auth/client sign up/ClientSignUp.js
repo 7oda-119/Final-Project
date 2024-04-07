@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ClientSignUp.css'
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import { baseUrl } from '../../Api/Api';
 
 function ClientSignUp() {
     const navigate = useNavigate();
@@ -9,56 +12,79 @@ function ClientSignUp() {
         navigate("/signin")
     }
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [country, setCountry] = useState('');
+    const [FirstName, setFirstName] = useState('');
+    const [LastName, setLastName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const [ConfirmPassword, setConfirmPassword] = useState('');
+    const [Country, setCountry] = useState();
+    const [data, setData] = useState([])
+    const [getState, setState] = useState([])
     const [errors, setErrors] = useState({});
+
 
     const validateForm = () => {
         const newErrors = {};
-        if (!firstName) {
-            newErrors.firstName = 'First Name is required';
+        if (!FirstName) {
+            newErrors.FirstName = 'First Name is required';
         }
         
-        if (!lastName) {
-            newErrors.lastName = 'Last Name is required';
+        if (!LastName) {
+            newErrors.LastName = 'Last Name is required';
         }
         
-        if (!email) {
-        newErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = 'Email is invalid';
+        if (!Email) {
+        newErrors.Email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(Email)) {
+        newErrors.Email = 'Email is invalid';
         }
         
-        if (!password) {
-        newErrors.password = 'Password is required';
-        } else if (password.length < 8) {
-        newErrors.password = 'Password should be at least 8 characters long';
+        if (!Password) {
+        newErrors.Password = 'Password is required';
+        } else if (Password.length < 8) {
+        newErrors.Password = 'Password should be at least 8 characters long';
         }
         
-        if (!confirmPassword) {
-        newErrors.confirmPassword = 'Confirm Password is required';
-        } else if (confirmPassword !== password) {
-        newErrors.confirmPassword = 'Passwords do not match';
+        if (!ConfirmPassword) {
+        newErrors.ConfirmPassword = 'Confirm Password is required';
+        } else if (ConfirmPassword !== Password) {
+        newErrors.ConfirmPassword = 'Passwords do not match';
         }
 
-        if (!country) {
+        if (!Country) {
             newErrors.country = 'Country is required';
         }
         
         return newErrors;
     };
+
+    useEffect(()=>{
+        axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json').then(res=>setData(res.data)).catch(err=>console.log(err))
+    },[])
+    const country = [...new Set(data.map(item=> item.country))];
+    country.sort();
+
+    const handleCountry = (e) =>{
+        setCountry(e.target.value);
+      let states = data.filter(state => state.country === e.target.value); 
+      states = [...new Set(states.map(item=>item.subcountry))]
+      states.sort();
+      setState(states);
+    }
     
-    function handleSubmit(e){
+    const handleSubmit = async(e)=>{
         e.preventDefault();
-        const newErrors = validateForm();
-        setErrors(newErrors);
+        
+        try{
+            const response = await axios.post(`${baseUrl}/Register-User`, {FirstName, LastName, Email, Password, ConfirmPassword, Country})
+            console.log(response )
+            toast('Check your Email to confirm the Email')
+        }
+        catch(err){
+            console.log(err)
+          }
     }
 
-    
     
   return (
     <div className='box'>
@@ -69,20 +95,24 @@ function ClientSignUp() {
                 <div className="social-icons">
                 <a href="#" className="icon"><FaGoogle /></a>
                 </div>
-                <span>or use your email for registeration</span>
-                <input type="text" placeholder="FirstName" name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-                {errors.firstName && <span className='erorr'>{errors.firstName}</span>}
-                <input type="text" placeholder="LastName" name='lastName' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-                {errors.lastName && <span className='erorr'>{errors.lastName}</span>}
-                <input type="email" placeholder="Email" name='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-                {errors.email && <span className='erorr'>{errors.email}</span>}
-                <input type="password" placeholder="Password" name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-                {errors.password && <span className='erorr'>{errors.password}</span>}
-                <input type="password" placeholder="Confirm Password" name='confirmPassword' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                {errors.confirmPassword && <span className='erorr'>{errors.confirmPassword}</span>}
-                <input type="text" placeholder="country" name='country' value={country} onChange={(e) => setCountry(e.target.value)}/>
-                {errors.country && <span className='erorr'>{errors.country}</span>}
+                <span>or use your Email for registeration</span>
+                <input type="text" placeholder="FirstName" name='FirstName' value={FirstName} onChange={(e) => setFirstName(e.target.value)}/>
+                {errors.FirstName && <span className='erorr'>{errors.FirstName}</span>}
+                <input type="text" placeholder="LastName" name='LastName' value={LastName} onChange={(e) => setLastName(e.target.value)}/>
+                {errors.LastName && <span className='erorr'>{errors.LastName}</span>}
+                <input type="Email" placeholder="Email" name='Email' value={Email} onChange={(e) => setEmail(e.target.value)}/>
+                {errors.Email && <span className='erorr'>{errors.Email}</span>}
+                <input type="Password" placeholder="Password" name='Password' value={Password} onChange={(e) => setPassword(e.target.value)}/>
+                {errors.Password && <span className='erorr'>{errors.Password}</span>}
+                <input type="Password" placeholder="Confirm Password" name='ConfirmPassword' value={ConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                {errors.ConfirmPassword && <span className='erorr'>{errors.ConfirmPassword}</span>}
+                <select className='form-select my-1' value={Country} onChange={(e)=>handleCountry(e)}>
+                        <option value=''>select country</option>
+                        {country.map(item=> <option key={item} >{item}</option>)}
+                    </select>
+                    {errors.country && <span className='error'>{errors.country}</span>}
                 <button type='submit'>Sign Up</button>
+                <ToastContainer />
             </form>
         </div>
         <div className="toggle-sec">
@@ -90,7 +120,7 @@ function ClientSignUp() {
                 <div className="toggle-panel">
                     <h1>Welcome Back!</h1>
                     <p>Enter your personal details to use all of site features</p>
-                    <button onClick={handleSingIn} id="login">Sign In</button>
+                    <button type='button' onClick={handleSingIn} id="login">Sign In</button>
                 </div>
             </div>
         </div>

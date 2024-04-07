@@ -14,15 +14,12 @@ function Forget() {
     }
     const [email, setEmail] = useState('');
     
-    const [error, setError] = useState('');
-    
     const handleEmailChange = (e) => {
       setEmail(e.target.value);
   };
     
     const handleSubmit = async(e) => {
         e.preventDefault();
-        setError(''); // Reset the error state
     
         try {
             const res = await axios.post(`${baseUrl}/Forgot-Password?email=${email}`)
@@ -37,7 +34,7 @@ function Forget() {
         <div className="cont py-4">
         <form onSubmit={handleSubmit}>
             <div>
-                <h1><img src={logo} /> Task Sync</h1>
+                <h1><img src={logo} alt='logo'/>Task Sync</h1>
                 <p> Enter the email address and we'll send you a link to reset your password</p>
             </div>
             <div className='row d-flex justify-content-center'>

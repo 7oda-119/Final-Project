@@ -34,6 +34,7 @@ function SignIn() {
         try {
           await axios.post(`${baseUrl}/Login`, { email, password });
           toast('Login successful!');
+          navigate('/home')
           
         } catch (error) {
           setError(error.response.data)

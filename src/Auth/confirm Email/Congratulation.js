@@ -1,11 +1,11 @@
 import React from 'react';
-import congratulate from '../image/Congratulation.png'
 import './Congratulation.css';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { baseUrl } from '../../Api/Api';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import logo from '..//image/logo.png'
 
 function Congratulation() {
   const navigate = useNavigate();
@@ -28,15 +28,19 @@ function Congratulation() {
   };
 
   return (
-    <div className='congrate'>
-      <div>
-        <img src={congratulate} alt="" height="250px" />
-        <div className="cong">
-          <h2>Congratulation</h2>
-          <p>You have confirmed your email successfully and now you're ready to log in</p>
-          <button onClick={handleConfirm}>Go to log in</button>
+      <div className='forget d-flex justify-content-center'>
+        <div className="cont py-5">
+        <form>
+            <div >
+                <h1><img src={logo} alt='logo'/>Task Sync</h1>
+                <p> Click on the confirm button to cnfirm the email.</p>
+            </div>
+            <div className='confirm'>
+                <button className='btn btn-primary' type='button' onClick={handleConfirm}>Confirm</button>
+            </div>
+            <ToastContainer />
+        </form>
         </div>
-      </div>
     </div>
   )
 }
