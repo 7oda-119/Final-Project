@@ -16,9 +16,10 @@ function FreelanceSignUp() {
     const [formData ,setFormData] = useState({
         firstName:'', lastName:'', email:'', password:'', confirmPassword:'',
         age: '', zipCode:'',
-        position:'', description:'', pictureUrl:'',
+        position:'', description:'',
         education:'', exprirnces:'',hourlyRate:'', protfolioUrl:''
     });
+    const [selectedImage, setSelectedImage] = useState(null);
     const [selectCountry, setSelectCountry] = useState();
     const [selectSate, setSelectState] = useState();
     const [selectCity, setSelectCity] = useState();
@@ -63,6 +64,10 @@ function FreelanceSignUp() {
         { id: 4, name: 'Chinese' },
         { id: 5, name: 'Arabic' },
       ];
+      const handleLanguageChange = (languageOptions) => {
+        const selectedLanguageNames = languageOptions.map((option) => option.name);
+        setLanguages(selectedLanguageNames);
+      };
 
     const skillOptions = [
         { id: 1, name: 'HTML' },
@@ -71,7 +76,10 @@ function FreelanceSignUp() {
         { id: 4, name: 'C#' },
         { id: 5, name: '.NET FRAMWORK' },
       ];
-
+      const handleLSkillChange = (skillOptions) => {
+        const selectedSkillNames = skillOptions.map((option) => option.name);
+        setSkills(selectedSkillNames);
+      };
     const handleChande = (e)=>{
         const {name, value} = e.target;
         setFormData((prevData)=>({
@@ -79,6 +87,9 @@ function FreelanceSignUp() {
             [name]: value
         }));
     };
+    const handleImageChange = (event) => {
+        setSelectedImage(event.target.files[0]);
+      };
 
     const handleNext = () => {
         if (step === 1) {
@@ -134,6 +145,8 @@ function FreelanceSignUp() {
         errors.password = 'Password is required';
         } else if (formData.password.length < 8) {
         errors.password = 'Password should be at least 8 characters long';
+        } else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$_.]).{8,}$/.test(formData.password)){
+            errors.password = "Password mut be at least one capital character, small  character, number and special character.";
         }
         if (!formData.confirmPassword) {
         errors.confirmPassword = 'Confirm Password is required';
@@ -174,7 +187,7 @@ function FreelanceSignUp() {
         if (!formData.description) {
             errors.description = 'Description is required';
         }
-        if (!formData.pictureUrl) {
+        if (!selectedImage) {
             errors.pictureUrl = 'Picture is required';
         }
         if (skills.length === 0) {
@@ -189,6 +202,7 @@ function FreelanceSignUp() {
     const handleSubmit=(e)=>{
         e.preventDefault();
         console.log(formData);
+        console.log(selectedImage);
         console.log(languages);
         console.log(selectCountry);
         console.log(selectSate);
@@ -196,19 +210,7 @@ function FreelanceSignUp() {
         console.log(phone);
         console.log(skills);
         console.log(errors);
-        setFormData({
-            firstName:'', lastName:'', email:'', password:'', confirmPassword:'',
-            age: '', selectCountry:'', selectSate:'',selectCity:'', zipCode:'',
-            position:'', description:'', pictureUrl:'',
-            education:'', exprirnces:'',hourlyRate:'', protfolioUrl:''
-        });
-        setSelectCountry('');
-        setSelectState('');
-        setSelectCity('');
-        setPhone('');
-        setLanguages([]);
-        setSkills([]);
-        setStep(1);
+        
     }
 
   return (
@@ -281,7 +283,7 @@ function FreelanceSignUp() {
                         labelField="name"
                         valueField="id"
                         multi
-                        onChange={(values) => setSkills(values)}
+                        onChange={handleLSkillChange}
                         color='#65B741'
                     />
                     {errors.skills && <span className='error'>{errors.skills}</span>}
@@ -290,11 +292,11 @@ function FreelanceSignUp() {
                         labelField="name"
                         valueField="id"
                         multi
-                        onChange={(values) => setLanguages(values)}
+                        onChange={handleLanguageChange}
                         color='#65B741'
                     />
                     {errors.language && <span className='error'>{errors.language}</span>}
-                    <input type="text" name='pictureUrl' value={formData.pictureUrl} onChange={handleChande} placeholder="Url of your picture"/>
+                    <input className='form-control' type="file" accept="image/*" name='pictureUrl' onChange={handleImageChange} placeholder="Url of your picture"/>
                     {errors.pictureUrl && <span className='error'>{errors.pictureUrl}</span>}
                     <button onClick={handleBack}>Back</button>
                     <button type='button' onClick={handleNext}>Next</button>
@@ -307,7 +309,7 @@ function FreelanceSignUp() {
                     <input type="number" name='hourlyRate' value={formData.hourlyRate} onChange={handleChande} placeholder="hourlyRate($.. per hour)"/>
                     <textarea className="form-control" name='education' value={formData.education} onChange={handleChande} placeholder="Education"></textarea>
                     <textarea className="form-control" name='exprirnces' value={formData.exprirnces} onChange={handleChande} placeholder="Exprirnces"></textarea>
-                    <input type="text" name='protfolioUrl' value={formData.protfolioUrl} onChange={handleChande} placeholder="Protfolio Url"/>
+                    <input type="url" name='protfolioUrl' value={formData.protfolioUrl} onChange={handleChande} placeholder="Protfolio Url"/>
                     <button onClick={handleBack}>Back</button>
                     <button type='submit'>Submit</button>
 

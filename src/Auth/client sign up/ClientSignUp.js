@@ -71,12 +71,24 @@ function ClientSignUp() {
       states.sort();
       setState(states);
     }
-    
+    const model = {
+        FirstName,
+        LastName,
+        Email,
+        Password,
+        ConfirmPassword,
+        Country
+      };
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        
+        const newErrors = validateForm();
+        setErrors(newErrors);
         try{
-            const response = await axios.post(`${baseUrl}/Register-User`, {FirstName, LastName, Email, Password, ConfirmPassword, Country})
+            const response = await axios.post(`${baseUrl}/Register-User`, model, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+            })
             console.log(response )
             toast('Check your Email to confirm the Email')
         }

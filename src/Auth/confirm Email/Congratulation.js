@@ -15,7 +15,8 @@ function Congratulation() {
   const encodedToken = encodeURIComponent(token);
   const email = decodeURIComponent(params.get('email'));
   
-  const handleConfirm = async () => {
+  const handleConfirm = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.post(`${baseUrl}/Confirm-Email?token=${encodedToken}&email=${email}`);
       toast(response.data)
@@ -30,13 +31,13 @@ function Congratulation() {
   return (
       <div className='forget d-flex justify-content-center'>
         <div className="cont py-5">
-        <form>
+        <form onSubmit={handleConfirm}>
             <div >
                 <h1><img src={logo} alt='logo'/>Task Sync</h1>
                 <p> Click on the confirm button to cnfirm the email.</p>
             </div>
             <div className='confirm'>
-                <button className='btn btn-primary' type='button' onClick={handleConfirm}>Confirm</button>
+                <button className='btn btn-primary' type='submit'>Confirm</button>
             </div>
             <ToastContainer />
         </form>
