@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 export default function Password({ show, onHide }) {
-    const [oldPassword, setOldPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 

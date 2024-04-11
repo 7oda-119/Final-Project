@@ -10,7 +10,7 @@ import FreelanceSignUp from './Auth/freelancer sign up/FreelanceSignUp';
 import Done from './Auth/done Registration/Done';
 import Forget from './Auth/forget Password/Forget';
 import Congratulation from './Auth/confirm Email/Congratulation';
-import FreelancerProfile from './Auth/freelancerProfile/FreelancerProfile';
+import FreelancerProfile from './accounts/freelancerProfile/FreelancerProfile';
 import Account from './accounts/account info/Account';
 import ConfirmPass from './accounts/confirmed password/ConfirmPass';
 import ResetPassword from './Auth/resetPassword/ResetPassword';

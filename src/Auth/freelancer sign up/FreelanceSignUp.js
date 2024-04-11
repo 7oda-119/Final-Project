@@ -6,6 +6,9 @@ import Select from 'react-dropdown-select';
 import axios from 'axios';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { ToastContainer, toast } from 'react-toastify';
+import { baseUrl } from '../../Api/Api';
+
 function FreelanceSignUp() {
 
     const navigate = useNavigate();
@@ -13,21 +16,28 @@ function FreelanceSignUp() {
         navigate("/signin")
     }
 
-    const [formData ,setFormData] = useState({
-        firstName:'', lastName:'', email:'', password:'', confirmPassword:'',
-        age: '', zipCode:'',
-        position:'', description:'',
-        education:'', exprirnces:'',hourlyRate:'', protfolioUrl:''
-    });
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [selectCountry, setSelectCountry] = useState();
-    const [selectSate, setSelectState] = useState();
-    const [selectCity, setSelectCity] = useState();
-    const [phone, setPhone] = useState();
+    const [FirstName, setFirstName] = useState('');
+    const [LastName, setLastName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const [ConfirmPassword, setConfirmPassword] = useState('');
+    const [Age, setAge] = useState('');
+    const [ZIP, setZIP] = useState('');
+    const [YourTitle, setYourTitle] = useState('');
+    const [Description, setDescription] = useState('');
+    const [Education, setEducation] = useState('');
+    const [Experience, setExperience] = useState('');
+    const [HourlyRate, setHourlyRate] = useState('');
+    const [PortfolioURl, setPortfolioURl] = useState('');
+    const [Country, setCountry] = useState();
+    const [ProfilePicture, setProfilePicture] = useState(null);
+    const [State, setSelectState] = useState();
+    const [Address, setAddress] = useState();
+    const [PhoneNumber, setPhoneNumber] = useState();
 
-    const [languages, setLanguages] = useState([])
+    const [SelectedLanguages, setSelectedLanguages] = useState([])
 
-    const [skills, setSkills] = useState([])
+    const [SelectedSkills, setSelectedSkills] = useState([])
 
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
@@ -43,7 +53,7 @@ function FreelanceSignUp() {
     country.sort();
 
     const handleCountry = (e) =>{
-        setSelectCountry(e.target.value);
+        setCountry(e.target.value);
       let states = data.filter(state => state.country === e.target.value); 
       states = [...new Set(states.map(item=>item.subcountry))]
       states.sort();
@@ -58,45 +68,39 @@ function FreelanceSignUp() {
     }
 
     const languageOptions = [
-        { id: 1, name: 'English' },
-        { id: 2, name: 'German' },
-        { id: 3, name: 'French' },
-        { id: 4, name: 'Chinese' },
-        { id: 5, name: 'Arabic' },
+        { id: 'en', name: 'English' },
+        { id: 'mer', name: 'Meru' },
+        { id: 'pt_BR', name: 'Brazilian Portuguese' },
+        { id: 'hi', name: 'Hindi' },
+        { id: 'ar', name: 'Arabic' },
       ];
       const handleLanguageChange = (languageOptions) => {
-        const selectedLanguageNames = languageOptions.map((option) => option.name);
-        setLanguages(selectedLanguageNames);
+        const selectedLanguageNames = languageOptions.map((option) => option.id);
+        setSelectedLanguages(selectedLanguageNames);
       };
 
     const skillOptions = [
-        { id: 1, name: 'HTML' },
-        { id: 2, name: 'CSS' },
-        { id: 3, name: 'JAVASCRIPT' },
-        { id: 4, name: 'C#' },
-        { id: 5, name: '.NET FRAMWORK' },
+        { id: 18, name: 'AI' },
+        { id: 36, name: 'C' },
+        { id: 37, name: 'C#' },
+        { id: 73, name: 'Css' },
+        { id: 97, name: 'Dot Net' },
       ];
       const handleLSkillChange = (skillOptions) => {
-        const selectedSkillNames = skillOptions.map((option) => option.name);
-        setSkills(selectedSkillNames);
+        const selectedSkillID = skillOptions.map((option) => option.id);
+        setSelectedSkills(selectedSkillID);
       };
-    const handleChande = (e)=>{
-        const {name, value} = e.target;
-        setFormData((prevData)=>({
-            ...prevData,
-            [name]: value
-        }));
-    };
+    
     const handleImageChange = (event) => {
-        setSelectedImage(event.target.files[0]);
+        setProfilePicture(event.target.files[0]);
       };
 
     const handleNext = () => {
         if (step === 1) {
-            /*if(!formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.confirmPassword) {
+            /*if(!FirstName || !LastName || !Email || !Password || !ConfirmPassword) {
                 alert('Please fill in all fields');
                 return;
-            }else if(formData.password !== formData.confirmPassword){
+            }else if(Password !== ConfirmPassword){
                 alert('the password does  not match the confirmed password')
                 return ;
             }*/
@@ -130,27 +134,27 @@ function FreelanceSignUp() {
 
       const validateFormStep1 =()=>{
         const errors = {};
-        if (!formData.firstName) {
+        if (!FirstName) {
             errors.firstName = 'First Name is required';
         }
-        if (!formData.lastName) {
+        if (!LastName) {
             errors.lastName = 'Last Name is required';
         }
-        if (!formData.email) {
+        if (!Email) {
         errors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        } else if (!/\S+@\S+\.\S+/.test(Email)) {
         errors.email = 'Email is invalid';
         }      
-        if (!formData.password) {
+        if (!Password) {
         errors.password = 'Password is required';
-        } else if (formData.password.length < 8) {
+        } else if (Password.length < 8) {
         errors.password = 'Password should be at least 8 characters long';
-        } else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$_.]).{8,}$/.test(formData.password)){
+        } else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$_.]).{8,}$/.test(Password)){
             errors.password = "Password mut be at least one capital character, small  character, number and special character.";
         }
-        if (!formData.confirmPassword) {
+        if (!ConfirmPassword) {
         errors.confirmPassword = 'Confirm Password is required';
-        } else if (formData.confirmPassword !== formData.password) {
+        } else if (ConfirmPassword !== Password) {
         errors.confirmPassword = 'Passwords do not match';
         }
         return errors;
@@ -158,59 +162,82 @@ function FreelanceSignUp() {
 
       const validateFormStep2 =()=>{
         const errors = {};
-        if (!formData.age) {
+        if (!Age) {
             errors.age = 'Age is required';
         }
-        if (!selectCountry) {
+        if (!Country) {
             errors.country = 'Country is required';
         }
-        if (!selectSate) {
+        if (!State) {
             errors.state = 'State is required';
         }
-        if (!selectCity) {
+        if (!Address) {
             errors.state = 'City is required';
         }
-        if (!formData.zipCode) {
+        if (!ZIP) {
             errors.zipCode = 'Zip code is required';
         }
-        if (!phone) {
-            errors.phone = 'Phone is required';
+        if (!PhoneNumber) {
+            errors.PhoneNumber = 'PhoneNumber is required';
         }
         return errors;
       }
 
       const validateFormStep3 =()=>{
         const errors = {};
-        if (!formData.position) {
+        if (!YourTitle) {
             errors.position = 'Position is required';
         }
-        if (!formData.description) {
+        if (!Description) {
             errors.description = 'Description is required';
         }
-        if (!selectedImage) {
-            errors.pictureUrl = 'Picture is required';
+        
+        if (SelectedSkills.length === 0) {
+            errors.SelectedSkills = 'SelectedSkills code is required';
         }
-        if (skills.length === 0) {
-            errors.skills = 'Skills code is required';
-        }
-        if (languages.length === 0) {
-            errors.languages = 'Language is required';
+        if (SelectedLanguages.length === 0) {
+            errors.SelectedLanguages = 'Language is required';
         }
         return errors;
       }
 
-    const handleSubmit=(e)=>{
+    const handleSubmit= async (e)=> {
         e.preventDefault();
-        console.log(formData);
-        console.log(selectedImage);
-        console.log(languages);
-        console.log(selectCountry);
-        console.log(selectSate);
-        console.log(selectCity);
-        console.log(phone);
-        console.log(skills);
-        console.log(errors);
+        const formData = new FormData();
+        formData.append('FirstName', FirstName);
+        formData.append('LastName', LastName);
+        formData.append('Email', Email);
+        formData.append('Password', Password);
+        formData.append('ConfirmPassword', ConfirmPassword);
+        formData.append('Age', Age);
+        formData.append('ZIP', ZIP);
+        formData.append('YourTitle', YourTitle);
+        formData.append('Description', Description);
+        formData.append('Education', Education);
+        formData.append('Experience', Experience);
+        formData.append('HourlyRate', HourlyRate);
+        formData.append('PortfolioURl', PortfolioURl);
+        formData.append('Country', Country);
+        formData.append('State', State);
+        formData.append('Address', Address);
+        formData.append('PhoneNumber', PhoneNumber);
+        formData.append('file', ProfilePicture);
+        formData.append('SelectedLanguages', JSON.stringify(SelectedLanguages));
+        formData.append('SelectedSkills', JSON.stringify(SelectedSkills)) ;
         
+
+        try{
+            const response = await axios.post(`${baseUrl}/Register-Freelance`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+            })
+            console.log(response )
+            toast('Check your Email to confirm the Email')
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 
   return (
@@ -229,15 +256,15 @@ function FreelanceSignUp() {
                 </div>
                 {step === 1 && (
                     <div className='steps'>
-                    <input type="text" name='firstName' value={formData.firstName} onChange={handleChande} placeholder="FirstName" />
+                    <input type="text" name='firstName' value={FirstName} onChange={(e) => setFirstName(e.target.value)} placeholder="FirstName" />
                     {errors.firstName && <span className='error'>{errors.firstName}</span>}
-                    <input type="text" name='lastName' value={formData.lastName} onChange={handleChande} placeholder="LastName"/>
+                    <input type="text" name='lastName' value={LastName} onChange={(e) => setLastName(e.target.value)} placeholder="LastName"/>
                     {errors.lastName && <span className='error'>{errors.lastName}</span>}
-                    <input type="email" name='email' value={formData.email} onChange={handleChande} placeholder="Email" required />
+                    <input type="email" name='email' value={Email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
                     {errors.email && <span className='error'>{errors.email}</span>}
-                    <input type="password" name='password' value={formData.password} onChange={handleChande} placeholder="Password" />
+                    <input type="password" name='password' value={Password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                     {errors.password && <span className='error'>{errors.password}</span>}
-                    <input type="password" name='confirmPassword' value={formData.confirmPassword} onChange={handleChande} placeholder="Confirm Password" />
+                    <input type="password" name='confirmPassword' value={ConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
                     {errors.confirmPassword && <span className='error'>{errors.confirmPassword}</span>}
                     <button type="button" onClick={handleNext}>Next</button>
                </div>
@@ -245,27 +272,27 @@ function FreelanceSignUp() {
 
                 {step === 2 && (
                     <div className='steps'>
-                    <input type="number" name='age' value={formData.age} onChange={handleChande} placeholder="Age"/>
+                    <input type="number" name='age' value={Age} onChange={(e) => setAge(e.target.value)} placeholder="Age"/>
                     {errors.age && <span className='error'>{errors.age}</span>}
-                    <select className='form-select my-1' value={selectCountry} onChange={(e)=>handleCountry(e)}>
+                    <select className='form-select my-1' value={Country} onChange={(e)=>handleCountry(e)}>
                         <option value=''>select country</option>
                         {country.map(item=> <option key={item} >{item}</option>)}
                     </select>
                     {errors.country && <span className='error'>{errors.country}</span>}
-                    <select className='form-select my-1' value={selectSate} onChange={(e)=>handleState(e)}>
+                    <select className='form-select my-1' value={State} onChange={(e)=>handleState(e)}>
                         <option value=''>select state</option>
                         {getState.map(item=> <option key={item} >{item}</option>)}
                     </select>                    
                     {errors.state && <span className='error'>{errors.state}</span>}
-                    <select className='form-select my-1' value={selectCity} onChange={(e)=>setSelectCity(e.target.value)}>
+                    <select className='form-select my-1' value={Address} onChange={(e)=>setAddress(e.target.value)}>
                         <option value=''>select city</option>
                         {cities.map(item=> <option key={item.name} >{item.name}</option>)}
                     </select>
                     {errors.city && <span className='erorr'>{errors.city}</span>}
-                    <input type="number" name='zipCode' value={formData.zipCode} onChange={handleChande} placeholder="Zip code"/>
+                    <input type="number" name='zipCode' value={ZIP} onChange={(e) => setZIP(e.target.value)} placeholder="Zip code"/>
                     {errors.zipCode && <span className='error'>{errors.zipCode}</span>}
-                    <PhoneInput placeholder="Enter phone number" value={phone} onChange={setPhone}/>
-                    {errors.phone && <span className='error'>{errors.phone}</span>}
+                    <PhoneInput placeholder="Enter Phone number" value={PhoneNumber} onChange={setPhoneNumber}/>
+                    {errors.PhoneNumber && <span className='error'>{errors.PhoneNumber}</span>}
                     <button onClick={handleBack}>Back</button>
                     <button type='button' onClick={handleNext}>Next</button>
 
@@ -274,9 +301,9 @@ function FreelanceSignUp() {
 
                 {step === 3 && (
                     <div className='steps'>
-                    <input type="text" name='position' value={formData.position} onChange={handleChande} placeholder="Position"/>
+                    <input type="text" name='position' value={YourTitle} onChange={(e) => setYourTitle(e.target.value)} placeholder="Position"/>
                     {errors.position && <span className='error'>{errors.position}</span>}
-                    <textarea className="form-control" name='description' value={formData.description} onChange={handleChande} placeholder="Description about you"></textarea>
+                    <textarea className="form-control" name='description' value={Description} onChange={(e) => setDescription(e.target.value)} placeholder="Description about you"></textarea>
                     {errors.description && <span className='error'>{errors.description}</span>}
                     <Select
                         options={skillOptions}
@@ -286,7 +313,7 @@ function FreelanceSignUp() {
                         onChange={handleLSkillChange}
                         color='#65B741'
                     />
-                    {errors.skills && <span className='error'>{errors.skills}</span>}
+                    {errors.SelectedSkills && <span className='error'>{errors.SelectedSkills}</span>}
                     <Select
                         options={languageOptions}
                         labelField="name"
@@ -298,6 +325,7 @@ function FreelanceSignUp() {
                     {errors.language && <span className='error'>{errors.language}</span>}
                     <input className='form-control' type="file" accept="image/*" name='pictureUrl' onChange={handleImageChange} placeholder="Url of your picture"/>
                     {errors.pictureUrl && <span className='error'>{errors.pictureUrl}</span>}
+                    
                     <button onClick={handleBack}>Back</button>
                     <button type='button' onClick={handleNext}>Next</button>
 
@@ -306,15 +334,17 @@ function FreelanceSignUp() {
 
                 {step === 4 && (
                     <div className='steps'>
-                    <input type="number" name='hourlyRate' value={formData.hourlyRate} onChange={handleChande} placeholder="hourlyRate($.. per hour)"/>
-                    <textarea className="form-control" name='education' value={formData.education} onChange={handleChande} placeholder="Education"></textarea>
-                    <textarea className="form-control" name='exprirnces' value={formData.exprirnces} onChange={handleChande} placeholder="Exprirnces"></textarea>
-                    <input type="url" name='protfolioUrl' value={formData.protfolioUrl} onChange={handleChande} placeholder="Protfolio Url"/>
+                    <input type="number" name='hourlyRate' value={HourlyRate} onChange={(e) => setHourlyRate(e.target.value)} placeholder="hourlyRate($.. per hour)"/>
+                    <textarea className="form-control" name='education' value={Education} onChange={(e) => setEducation(e.target.value)} placeholder="Education"></textarea>
+                    <textarea className="form-control" name='exprirnces' value={Experience} onChange={(e) => setExperience(e.target.value)} placeholder="Exprirnces"></textarea>
+                    <input type="url" name='protfolioUrl' value={PortfolioURl} onChange={(e) => setPortfolioURl(e.target.value)} placeholder="Protfolio Url"/>
+                    
                     <button onClick={handleBack}>Back</button>
                     <button type='submit'>Submit</button>
 
                 </div> 
                 )}
+                <ToastContainer />
             </form>
         </div>
         <div className="toggle-sec">

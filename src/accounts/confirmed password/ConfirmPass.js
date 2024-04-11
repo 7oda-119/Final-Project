@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaRegCheckCircle } from "react-icons/fa";
-import './ConfirmPass.css'
+import '../CSS.css'
 import { AiFillEdit } from "react-icons/ai";
 import Password from '../password & security/Password';
 export default function ConfirmPass() {

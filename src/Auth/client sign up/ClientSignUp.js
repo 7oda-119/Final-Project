@@ -94,7 +94,7 @@ function ClientSignUp() {
         }
         catch(err){
             console.log(err)
-          }
+        }
     }
 
     

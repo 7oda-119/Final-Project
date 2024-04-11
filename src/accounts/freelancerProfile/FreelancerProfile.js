@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
-import './FreelancerProfile.css'
 import { FaUserEdit } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
 function FreelancerProfile() {
@@ -88,8 +87,9 @@ function FreelancerProfile() {
                         <div className="px-2 py-3">
                             <h3 className='py-2'>{position}</h3>
                             <h4>About:</h4>
-                            <p className='px-4'> i am student in ........</p>
-                            <a href="#" className='linkedin'>{linkedin}</a>    
+                              <p className='px-4'> i am student in ........</p>
+                            <h4>LinkedIn:</h4>
+                              <a href="#" className='linkedin'>{linkedin}</a>
                         </div>  
                     </div>
                     <div className="Skills col-lg-5 py-3">
@@ -101,7 +101,7 @@ function FreelancerProfile() {
                             <p>Languages:</p>
                             <span>English</span>
                         </div>
-                        <button className='btn-edit col-lg-1 float-right' onClick={handleOpenModal}><FaUserEdit /></button>
+                        <button className='btn-edit' onClick={handleOpenModal}><FaUserEdit /></button>
                     </div>  
                 </div>           
             </div>
@@ -136,7 +136,7 @@ function FreelancerProfile() {
             <Form.Group controlId="formLinkedin">
               <Form.Label>LinkedIn</Form.Label>
               <Form.Control
-                type="text"
+                type="url"
                 placeholder="Enter LinkedIn URL"
                 value={linkedin}
                 onChange={handleLinkedinChange}

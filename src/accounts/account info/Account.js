@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Information from '../information/Information'
-import './Account.css'
+import '../CSS.css'
 import ConfirmPass from '../confirmed password/ConfirmPass';
 export default function Account() {
 
