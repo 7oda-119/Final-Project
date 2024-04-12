@@ -1,6 +1,7 @@
 import React from 'react'
 import './Errors.css'
 import { useNavigate } from 'react-router-dom';
+import './Errors.css'
 function Error404() {
     const navigate = useNavigate();
     function navigateHome(){
@@ -8,10 +9,10 @@ function Error404() {
     }
     
   return (
-    <div>
-        <div id="notfound">
-		<div className="notfound">
-			<div className="notfound-404">
+    <div className='errorPages'>
+        <div id="errorN">
+		<div className="errorN">
+			<div className="errorNum">
 				<div></div>
 				<h1>404</h1>
 			</div>
@@ -19,7 +20,7 @@ function Error404() {
 			<p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
 			<button onClick={navigateHome}>home page</button>
 		</div>
-	</div>
+		</div>
     </div>
   )
 }

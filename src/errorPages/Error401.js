@@ -1,19 +1,18 @@
 import React from 'react'
-import "./Errors.css"
-function Error403() {
+
+export default function Error401() {
   return (
-     <div className='errorPages'>
+    <div className='errorPages'>
           <div id="errorN">
                <div className="errorN">
                     <div className="errorNum">
                          <div></div>
-                         <h1>403</h1>
+                         <h1>401</h1>
                     </div>
-                    <h2>Forbidden</h2>
-                    <p>You don't have permission to access this resourse.</p>
+                    <h2>Unauthorized</h2>
+                    <p>Sorry, your request couldn't be processed.</p>
                </div>
           </div>
      </div>
   )
 }
-export default Error403;
