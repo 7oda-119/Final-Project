@@ -3,6 +3,7 @@ import { FaGoogle } from "react-icons/fa";
 import './SignIn.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '../../Api/Api';
@@ -27,17 +28,23 @@ function SignIn() {
         setPassword(e.target.value);
     };
 
+    const cookies = Cookie();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(''); // Reset the error state
     
         try {
-          await axios.post(`${baseUrl}/Login`, { email, password });
+          const res = await axios.post(`${baseUrl}/Login`, { email, password });
+          const token = res.data
+          cookies.set('freelanceCookie', token)
           toast('Login successful!');
-          navigate('/home')
+          navigate('/')
           
         } catch (error) {
-          setError(error.response.data)
+          if(error.response.status){
+            setError(error.response.data); 
+          }
         }
       };
     
@@ -55,6 +62,7 @@ function SignIn() {
                 <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} required />
                 <button className='forgetPass' onClick={navigateToForgetPass}>Forget Your Password?</button>
                 <button>Sign In</button>
+                <p className='error'>{error}</p>
                 <ToastContainer />
             </form>
         </div>

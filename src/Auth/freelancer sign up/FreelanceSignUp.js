@@ -35,7 +35,7 @@ function FreelanceSignUp() {
     const [Address, setAddress] = useState();
     const [PhoneNumber, setPhoneNumber] = useState();
 
-    const [SelectedLanguages, setSelectedLanguages] = useState([])
+    const [SelectedLanguages, setSelectedLanguages] = useState()
 
     const [SelectedSkills, setSelectedSkills] = useState([])
 
@@ -97,13 +97,6 @@ function FreelanceSignUp() {
 
     const handleNext = () => {
         if (step === 1) {
-            /*if(!FirstName || !LastName || !Email || !Password || !ConfirmPassword) {
-                alert('Please fill in all fields');
-                return;
-            }else if(Password !== ConfirmPassword){
-                alert('the password does  not match the confirmed password')
-                return ;
-            }*/
             const validationErrors = validateFormStep1();
             if (Object.keys(validationErrors).length > 0) {
                 setErrors(validationErrors);
@@ -222,8 +215,8 @@ function FreelanceSignUp() {
         formData.append('Address', Address);
         formData.append('PhoneNumber', PhoneNumber);
         formData.append('file', ProfilePicture);
-        formData.append('SelectedLanguages', JSON.stringify(SelectedLanguages));
-        formData.append('SelectedSkills', JSON.stringify(SelectedSkills)) ;
+        formData.append('SelectedLanguages', SelectedLanguages);
+        formData.append('SelectedSkills', SelectedSkills) ;
         
 
         try{

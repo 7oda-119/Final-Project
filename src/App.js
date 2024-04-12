@@ -14,6 +14,9 @@ import FreelancerProfile from './accounts/freelancerProfile/FreelancerProfile';
 import Account from './accounts/account info/Account';
 import ConfirmPass from './accounts/confirmed password/ConfirmPass';
 import ResetPassword from './Auth/resetPassword/ResetPassword';
+import Error404 from './errorPages/Error404';
+import Error403 from './errorPages/Error403';
+import ProfileFree from './accounts/ProfileFreelancer.js/ProfileFree';
 
 
 function App() {
@@ -31,8 +34,11 @@ function App() {
       <Route path='registrationDone' element={<Done />}/>
       <Route path='congratulation' element={<Congratulation />}/>
       <Route path='profile' element={<FreelancerProfile />}/> 
+      <Route path='profileF' element={<ProfileFree />}/> 
       <Route path='account' element={<Account />}/>
       <Route path='confpass' element={<ConfirmPass />}/>
+      <Route path='error404' element={<Error404 />}/>
+      <Route path='error403' element={<Error403 />}/>
     </Routes>
     </div>
   );

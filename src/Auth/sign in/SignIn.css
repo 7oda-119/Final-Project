@@ -69,6 +69,10 @@
     height: 100%;
 }
 
+form .error{
+    color: red;
+    font-size: 12px;
+}
 .section input{
     background-color: #eee;
     border: none;

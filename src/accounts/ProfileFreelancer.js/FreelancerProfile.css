@@ -10,6 +10,10 @@
     position: relative;
 }
 
+.account-info .head{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
 .Skills span{
     background-color: #EEEEEE;
     margin-left: 20px;
@@ -19,14 +23,11 @@
 
 .btn-edit{
     position: absolute;
-    right: 10px;
+    right: -10px;
     bottom: 10px;
     width: 50px;
-    background-color: #EEEEEE;
-    border-radius: 20px;
     border: none;
     font-size: 20px;
-    padding-bottom: 5px;
 }
 .linkedin{
     text-decoration: none;
