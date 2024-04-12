@@ -10,7 +10,6 @@ import FreelanceSignUp from './Auth/freelancer sign up/FreelanceSignUp';
 import Done from './Auth/done Registration/Done';
 import Forget from './Auth/forget Password/Forget';
 import Congratulation from './Auth/confirm Email/Congratulation';
-import FreelancerProfile from './accounts/freelancerProfile/FreelancerProfile';
 import Account from './accounts/account info/Account';
 import ConfirmPass from './accounts/confirmed password/ConfirmPass';
 import ResetPassword from './Auth/resetPassword/ResetPassword';
@@ -35,8 +34,7 @@ function App() {
       <Route path='freelanceSignUp' element={<FreelanceSignUp />}/>
       <Route path='registrationDone' element={<Done />}/>
       <Route path='congratulation' element={<Congratulation />}/>
-      <Route path='profile' element={<FreelancerProfile />}/> 
-      <Route path='profileF' element={<ProfileFree />}/> 
+      <Route path='profile' element={<ProfileFree />}/> 
       <Route path='account' element={<Account />}/>
       <Route path='confpass' element={<ConfirmPass />}/>
       <Route path='error404' element={<Error404 />}/>
