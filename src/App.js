@@ -18,6 +18,10 @@ import Error403 from './errorPages/Error403';
 import ProfileFree from './accounts/ProfileFreelancer.js/ProfileFree';
 import Error401 from './errorPages/Error401';
 import Error500 from './errorPages/Error500';
+import Select from './components/Select';
+import Protfolio from './accounts/ProfileFreelancer.js/Protfolio';
+import SelectImage from './components/SelectImage';
+import ReconfirmEmail from './Auth/ReconfirmEmail';
 
 
 function App() {
@@ -34,13 +38,17 @@ function App() {
       <Route path='freelanceSignUp' element={<FreelanceSignUp />}/>
       <Route path='registrationDone' element={<Done />}/>
       <Route path='congratulation' element={<Congratulation />}/>
+      <Route path='reconfirm-email' element={<ReconfirmEmail />}/>
       <Route path='profile' element={<ProfileFree />}/> 
+      <Route path='protfolio' element={<Protfolio />}/> 
       <Route path='account' element={<Account />}/>
       <Route path='confpass' element={<ConfirmPass />}/>
       <Route path='error404' element={<Error404 />}/>
       <Route path='error403' element={<Error403 />}/>
       <Route path='error401' element={<Error401 />}/>
       <Route path='error500' element={<Error500 />}/>
+      <Route path='select' element={<Select />}/>
+      <Route path='selectimage' element={<SelectImage />}/>
     </Routes>
     </div>
   );

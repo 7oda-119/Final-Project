@@ -93,7 +93,7 @@ function FreelanceSignUp() {
     
     const handleImageChange = (event) => {
         setProfilePicture(event.target.files[0]);
-      };
+    };
 
     const handleNext = () => {
         if (step === 1) {
@@ -227,6 +227,7 @@ function FreelanceSignUp() {
             })
             console.log(response )
             toast('Check your Email to confirm the Email')
+            navigate('/reconfirm-email')
         }
         catch(err){
             console.log(err)

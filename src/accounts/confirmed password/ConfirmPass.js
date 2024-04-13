@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaRegCheckCircle } from "react-icons/fa";
 import '../CSS.css'
 import { AiFillEdit } from "react-icons/ai";
-import Password from '../password & security/Password';
+import Password from '../../Modal/Password';
 export default function ConfirmPass() {
 
     const [showModal, setShowModal] = useState(false);

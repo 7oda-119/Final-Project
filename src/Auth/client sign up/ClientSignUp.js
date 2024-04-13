@@ -91,6 +91,7 @@ function ClientSignUp() {
             })
             console.log(response )
             toast('Check your Email to confirm the Email')
+            navigate('/reconfirm-email')
         }
         catch(err){
             console.log(err)
