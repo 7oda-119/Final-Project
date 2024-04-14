@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { baseUrl } from '../Api/Api';
+import Cookie from 'cookie-universal'
 
-export default function EditInfoFreelancer({ isOpen, closeModal, saveData }) {
+export default function EditInfoFreelancer({ isOpen, closeModal }) {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [Age, setAge] = useState('');
@@ -15,7 +17,6 @@ export default function EditInfoFreelancer({ isOpen, closeModal, saveData }) {
   const [HourlyRate, setHourlyRate] = useState('');
   const [PortfolioURl, setPortfolioURl] = useState('');
   const [Country, setCountry] = useState();
-  const [ProfilePicture, setProfilePicture] = useState(null);
   const [State, setSelectState] = useState();
   const [Address, setAddress] = useState();
   const [PhoneNumber, setPhoneNumber] = useState();
@@ -42,9 +43,70 @@ export default function EditInfoFreelancer({ isOpen, closeModal, saveData }) {
         setSelectState(e.target.value);
       let cities = data.filter(city => city.subcountry === e.target.value)
       setCities(cities)
-
     }
 
+    const cookies = Cookie();
+  const token = cookies.get('freelanceCookie');
+
+      //fetch freelancer information
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/Account/Freelancer-Account`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+        });
+      console.log(response.data.profilePicture)
+      setFirstName(response.data.firstName);
+      setLastName(response.data.lastName);
+      setAddress(response.data.address);
+      setAge(response.data.age);
+      setPhoneNumber(response.data.phoneNumber);
+      setHourlyRate(response.data.hourlyRate);
+      setDescription(response.data.description);
+      setEducation(response.data.education);
+      setExperience(response.data.experience);
+      setPortfolioURl(response.data.portfolioURl);
+      setZIP(response.data.zip);
+      setYourTitle(response.data.yourTitle);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateProfileInfo =async()=>{
+    const formData = new FormData();
+        formData.append('FirstName', FirstName);
+        formData.append('LastName', LastName);
+        formData.append('Age', Age);
+        formData.append('ZIP', ZIP);
+        formData.append('YourTitle', YourTitle);
+        formData.append('Description', Description);
+        formData.append('Education', Education);
+        formData.append('Experience', Experience);
+        formData.append('HourlyRate', HourlyRate);
+        formData.append('PortfolioURl', PortfolioURl);
+        formData.append('Country', Country);
+        formData.append('State', State);
+        formData.append('Address', Address);
+        formData.append('PhoneNumber', PhoneNumber);
+    try{
+      const response = await axios.post(`${baseUrl}/api/Account/Change-Name-Phone-Age-Language-ZIP-Address-Experience-Education-PortfolioURl-Description-YourTitle-HourlyRate-Freelancer`,formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        }
+      });
+      window.location.reload();
+      closeModal();
+    }catch(err){
+      console.log(err)
+    }
+  }
   
   return (
     <div>
@@ -56,61 +118,72 @@ export default function EditInfoFreelancer({ isOpen, closeModal, saveData }) {
               <button type="button" className="btn-close" onClick={closeModal}></button>
             </div>
             <div className="modal-body">
-              <div className="mb-2">
-                <input type="text" className="form-control" id="firstName" value={FirstName} placeholder='First Name' onChange={(e) => setFirstName(e.target.value)} />
+              <div className="mb-1">
+                <label className='form-label mb-1' >First Name</label>
+                <input type="text" className="form-control" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
               </div>
-              <div className="mb-2">
-                <input type="text" className="form-control" id="lastName" value={LastName} placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} />
+              <div className="mb-1">
+                <label className='form-label mb-1'>Last Name</label>
+                <input type="text" className="form-control" value={LastName} onChange={(e) => setLastName(e.target.value)} />
               </div>
-              <div className="mb-2">
-                <input type="number" className="form-control" id="age" value={Age} placeholder='Age' onChange={(e) => setAge(e.target.value)} />
+              <div className="mb-1">
+              <label className='form-label mb-1'>Age</label>
+                <input type="number" className="form-control" value={Age} onChange={(e) => setAge(e.target.value)} />
               </div>
-              <div className="mb-2">
-              <PhoneInput placeholder="Enter Phone number" value={PhoneNumber} onChange={setPhoneNumber}/>
+              <div className="mb-1">
+              <label className='form-label mb-1'>Phone Number</label>
+              <PhoneInput value={PhoneNumber} onChange={setPhoneNumber}/>
               </div>
-              <div className="mb-2">
-                <input type="text" className="form-control" id="phone" value={ZIP} placeholder='Zip code' onChange={(e) => setZIP(e.target.value)} />
+              <div className="mb-1">
+              <label className='form-label mb-1'>Zip Code</label>
+                <input type="text" className="form-control" value={ZIP} onChange={(e) => setZIP(e.target.value)} />
               </div>
-              <div className="mb-2">
+              <div className="mb-1">
                 <select className='form-select my-1' value={Country} onChange={(e)=>handleCountry(e)}>
                   <option value=''>select country</option>
                   {country.map(item=> <option key={item} >{item}</option>)}
                 </select>
               </div>
-              <div className="mb-2">
+              <div className="mb-1">
                 <select className='form-select my-1' value={State} onChange={(e)=>handleState(e)}>
                   <option value=''>select state</option>
                   {getState.map(item=> <option key={item} >{item}</option>)}
                 </select>                    
               </div>
-              <div className="mb-2">
+              <div className="mb-1">
                 <select className='form-select my-1' value={Address} onChange={(e)=>setAddress(e.target.value)}>
                   <option value=''>select city</option>
                   {cities.map(item=> <option key={item.name} >{item.name}</option>)}
                 </select>
               </div>
-              <div className="mb-2">
-                <input type="text" className="form-control" id="phone" value={Education} placeholder='Education' onChange={(e) => setEducation(e.target.value)} />
+              <div className="mb-1">
+                <label className='form-label mb-1'>Education</label>
+                <input type="text" className="form-control" value={Education} onChange={(e) => setEducation(e.target.value)} />
               </div>
-              <div className="mb-2">
-                <input type="url" className="form-control" id="phone" value={PortfolioURl} placeholder='Protfolio URL' onChange={(e) => setPortfolioURl(e.target.value)} />
+              <div className="mb-1">
+                <label className='form-label mb-1'>Portfolio URL</label>
+                <input type="url" className="form-control" value={PortfolioURl} onChange={(e) => setPortfolioURl(e.target.value)} />
               </div>
-              <div className="mb-2">
-              <textarea class="form-control" placeholder='Experience' value={Experience} onChange={(e) => setExperience(e.target.value)} rows="3"></textarea>
+              <div className="mb-1">
+                <label className='form-label mb-1'>Experience</label>
+                <textarea className="form-control" value={Experience} onChange={(e) => setExperience(e.target.value)} rows="3"></textarea>
               </div>
-              <div className="mb-2">
-              <textarea class="form-control" placeholder='Description' value={Description} onChange={(e) => setDescription(e.target.value)} rows="3"></textarea>
+              <div className="mb-1">
+                <label className='form-label mb-1'>Description</label>
+                <textarea className="form-control" value={Description} onChange={(e) => setDescription(e.target.value)} rows="3"></textarea>
               </div>
-              <div className="mb-2">
-                <input type="text" className="form-control" id="phone" value={YourTitle} placeholder='Position' onChange={(e) => setYourTitle(e.target.value)} />
+              <div className="mb-1">
+                <label className='form-label mb-1'>Your Position</label>
+                <input type="text" className="form-control" id="phone" value={YourTitle} onChange={(e) => setYourTitle(e.target.value)} />
               </div>
-              <div className="mb-2">
-                <input type="text" className="form-control" id="phone" value={HourlyRate} placeholder='Hoyrly Rate' onChange={(e) => setHourlyRate(e.target.value)} />
+              <div className="mb-1">
+              <label className='form-label mb-1'>Hourly Rate</label>
+                <input type="text" className="form-control" id="phone" value={HourlyRate} onChange={(e) => setHourlyRate(e.target.value)} />
               </div>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={closeModal}>Close</button>
-              <button type="button" className="btn btn-primary" >Save</button>
+              <button type="button" className="btn btn-primary" onClick={updateProfileInfo}>Save</button>
             </div>
           </div>
         </div>
