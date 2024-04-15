@@ -8,20 +8,21 @@ import Choose from './Auth/client or freelancer/Choose';
 import ClientSignUp from './Auth/client sign up/ClientSignUp';
 import FreelanceSignUp from './Auth/freelancer sign up/FreelanceSignUp';
 import Done from './Auth/done Registration/Done';
+import ReconfirmEmail from './Auth/ReconfirmEmail';
 import Forget from './Auth/forget Password/Forget';
 import Congratulation from './Auth/confirm Email/Congratulation';
-import Account from './accounts/account info/Account';
-import ConfirmPass from './accounts/confirmed password/ConfirmPass';
 import ResetPassword from './Auth/resetPassword/ResetPassword';
+import UserAccount from './accounts/UserAccount';
+import FreelancerAccount from './accounts/FreelancerAccount';
+import ConfirmPass from './accounts/confirmed password/ConfirmPass';
+import Protfolio from './accounts/ProfileFreelancer.js/Protfolio';
 import Error404 from './errorPages/Error404';
 import Error403 from './errorPages/Error403';
 import ProfileFree from './accounts/ProfileFreelancer.js/ProfileFree';
 import Error401 from './errorPages/Error401';
 import Error500 from './errorPages/Error500';
 import Select from './components/Select';
-import Protfolio from './accounts/ProfileFreelancer.js/Protfolio';
 import SelectImage from './components/SelectImage';
-import ReconfirmEmail from './Auth/ReconfirmEmail';
 
 
 function App() {
@@ -41,7 +42,8 @@ function App() {
       <Route path='reconfirm-email' element={<ReconfirmEmail />}/>
       <Route path='profile' element={<ProfileFree />}/> 
       <Route path='protfolio' element={<Protfolio />}/> 
-      <Route path='account' element={<Account />}/>
+      <Route path='account-user' element={<UserAccount/>}/>
+      <Route path='account-freelancer' element={<FreelancerAccount/>}/>
       <Route path='confpass' element={<ConfirmPass />}/>
       <Route path='error404' element={<Error404 />}/>
       <Route path='error403' element={<Error403 />}/>

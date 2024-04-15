@@ -46,7 +46,7 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
     }
 
     const cookies = Cookie();
-  const token = cookies.get('freelanceCookie');
+    const token = cookies.get('freelanceCookie');
 
       //fetch freelancer information
   useEffect(() => {
@@ -59,10 +59,12 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
         headers: {
           Authorization: `Bearer ${token}`
         }
-        });
-      console.log(response.data.profilePicture)
+      });
+      console.log(response.data)
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
+      setCountry(response.data.country);
+      setSelectState(response.data.state);
       setAddress(response.data.address);
       setAge(response.data.age);
       setPhoneNumber(response.data.phoneNumber);
@@ -102,7 +104,6 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
         }
       });
       window.location.reload();
-      closeModal();
     }catch(err){
       console.log(err)
     }
@@ -182,8 +183,8 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={closeModal}>Close</button>
-              <button type="button" className="btn btn-primary" onClick={updateProfileInfo}>Save</button>
+              <button type="button" className='btnbtn-' onClick={closeModal}>Close</button>
+              <button type="button" className='btn btn-primary' onClick={updateProfileInfo}>Save</button>
             </div>
           </div>
         </div>

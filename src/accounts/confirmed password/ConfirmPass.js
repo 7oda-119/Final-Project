@@ -15,7 +15,7 @@ export default function ConfirmPass() {
     };
   
   return (
-    <div>
+    <div style={{height:'83vh'}}>
         <h4>Password & security</h4>
         <div className='security-pass'>
             <h4>Authentication options</h4>

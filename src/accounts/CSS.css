@@ -22,8 +22,8 @@
 
 /* Confirm Password */
 .security-pass{
-    margin: 33px 20px 0 20px;
     background-color: transparent;
+    margin-top: 20px;
     padding: 20px 20px 50px 20px;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -48,16 +48,48 @@
     left: 30px;
 }
 
-/* Information */
+/* Account freelancer & user */
+.bg-acc{
+    min-height: 90vh;
+}
 .Account{
+    position: relative;
     display: flex;
-    gap: 100px;
     background-color: transparent;
     padding: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow: #625ee2 0px 1px 3px 0px, rgba(210, 96, 20, 0.15) 0px 0px 0px 1px;
+}
+.Account .edit-img{
+    position: absolute;
+    top: 160px;
+    left: 80px;
+    border-radius: 20px;
+    color: rgb(25, 137, 25);
+}
+.Account .editInfo{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: rgb(26, 110, 26);
+}
+.Account .edit-sk-lang{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: rgb(26, 110, 26);
+}
+.Account .edit-user{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: rgb(9, 149, 9);
+}
+.Acc-info{
+    margin-top: 30px;
 }
 .Account img{
     width: 120px;
@@ -69,42 +101,109 @@
 }
 .Account label{
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 450;
+    color: rgb(7, 106, 21);
+    display: block;
 }
 .Account p{
-    font-weight: 600;
+    font-weight: 550;
+    margin-left: 10px;
 }
-.Acc-info{
-    margin-top: 30px;
+.Account a{
+    font-weight: 550;
+    margin-left: 10px;
+    text-decoration: none;
+}
+.Account span{
+    font-weight: 600;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: #EEF0E5;
+    padding: 2px 5px;
+    border-radius: 30px;
+    display: inline;
 }
 /* Freelancer Profile */
 .account{
     margin: 50px 150px 0 150px;
     padding: 20px 0 50px 0;
+    min-height: 450px;
 }
+
 .account-info{
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
     border-radius: 20px;
-    overflow: hidden;
+}
+
+.account-info .head{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
+.account .Skills{
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
 .Skills span{
-    background-color: #EEEEEE;
-    margin-left: 20px;
+    background-color: #EEF0E5;
+    margin-left: 10px;
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
-.btn-edit{
-    position: absolute;
-    right:18px;
-    bottom: 15px;
-    color: #097015;
-    font-size: 25px;
-}
 .linkedin{
     text-decoration: none;
     padding: 0 0 0 25px;
+}
+
+/* protfolio */
+.portfolio{
+    max-width: 80%;
+    margin-top: 50px;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+}
+.portfolio .add{
+    text-align: center;
+}
+
+.portfolio .cards{
+    padding: 30px 10px 20px 10px;
+    border-radius: 20px;
+   
+}
+/* test*/
+.AccFree .rate{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;    
+    max-height: 300px;
+    position: relative;
+}
+.AccFree .rate .edit-img{
+    position: absolute;
+    top: 95px;
+    left: 145px;
+    color: rgb(25, 137, 25);
+}
+
+.AccFree .FreeInfo{
+    margin-bottom: 10px;
+    padding: 20px 0 20px 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;}
+.AccFree .FreeInfo p{
+    margin-left: 40px;
+    font-weight: 600;
+}
+.AccFree .FreeInfo .languages{
+    margin-left: 30px;
+    background-color: #9EB8D9;
+    padding: 5px;
+    border-radius: 7px;
+    font-weight: 600;
+}
+.AccFree .FreeInfo .skills{
+    margin-left: 10px;
+    background-color: #9EB8D9;
+    padding: 5px;
+    border-radius: 7px;
+    font-weight: 600;
 }

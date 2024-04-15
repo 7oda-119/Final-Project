@@ -36,7 +36,8 @@ function SignIn() {
     
         try {
           const res = await axios.post(`${baseUrl}/Login`, { email, password });
-          const token = res.data
+          const token = res.data.token
+          console.log(token)
           cookies.set('freelanceCookie', token)
           toast('Login successful!');
           navigate('/')
