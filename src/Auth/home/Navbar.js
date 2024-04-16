@@ -7,12 +7,14 @@ import './Navbar.css'
 function Navbar() {
 
   const navigate = useNavigate();
+
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie');
   const role = cookies.get('role');
 
   const handleSignOut =()=>{
     cookies.remove('freelanceCookie')
+    cookies.remove('role')
     navigate('/signin')
   }
 
