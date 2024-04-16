@@ -48,7 +48,7 @@
     left: 30px;
 }
 
-/* Account freelancer & user */
+/* Account user */
 .bg-acc{
     min-height: 90vh;
 }
@@ -62,25 +62,7 @@
     border-radius: 20px;
     box-shadow: #625ee2 0px 1px 3px 0px, rgba(210, 96, 20, 0.15) 0px 0px 0px 1px;
 }
-.Account .edit-img{
-    position: absolute;
-    top: 160px;
-    left: 80px;
-    border-radius: 20px;
-    color: rgb(25, 137, 25);
-}
-.Account .editInfo{
-    position: absolute;
-    top: 40px;
-    right: 10px;
-    background-color: rgb(26, 110, 26);
-}
-.Account .edit-sk-lang{
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background-color: rgb(26, 110, 26);
-}
+
 .Account .edit-user{
     position: absolute;
     top: 10px;
@@ -91,11 +73,7 @@
 .Acc-info{
     margin-top: 30px;
 }
-.Account img{
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-}
+
 .Account h4{
     padding: 0 0 25px 25px;
 }
@@ -187,7 +165,7 @@
 
 .AccFree .FreeInfo{
     margin-bottom: 10px;
-    padding: 20px 0 20px 20px;
+    padding: 10px 0 10px 20px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;}
 .AccFree .FreeInfo p{
     margin-left: 40px;

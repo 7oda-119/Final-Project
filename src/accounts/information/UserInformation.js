@@ -14,25 +14,24 @@ function Information() {
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
-  console.log(token)
 
-    //fetch freelancer information
-    useEffect(() => {
-      fetchData();
-    }, []);
+  //fetch freelancer information
+  useEffect(() => {
+    fetchData();
+  }, []);
   
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}/api/Account/User-Account`,{
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setFirstName(response.data.firstName);
-        setLastName(response.data.lastName);
-        setEmail(response.data.email);
-        setusername(response.data.username);
-        setCountry(response.data.country);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/Account/User-Account`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setFirstName(response.data.firstName);
+      setLastName(response.data.lastName);
+      setEmail(response.data.email);
+      setusername(response.data.username);
+      setCountry(response.data.country);
       } catch (error) {
         console.error(error);
       }

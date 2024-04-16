@@ -32,7 +32,6 @@ export default function Test() {
      //call token 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
-  console.log(token)
 
     //fetch freelancer information
   useEffect(() => {
@@ -51,6 +50,7 @@ export default function Test() {
       setLastName(response.data.lastName);
       setEmail(response.data.email);
       setusername(response.data.username);
+      setRating(response.data.rate);
       setCountry(response.data.country);
       setState(response.data.state);
       setAddress(response.data.address);
@@ -71,7 +71,8 @@ export default function Test() {
     }
   };
 
-    const [rating, setRating] = useState(2)
+  const [rating, setRating] = useState()
+
     //open modal of picture of freelancer
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const openImageModal = () => {
@@ -118,30 +119,30 @@ export default function Test() {
                 </div>
                 <div className='col-8' >
                     <div className='FreeInfo mr-3'>
-                        <span className='d-block mb-1'>Age:</span>
-                        <p>{age}</p>
-                        <span className='d-block mb-1'>phone:</span>
-                        <p>{phoneNumber}</p>
-                        <span className='d-block mb-1'>Zip Code:</span>
-                        <p>{zip}</p>
-                        <span className=' d-block mb-1'>Languages:</span>
+                        <span className='d-block'>Age:</span>
+                        <p className='mb-1'>{age}</p>
+                        <span className='d-block'>phone:</span>
+                        <p className='mb-1'>{phoneNumber}</p>
+                        <span className='d-block '>Zip Code:</span>
+                        <p className='mb-1'>{zip}</p>
+                        <span className=' d-block '>Languages:</span>
                         <div style={{margin:"10px 0 0 30px"}}>
                             {selectedLangueges.map((lang)=><span className='languages' key={lang}>{lang}</span>)}
                         </div>
                     </div>
                     <div className='FreeInfo'>
                         <span className='d-block'>Your Title:</span>
-                        <p>23</p>
+                        <p className='mb-1'>{yourTitle}</p>
                         <span className='d-block'>Skills:</span>
                         <div style={{margin:"10px 0 15px 30px"}}>
                         {selectedSkills.map((skill)=><span className='skills' key={skill}>{skill}</span>)}
                         </div>
                         <span className='d-block'>Description:</span>
-                        <p>{description}</p>
+                        <p className='mb-1'>{description}</p>
                         {education && <div><span className='d-block'>Education:</span>
-                        <p>{education }</p></div>}
+                        <p className='mb-1'>{education }</p></div>}
                         {experience && <div><span className='d-block'>Experience:</span>
-                        <p>{experience}</p></div>}
+                        <p >{experience}</p></div>}
                     </div>
 
                 </div>
