@@ -1,5 +1,5 @@
 import React from 'react'
-import ConfirmPass from './confirmed password/ConfirmPass'
+import ConfirmPass from './password/ConfirmPass'
 import Test from './information/FreelancerInformation'
 export default function FreelancerAccount() {
   return (

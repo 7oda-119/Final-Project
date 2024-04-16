@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { baseUrl } from '../Api/Api';
+import { baseUrl } from '../../Api/Api';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
 export default function Password({ show, onHide }) {

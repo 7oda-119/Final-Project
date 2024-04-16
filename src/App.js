@@ -23,6 +23,7 @@ import Error500 from './errorPages/Error500';
 import Select from './components/Select';
 import SelectImage from './components/SelectImage';
 import RequireAuth from './Auth/RequireAuth';
+import Heart from './components/Heart';
 
 
 function App() {
@@ -47,13 +48,14 @@ function App() {
         <Route path='account-user' element={<UserAccount/>}/>
         <Route path='account-freelancer' element={<FreelancerAccount/>}/>
       </Route>
-      
+
       <Route path='error404' element={<Error404 />}/>
       <Route path='error403' element={<Error403 />}/>
       <Route path='error401' element={<Error401 />}/>
       <Route path='error500' element={<Error500 />}/>
       <Route path='select' element={<Select />}/>
       <Route path='selectimage' element={<SelectImage />}/>
+      <Route path='heart' element={<Heart />}/>
     </Routes>
     </div>
   );

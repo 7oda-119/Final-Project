@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Cookie from 'cookie-universal'
-import { baseUrl } from '../Api/Api';
+import { baseUrl } from '../../Api/Api';
 export default function EditInfoUser({ isOpen, closeModal }) {
     
 
@@ -88,8 +88,8 @@ export default function EditInfoUser({ isOpen, closeModal }) {
               
             </div>
             <div className="modal-footer">
-              <button type="button" style={{background:"#7D7C7C",color:"white", borderRadius:"10px"}} onClick={closeModal}>Close</button>
-              <button type="button" style={{background:"#525CEB",color:"white", borderRadius:"10px"}} onClick={updateProfileInfo} >Save</button>
+              <button type="button" className='btn btn-secondary' onClick={closeModal}>Close</button>
+              <button type="button" className='btn btn-primary' onClick={updateProfileInfo} >Save</button>
             </div>
           </div>
         </div>

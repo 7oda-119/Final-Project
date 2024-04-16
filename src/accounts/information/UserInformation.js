@@ -4,7 +4,7 @@ import axios from 'axios';
 import { baseUrl } from '../../Api/Api';
 import { FaUserEdit } from "react-icons/fa";
 import '../CSS.css'
-import EditInfoUser from '../../Modal/EditInfoUser';
+import EditInfoUser from './EditInfoUser';
 function Information() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

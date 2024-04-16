@@ -7,7 +7,7 @@ import Cookie from 'cookie-universal'
 import axios from 'axios';
 import { baseUrl } from '../../Api/Api';
 import '.././CSS.css'
-import EditInfoFreelancer from '../../Modal/EditInfoFreelancer';
+import EditInfoFreelancer from './EditInfoFreelancer';
 export default function Test() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

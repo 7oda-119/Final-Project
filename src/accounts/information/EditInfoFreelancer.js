@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import { baseUrl } from '../Api/Api';
+import { baseUrl } from '../../Api/Api';
 import Cookie from 'cookie-universal'
 
 export default function EditInfoFreelancer({ isOpen, closeModal }) {
@@ -183,7 +183,7 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className='btnbtn-' onClick={closeModal}>Close</button>
+              <button type="button" className='btn btn-secondary' onClick={closeModal}>Close</button>
               <button type="button" className='btn btn-primary' onClick={updateProfileInfo}>Save</button>
             </div>
           </div>

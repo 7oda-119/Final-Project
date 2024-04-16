@@ -1,6 +1,6 @@
 import React from 'react'
 import UserInformation from './information/UserInformation'
-import ConfirmPass from './confirmed password/ConfirmPass'
+import ConfirmPass from './password/ConfirmPass'
 
 export default function TestAcc() {
   return (
