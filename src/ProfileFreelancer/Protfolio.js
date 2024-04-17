@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Card from '../../components/Card'
 import { IoAddCircleOutline } from "react-icons/io5";
 import Addportfolio from '../../Modal/Addportfolio';
+import './FreelancersPage.css';
 export default function Protfolio() {
     const [cards, setCards] = useState([
         { title: 'Title of project 1', description: 'Description of project 1', completionTime: 'Completion Time of project 1', skills: 'html, css, javaScript' },

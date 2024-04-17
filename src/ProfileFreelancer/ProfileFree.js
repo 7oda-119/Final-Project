@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { IoLocationOutline } from "react-icons/io5";
-import '.././CSS.css'
+import './FreelancersPage.css';
 import { Rating } from '@smastrom/react-rating'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
-import { baseUrl } from '../../Api/Api';
+import { baseUrl } from '../Api/Api';
 export default function ProfileFree() {
     const navigate = useNavigate();
-    function navToProtfolio(){
-        navigate('/protfolio')
-    }
+    let {id} = useParams();
+    console.log(id)
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setusername] = useState('');
     const [address, setAddress] = useState('');
@@ -29,12 +27,8 @@ export default function ProfileFree() {
     const [profilePicture, setProfilePicture] = useState();
     const [selectedLangueges, setSelectedLangueges] = useState([]);
     const [selectedSkills, setSelectedSkills] = useState([]);
-    const [rating, setRating] = useState(2)
+    const [rating, setRating] = useState()
 
-   //call token 
-  const cookies = Cookie();
-  const token = cookies.get('freelanceCookie')
-  console.log(token)
 
     //fetch freelancer information
   useEffect(() => {
@@ -43,14 +37,10 @@ export default function ProfileFree() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/Account/Freelancer-Account`,{
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-        });
+      const response = await axios.get(`${baseUrl}/api/Home/Get-Freelancer-By-ID?Fid=${id}`);
+      console.log(response.data)
       console.log(response.data.profilePicture)
-      setFirstName(response.data.firstName);
-      setLastName(response.data.lastName);
+      setFullName(response.data.fullName);
       setEmail(response.data.email);
       setusername(response.data.username);
       setAddress(response.data.address);
@@ -66,6 +56,7 @@ export default function ProfileFree() {
       setSelectedSkills(response.data.selectedSkills);
       setSelectedLangueges(response.data.selectedLanguages);
       setYourTitle(response.data.yourTitle);
+      setRating(response.data.rate);
     } catch (error) {
       console.error(error);
     }
@@ -79,7 +70,7 @@ export default function ProfileFree() {
             <img className='user-photo' src={profilePicture} alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}}/>
           </div>
           <div className='px-3' >
-            <span className='d-block my-1' style={{fontWeight:'500'}}>{firstName} {lastName}</span>
+            <span className='d-block my-1' style={{fontWeight:'500'}}>{fullName}</span>
             <span className='d-block my-1'>{username}</span>
             <span className='d-block my-1'><IoLocationOutline className='d-inline'/>{address}</span>
             <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>

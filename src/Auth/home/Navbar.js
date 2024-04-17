@@ -32,6 +32,7 @@ function Navbar() {
             <div className="container">
                 <Link className="navbar-brand" to={'/'}><img style={{width:'70px', height:'50px'}} src={logo}/></Link>
                 <Link className="nav-link active" aria-current="page" to={'/'}>Home</Link>
+                <Link className="nav-link active" aria-current="page" to={'/freelancers'}>Freelancers</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
