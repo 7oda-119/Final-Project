@@ -171,6 +171,11 @@
     margin-left: 40px;
     font-weight: 600;
 }
+.AccFree .FreeInfo a{
+    margin-left: 40px;
+    font-weight: 600;
+    text-decoration: none;
+}
 .AccFree .FreeInfo .languages{
     margin-left: 30px;
     background-color: #9EB8D9;

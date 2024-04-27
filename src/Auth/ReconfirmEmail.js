@@ -24,24 +24,26 @@ export default function ReconfirmEmail() {
 };
 
   return (
-    <div className=' d-flex justify-content-center'>
-        <div className="cont py-4">
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h1><img src={logo} alt='logo'/>Task Sync</h1>
-                <p> Enter the email address and we'll send you a link to confirm the email</p>
-            </div>
-            <div className='row d-flex justify-content-center'>
-            <input className='form-control ' type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
-            </div>
-            <div className='confirm'>
+    <div style={{minHeight:'90vh'}}>
+      <div className=' d-flex justify-content-center'>
+          <div className="cont py-4">
+          <form onSubmit={handleSubmit}>
               <div>
-                <button className='btn btn-primary' type='submit'>Send</button>
+                  <h1><img src={logo} alt='logo'/>Task Sync</h1>
+                  <p> Enter the email address and we'll send you a link to confirm the email</p>
               </div>
-            </div>
-            <ToastContainer />
-        </form>
-        </div>
+              <div className='row d-flex justify-content-center'>
+              <input className='form-control ' type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
+              </div>
+              <div className='confirm'>
+                <div>
+                  <button className='btn btn-primary' type='submit'>Send</button>
+                </div>
+              </div>
+              <ToastContainer />
+          </form>
+          </div>
+      </div>
     </div>
   )
 }

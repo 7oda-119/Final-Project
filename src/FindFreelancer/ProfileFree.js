@@ -29,6 +29,8 @@ export default function ProfileFree() {
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [rating, setRating] = useState()
 
+    const cookies = Cookie();
+    const token = cookies.get('freelanceCookie')
 
     //fetch freelancer information
   useEffect(() => {
@@ -37,7 +39,11 @@ export default function ProfileFree() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/Home/Get-Freelancer-By-ID?Fid=${id}`);
+      const response = await axios.get(`${baseUrl}/api/Home/Get-Freelancer-By-ID?Fid=${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       console.log(response.data)
       console.log(response.data.profilePicture)
       setFullName(response.data.fullName);
@@ -63,45 +69,47 @@ export default function ProfileFree() {
   };
 
   return (
-    <div className='account d-flex justify-content-center '>
-      <div className="account-info col-lg-10 row ">
-        <div className="head d-flex py-3 " > 
-          <div>
-            <img className='user-photo' src={profilePicture} alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}}/>
-          </div>
-          <div className='px-3' >
-            <span className='d-block my-1' style={{fontWeight:'500'}}>{fullName}</span>
-            <span className='d-block my-1'>{username}</span>
-            <span className='d-block my-1'><IoLocationOutline className='d-inline'/>{address}</span>
-            <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>
-          </div>    
-        </div>
-        <div className="row">
-          <div className="Skills col-lg-5 py-3">
-            <div className='py-2'>
-              <h4>Skills</h4>
-              {selectedSkills.map((skill)=><span key={skill}>{skill}</span>)}
-            </div>  
-            <div className='py-3'>
-              <h4>Languages:</h4>
-              {selectedLangueges.map((lang)=><span key={lang}>{lang}</span>)}
+    <div style={{minHeight: '84vh'}}>
+      <div className='account d-flex justify-content-center '>
+        <div className="account-info col-lg-10 row ">
+          <div className="head d-flex py-3 " > 
+            <div>
+              <img className='user-photo' src={profilePicture} alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}}/>
             </div>
+            <div className='px-3' >
+              <span className='d-block my-1' style={{fontWeight:'500'}}>{fullName}</span>
+              <span className='d-block my-1'>{username}</span>
+              <span className='d-block my-1'><IoLocationOutline className='d-inline'/>{address}</span>
+              <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>
+            </div>    
           </div>
-          <div className="about col-lg-7 ">
-            <div className='d-flex justify-content-between'>
-              <div className=" px-2 py-3">
-                <h3 className='py-2'>{yourTitle}</h3>
-                <p className='px-4'>{description}</p>
+          <div className="row">
+            <div className="Skills col-lg-5 py-3">
+              <div className='py-2'>
+                <h4>Skills</h4>
+                {selectedSkills.map((skill)=><span key={skill}>{skill}</span>)}
               </div>  
-              {hourlyRate?(
-                <p className='py-4'>{hourlyRate}/hour</p>):
-                (<p></p>)
-              }
+              <div className='py-3'>
+                <h4>Languages:</h4>
+                {selectedLangueges.map((lang)=><span key={lang}>{lang}</span>)}
+              </div>
             </div>
-            <h4>PortfolioURL:</h4>
-            <a href={portfolioURL} className='linkedin'>portfolioURL</a>
-          </div>
-        </div>           
+            <div className="about col-lg-7 ">
+              <div className='d-flex justify-content-between'>
+                <div className=" px-2 py-3">
+                  <h3 className='py-2'>{yourTitle}</h3>
+                  <p className='px-4'>{description}</p>
+                </div>  
+                {hourlyRate?(
+                  <p className='py-4'>{hourlyRate}/hour</p>):
+                  (<p></p>)
+                }
+              </div>
+              <h4>PortfolioURL:</h4>
+              <a href={portfolioURL} className='linkedin'>portfolioURL</a>
+            </div>
+          </div>           
+        </div>
       </div>
     </div>
   )

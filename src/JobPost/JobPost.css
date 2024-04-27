@@ -2,9 +2,9 @@
 .job-post-container {
   max-width: 800px;
   min-height: 90;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   padding: 20px;
-  border: 3px solid #6673e1;
+  border: 2px solid #6673e1;
   border-radius: 8px;
   background-color: #fff5f5;
 }
@@ -18,8 +18,7 @@
 }
 
 .job-post-detail {
-  
-  margin: 20px;
+  margin: 10px 20px;
   color: #000000;
 }
 
@@ -97,6 +96,8 @@
 
 .job-post-s-buttons {
 display: flex;
+max-width: 100px;
+margin-left: 20px;
 }
 
 .hire-s-button, .heart-s-button {
@@ -146,7 +147,6 @@ display: flex;
   border-radius: 4px;
 }
 
-
 .edit-job-post-textarea {
   width: calc(100% - 10px);
   height: 70px;
@@ -181,53 +181,42 @@ display: flex;
 /* JobPostForm */
 
 .form-container {
+  position: relative;
   max-width: 700px;
-  height: 550px;
+  min-height: 570px;
   margin: 0 auto;
   padding: 20px;
-  border: 3px solid #625ee2;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 148, 232) 0px 0px 0px 1px inset;
+  border-radius: 10px;
 }
-
-
 .form-label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   font-weight: bold;
 }
-
-
 .form-input {
   width: calc(100% - 16px);
-  padding: 8px;
-  margin-bottom: 16px;
+  padding: 5px;
+  margin-bottom: 7px;
   border: 1px solid #625ee2;
-  border-radius: 4px;
+  border-radius: 5px;
 }
-
-
 .form-textarea {
   width: calc(100% - 10px);
   height: 70px;
-  padding: 8px;
-  margin-bottom: 16px;
+  padding: 5px;
+  margin-bottom: 7px;
   border:1px solid #625ee2;
   border-radius: 4px;
 }
-
-
 .form-submit {
   position: absolute;
-  top: 540px;
-  right: 420px;
-  padding: 10px 20px;
+  bottom: 10px;
+  right: 35px;
+  padding: 10px 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
 }
-
-
-

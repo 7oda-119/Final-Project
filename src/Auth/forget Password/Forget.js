@@ -30,28 +30,30 @@ function Forget() {
         }
     };
   return (
-    <div className='forget d-flex justify-content-center'>
-        <div className="cont py-4">
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h1><img src={logo} alt='logo'/>Task Sync</h1>
-                <p> Enter the email address and we'll send you a link to reset your password</p>
-            </div>
-            <div className='row d-flex justify-content-center'>
-            <input className='form-control ' type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
-            </div>
-            <div className='confirm'>
+    <div style={{minHeight:'90vh'}}>
+      <div className='forget d-flex justify-content-center'>
+          <div className="cont py-4">
+          <form onSubmit={handleSubmit}>
               <div>
-                <a className="goToAcc" onClick={haveNoAcc} >Don't have an account?</a>
+                  <h1><img src={logo} alt='logo'/>Task Sync</h1>
+                  <p> Enter the email address and we'll send you a link to reset your password</p>
               </div>
-              <div>
-                <button className='btn btn-primary' type='submit'>Send</button>
+              <div className='row d-flex justify-content-center'>
+              <input className='form-control ' type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
               </div>
-            </div>
-            <ToastContainer />
-        </form>
-        </div>
-    </div> 
+              <div className='confirm'>
+                <div>
+                  <a className="goToAcc" onClick={haveNoAcc} >Don't have an account?</a>
+                </div>
+                <div>
+                  <button className='btn btn-primary' type='submit'>Send</button>
+                </div>
+              </div>
+              <ToastContainer />
+          </form>
+          </div>
+      </div> 
+    </div>
   )
 }
 export default Forget;

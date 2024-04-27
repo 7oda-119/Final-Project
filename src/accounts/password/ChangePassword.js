@@ -4,6 +4,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { baseUrl } from '../../Api/Api';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 export default function Password({ show, onHide }) {
 
   const [oldPassword, setOldPassword] = useState('');
@@ -51,7 +52,8 @@ export default function Password({ show, onHide }) {
           Authorization: `Bearer ${token}`,
         }
       })
-      window.location.reload();
+      onHide();
+      toast('Password Changed')
     }catch(err){
       console.log(err.response.data)
       if(err.response.data === "Failed to change password"){
@@ -106,6 +108,7 @@ export default function Password({ show, onHide }) {
           </Form>
         </Modal.Body>
       </Modal>
+      <ToastContainer />
     </div>
   )
 }

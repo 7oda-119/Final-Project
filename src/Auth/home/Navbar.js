@@ -15,7 +15,7 @@ function Navbar() {
   const handleSignOut =()=>{
     cookies.remove('freelanceCookie')
     cookies.remove('role')
-    navigate('/signin')
+    navigate('/')
   }
 
   const handleAccount =()=>{
@@ -26,13 +26,25 @@ function Navbar() {
     }
   }
 
-  return (
+  return ( 
     <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top nav">
+        <nav className="navbar navbar-expand-lg sticky-top nav " style={{backgroundColor:"#FEFAF6"}}>
             <div className="container">
                 <Link className="navbar-brand" to={'/'}><img style={{width:'70px', height:'50px'}} src={logo}/></Link>
                 <Link className="nav-link active" aria-current="page" to={'/'}>Home</Link>
-                <Link className="nav-link active" aria-current="page" to={'/freelancers'}>Freelancers</Link>
+                {token && role === 'Freelancer'? (
+                  <Link className="nav-link active" aria-current="page" to={'/findwork'}>Find work</Link>
+                ) : (
+                  <>
+                    {token && role === 'User'? (
+                      <>
+                        <Link className="nav-link active" aria-current="page" to={'/freelancers'}>Find freelancer</Link>
+                        <Link className="nav-link active" aria-current="page" to={'/createjob'}>Upload job</Link>
+                        <Link className="nav-link active" aria-current="page" to={'/myjobs'}>My jobs</Link>
+                      </>
+                    ) : null}
+                  </>
+                )}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>

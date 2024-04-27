@@ -23,14 +23,21 @@ import Select from './components/Select';
 import SelectImage from './components/SelectImage';
 import RequireAuth from './Auth/RequireAuth';
 import Heart from './components/Heart';
-import JobPostsPage from './JobPost/JobPostsPage';
-import ProfileFree from './ProfileFreelancer/ProfileFree';
-import JobPostPage from './JobPost/JobPostPage';
-import FreelancersPage from './ProfileFreelancer/FreelancersPage';
-import NoUserFound from './ProfileFreelancer/NoUserFound';
+import AllJobPosts from './JobPost/AllJobPosts';
+import ProfileFree from './FindFreelancer/ProfileFree';
+import FreelancersPage from './FindFreelancer/FreelancersPage';
+import CreateJob from './JobPost/CreateJobPost';
+import MyJobs from './JobPost/MyJobPosts';
+import ContractDetails from './ContractForm/ContractDetails';
+import Form from './ContractForm/Form';
+import CategoriesList from './Edit/CategoriesList';
+import SkillList from './Edit/SkillList';
+import LanguageList from './Edit/LanguageList';
+import EditJobPost from './JobPost/EditJobPost';
 
 
 function App() {
+  
   return (
     <div className="App">
     <Navbar />
@@ -53,7 +60,10 @@ function App() {
 
       <Route path='freelancers' element={<FreelancersPage />}/>
       <Route path='freelancers/Profile/:id' element={<ProfileFree />}/> 
-      <Route path='jobpost' element={<JobPostPage />}/>
+      <Route path='createjob' element={<CreateJob />}/>
+      <Route path='myjobs' element={<MyJobs />}/>
+      <Route path='editmyjobs' element={<EditJobPost />}/>
+      <Route path='findwork' element={<AllJobPosts />}/>
       <Route path='error404' element={<Error404 />}/>
       <Route path='error403' element={<Error403 />}/>
       <Route path='error401' element={<Error401 />}/>
@@ -61,7 +71,11 @@ function App() {
       <Route path='select' element={<Select />}/>
       <Route path='selectimage' element={<SelectImage />}/>
       <Route path='heart' element={<Heart />}/>
-      <Route path='nouser' element={<NoUserFound />}/>
+      <Route path='contract' element={<ContractDetails />}/>
+      <Route path='contractform' element={<Form />}/>
+      <Route path='categories' element={<CategoriesList />}/>
+      <Route path='skills' element={<SkillList />}/>
+      <Route path='Languages' element={<LanguageList />}/>
     </Routes>
     </div>
   );

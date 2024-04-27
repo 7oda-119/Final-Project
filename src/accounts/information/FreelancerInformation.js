@@ -95,7 +95,7 @@ export default function Test() {
   };
 
   return (
-    <div className='AccFree row'>
+    <div className='AccFree row' style={{minHeight:'83vh'}}>
         <div className=' col-12 row d-flex justify-content-center'>
             <div>
                 <button className='editInfo btn btn-success' onClick={openInfoModal}>Edit Information</button>
@@ -113,7 +113,9 @@ export default function Test() {
                             <span className='d-block mb-1' style={{fontWeight:'600'}}>{firstName} {lastName}</span>
                             <span className='d-block mb-1'>{username}</span>
                             <span className='d-block mb-2'><IoLocationOutline className='d-inline'/>{country}-{state}-{address}</span>
-                            <Rating readOnly  style={{ maxWidth: '150px' }} value={rating} onChange={setRating}/>
+                            <div className='mx-4'>
+                              <Rating readOnly  style={{ maxWidth: '150px' }} value={rating} onChange={setRating}/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,12 +141,13 @@ export default function Test() {
                         </div>
                         <span className='d-block'>Description:</span>
                         <p className='mb-1'>{description}</p>
+                        <span className='d-block'>PortfolioURl:</span>
+                        <a href={portfolioURL} className='mb-1'>portfolioURL</a>
                         {education && <div><span className='d-block'>Education:</span>
                         <p className='mb-1'>{education }</p></div>}
                         {experience && <div><span className='d-block'>Experience:</span>
                         <p >{experience}</p></div>}
                     </div>
-
                 </div>
             </div>
         </div>

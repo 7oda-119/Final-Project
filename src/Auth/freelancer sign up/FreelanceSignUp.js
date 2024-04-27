@@ -67,25 +67,42 @@ function FreelanceSignUp() {
 
     }
 
-    const languageOptions = [
-        { id: 'en', name: 'English' },
-        { id: 'mer', name: 'Meru' },
-        { id: 'pt_BR', name: 'Brazilian Portuguese' },
-        { id: 'hi', name: 'Hindi' },
-        { id: 'ar', name: 'Arabic' },
-      ];
-      const handleLanguageChange = (languageOptions) => {
-        const selectedLanguageNames = languageOptions.map((option) => option.id);
-        setSelectedLanguages(selectedLanguageNames);
-      };
+    const [languageOptions, setLanguageOptions] = useState();
+    //fetch skills
+    useEffect(() => {
+        fetchLanguages();
+        fetchSkills();
+    }, []);
+  
+    const fetchLanguages = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}/api/Language/Get-All-Language-With-Id`);
+            console.log(response.data);
+            setLanguageOptions(response.data)
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    const skillOptions = [
-        { id: 18, name: 'AI' },
-        { id: 36, name: 'C' },
-        { id: 37, name: 'C#' },
-        { id: 73, name: 'Css' },
-        { id: 97, name: 'Dot Net' },
-      ];
+    const handleLanguageChange = (languageOptions) => {
+        const selectedLanguageID = languageOptions.map((option) => option.id);
+        setSelectedLanguages(selectedLanguageID);
+    };
+
+
+    const [skillOptions, setSkillOptions] = useState();
+    //fetch skills
+    const fetchSkills = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/Skill/Get-All-SKills-With-Id`);
+      console.log(response.data);
+      setSkillOptions(response.data)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+    
       const handleLSkillChange = (skillOptions) => {
         const selectedSkillID = skillOptions.map((option) => option.id);
         setSelectedSkills(selectedSkillID);
@@ -299,7 +316,8 @@ function FreelanceSignUp() {
                     {errors.position && <span className='error'>{errors.position}</span>}
                     <textarea className="form-control" name='description' value={Description} onChange={(e) => setDescription(e.target.value)} placeholder="Description about you"></textarea>
                     {errors.description && <span className='error'>{errors.description}</span>}
-                    <Select
+                    <Select 
+                        placeholder='Select Skills'
                         options={skillOptions}
                         labelField="name"
                         valueField="id"
@@ -308,9 +326,10 @@ function FreelanceSignUp() {
                         color='#65B741'
                     />
                     {errors.SelectedSkills && <span className='error'>{errors.SelectedSkills}</span>}
-                    <Select
+                    <Select 
+                        placeholder='Select Languages'
                         options={languageOptions}
-                        labelField="name"
+                        labelField="value"
                         valueField="id"
                         multi
                         onChange={handleLanguageChange}
