@@ -1,6 +1,6 @@
 import React from 'react'
 import ConfirmPass from './password/ConfirmPass'
-import Test from './information/FreelancerInformation'
+import FreelancerInformation from './information/FreelancerInformation'
 export default function FreelancerAccount() {
   return (
     <div >
@@ -17,7 +17,7 @@ export default function FreelancerAccount() {
             </nav>
             <div className="tab-content d-flex justify-content-center row" id="nav-tabContent">
                 <div className="tab-pane fade show active  " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                    <Test />
+                    <FreelancerInformation />
                 </div>
                 <div className="tab-pane fade col-5" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                     <ConfirmPass />

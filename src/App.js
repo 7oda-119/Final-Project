@@ -30,9 +30,9 @@ import CreateJob from './JobPost/CreateJobPost';
 import MyJobs from './JobPost/MyJobPosts';
 import ContractDetails from './ContractForm/ContractDetails';
 import Form from './ContractForm/Form';
-import CategoriesList from './Edit/CategoriesList';
-import SkillList from './Edit/SkillList';
-import LanguageList from './Edit/LanguageList';
+import CategoriesList from './Admin/CategoriesList';
+import SkillList from './Admin/SkillList';
+import LanguageList from './Admin/LanguageList';
 import EditJobPost from './JobPost/EditJobPost';
 
 
@@ -56,14 +56,19 @@ function App() {
       <Route element={<RequireAuth/>}>
         <Route path='account-user' element={<UserAccount/>}/>
         <Route path='account-freelancer' element={<FreelancerAccount/>}/>
+      
+        <Route path='freelancers' element={<FreelancersPage />}/>
+        <Route path='freelancers/Profile/:id' element={<ProfileFree />}/> 
+        <Route path='findwork' element={<AllJobPosts />}/>
+        <Route path='createjob' element={<CreateJob />}/>
+        <Route path='myjobs' element={<MyJobs />}/>
+        <Route path='editmyjobs' element={<EditJobPost />}/>
+      
+        <Route path='categories' element={<CategoriesList />}/>
+        <Route path='skills' element={<SkillList />}/>
+        <Route path='Languages' element={<LanguageList />}/>
       </Route>
 
-      <Route path='freelancers' element={<FreelancersPage />}/>
-      <Route path='freelancers/Profile/:id' element={<ProfileFree />}/> 
-      <Route path='createjob' element={<CreateJob />}/>
-      <Route path='myjobs' element={<MyJobs />}/>
-      <Route path='editmyjobs' element={<EditJobPost />}/>
-      <Route path='findwork' element={<AllJobPosts />}/>
       <Route path='error404' element={<Error404 />}/>
       <Route path='error403' element={<Error403 />}/>
       <Route path='error401' element={<Error401 />}/>
@@ -73,9 +78,8 @@ function App() {
       <Route path='heart' element={<Heart />}/>
       <Route path='contract' element={<ContractDetails />}/>
       <Route path='contractform' element={<Form />}/>
-      <Route path='categories' element={<CategoriesList />}/>
-      <Route path='skills' element={<SkillList />}/>
-      <Route path='Languages' element={<LanguageList />}/>
+      
+
     </Routes>
     </div>
   );
