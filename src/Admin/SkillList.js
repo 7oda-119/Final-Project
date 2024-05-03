@@ -4,7 +4,9 @@ import axios from 'axios';
 import { baseUrl } from '../Api/Api';
 import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const SkillsList = () => {
+  const navigate = useNavigate()
   const [skills, setSkills] = useState([]);
 
   const cookies = Cookie();
@@ -26,7 +28,16 @@ const SkillsList = () => {
       console.log(response.data);
       
     } catch (error) {
-      console.error(error);
+      const errorPages = error.response.status;
+        if (errorPages === 403) {
+          navigate('/error403');
+        } else if (errorPages === 401) {
+          navigate('/error401');
+        } else if (errorPages === 500) {
+          navigate('/error500');
+        } else{
+          console.log(error.response)
+        }
     }
   };
 

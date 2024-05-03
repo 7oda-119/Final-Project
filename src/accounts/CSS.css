@@ -1,4 +1,4 @@
-/* Account */
+/* Account reread */
 .setting{
     display: flex;
     margin: 20px 20px 0 50px;
@@ -50,12 +50,13 @@
 
 /* Account user */
 .bg-acc{
-    min-height: 90vh;
+    min-height: 75vh;
+    min-width: 50%;
 }
 .Account{
     position: relative;
-    display: flex;
     background-color: transparent;
+    
     padding: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -69,6 +70,7 @@
     right: 10px;
     font-size: 18px;
     color: rgb(9, 149, 9);
+    cursor: pointer;
 }
 .Acc-info{
     margin-top: 30px;

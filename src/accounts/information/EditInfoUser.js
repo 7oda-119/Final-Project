@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Cookie from 'cookie-universal'
 import { baseUrl } from '../../Api/Api';
+import { ToastContainer, toast } from 'react-toastify';
 export default function EditInfoUser({ isOpen, closeModal }) {
     
 
@@ -43,22 +44,22 @@ export default function EditInfoUser({ isOpen, closeModal }) {
 
     //update user data
     const updateProfileInfo = async()=>{
-        const formData = new FormData();
-            formData.append('FirstName', FirstName);
-            formData.append('LastName', LastName);
-            formData.append('Country', Country);
-        try{
-          const response = await axios.post(`${baseUrl}/api/Account/Change-Country-For-User`,formData, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data',
-            }
-          });
-          window.location.reload();
-        }catch(err){
-          console.log(err)
-        }
+      const formData = new FormData();
+      formData.append('FirstName', FirstName);
+      formData.append('LastName', LastName);
+      formData.append('Country', Country);
+      try{
+        const response = await axios.post(`${baseUrl}/api/Account/Change-Country-For-User`,formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          }
+      });
+      window.location.reload();
+      }catch(err){
+        console.log(err)
       }
+    }
       
   return (
     <div>
@@ -66,7 +67,7 @@ export default function EditInfoUser({ isOpen, closeModal }) {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Modal Title</h5>
+              <h5 className="modal-title">Update Information</h5>
               <button type="button" className="btn-close" onClick={closeModal}></button>
             </div>
             <div className="modal-body">
@@ -94,6 +95,7 @@ export default function EditInfoUser({ isOpen, closeModal }) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

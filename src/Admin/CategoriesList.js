@@ -4,7 +4,10 @@ import axios from 'axios';
 import { baseUrl } from '../Api/Api';
 import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const CategoriesList = () => {
+
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -25,7 +28,16 @@ const CategoriesList = () => {
       });
       setCategories(response.data)      
       } catch (error) {
-        console.error(error);
+        const errorPages = error.response.status;
+        if (errorPages === 403) {
+          navigate('/error403');
+        } else if (errorPages === 401) {
+          navigate('/error401');
+        } else if (errorPages === 500) {
+          navigate('/error500');
+        } else{
+          console.log(error.response)
+        }
       }
     };
 
@@ -42,7 +54,7 @@ const CategoriesList = () => {
       setAddCategory("");
       fetchData();
     }catch(error){
-      console.log(error)
+      console.log(error.response)
     }
   }
 

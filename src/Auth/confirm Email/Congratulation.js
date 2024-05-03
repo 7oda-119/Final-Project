@@ -19,29 +19,29 @@ function Congratulation() {
     e.preventDefault();
     try {
       const response = await axios.post(`${baseUrl}/Confirm-Email?token=${encodedToken}&email=${email}`);
-      toast(response.data)
-      console.log(token)
-      console.log(email)
       navigate('/signin')
+      toast.success("Congratulation you joined us")
     } catch (error) {
       console.log(error)
     }
   };
 
   return (
-      <div className='forget d-flex justify-content-center'>
-        <div className="cont py-5">
-        <form onSubmit={handleConfirm}>
-            <div >
-                <h1><img src={logo} alt='logo'/>Task Sync</h1>
-                <p> Click on the confirm button to cnfirm the email.</p>
-            </div>
-            <div className='confirm'>
-                <button className='btn btn-primary' type='submit'>Confirm</button>
-            </div>
-            <ToastContainer />
-        </form>
+    <div style={{minHeight:'90vh'}}>
+        <div className='forget d-flex justify-content-center'>
+          <div className="cont py-5">
+            <form onSubmit={handleConfirm}>
+                <div >
+                    <h1><img src={logo} alt='logo'/>Task Sync</h1>
+                    <p> Click on the confirm button to cnfirm the email.</p>
+                </div>
+                <div className='confirm'>
+                    <button className='btn btn-primary' type='submit'>Confirm</button>
+                </div>
+            </form>
+          </div>
         </div>
+        <ToastContainer />
     </div>
   )
 }

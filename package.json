@@ -13,7 +13,7 @@
     "country-state-city": "^3.2.1",
     "moment": "^2.30.1",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.1",
+    "react-bootstrap": "^2.10.1", 
     "react-dom": "^18.2.0",
     "react-dropdown-select": "^4.11.2",
     "react-heart": "^1.0.6",

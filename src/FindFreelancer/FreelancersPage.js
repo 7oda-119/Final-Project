@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './FreelancersPage.css'; // Import CSS file
 import { baseUrl } from '../Api/Api';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookie from 'cookie-universal'
 const FreelancersPage = () => {
+
+  const navigate = useNavigate();
   const [freelancers, setFreelancers] = useState([]); 
   const [name, setName] = useState('');
 
@@ -26,7 +28,20 @@ const FreelancersPage = () => {
       console.log(response.data);
       
       } catch (error) {
-        console.error(error);
+        console.log(error.response.status);
+        const errorPages = error.response.status;
+        if (errorPages === 403) {
+          navigate('/error403');
+        } else if (errorPages === 401) {
+          navigate('/error401');
+        } else if (errorPages === 500) {
+          navigate('/error500');
+        }
+        if(error.response.data === 'No users found with the specified name.' || error.response.data === 'No Freelancer found.'){
+          setFreelancers(null);
+        }else{
+          console.log(error.response)
+        }
       }
     };
 
@@ -39,19 +54,19 @@ const FreelancersPage = () => {
         });
         console.log(response.data)
         setFreelancers(response.data)
-      }catch(err){
-        if(err.response.data === 'No users found with the specified name.' || err.response.data === 'No Freelancer found.'){
+      }catch(error){
+        if(error.response.data === 'No users found with the specified name.' || error.response.data === 'No Freelancer found.'){
           setFreelancers(null);
         }else{
-          console.log(err.response.data)
+          console.log(error.response)
         }
       }
     }
   return (
-    <div style={{minHeight: '90vh'}}>
+    <div className='find-freelancers'>
         <div className="freelancers-container">
           <div className=' my-2 '>
-            <div className="my-lg-0 d-flex justify-content-center">
+            <div className="search-fraalancer">
               <div>
                 <input className="form-control" type="search" placeholder="Search For Freelancer" aria-label="Search" onChange={(e)=>setName(e.target.value)}/>
               </div>
@@ -78,8 +93,8 @@ const FreelancersPage = () => {
                 </div>
               </div>
             )}</>) : (
-              <div style={{maxWidth:'500px', minHeight:'78vh'}} className='container'>
-                  <h1 className='text-danger font-weight-bold my-5'>We Are Sorry There Are No Freelancers With This Name</h1>
+              <div  className='no-freelancer'>
+                  <h1>We Are Sorry There Are No Freelancers With This Name</h1>
               </div>
             )}
           </div>

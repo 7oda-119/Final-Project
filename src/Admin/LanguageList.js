@@ -4,12 +4,10 @@ import axios from 'axios';
 import { baseUrl } from '../Api/Api';
 import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const LanguageList = () => {
-  const [languages, setLanguages] = useState([
-    { id: "1", name: 'Language 1', isDeleted: false },
-    { id: "2", name: 'Language 2', isDeleted: false },
-    { id: "3", name: 'Language 3', isDeleted: false }
-  ]);
+  const navigate = useNavigate();
+  const [languages, setLanguages] = useState([]);
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -30,7 +28,16 @@ const LanguageList = () => {
       console.log(response.data);
       
     } catch (error) {
-      console.error(error);
+      const errorPages = error.response.status;
+        if (errorPages === 403) {
+          navigate('/error403');
+        } else if (errorPages === 401) {
+          navigate('/error401');
+        } else if (errorPages === 500) {
+          navigate('/error500');
+        } else{
+          console.log(error.response)
+        }
     }
   };
 

@@ -1,9 +1,0 @@
-.navbar .setting-icon{
-    margin-left: 20px;
-    font-size: 35px;
-    color: rgb(24, 96, 24);
-}
-.dropdown-menu .acc:active, .dropdown-menu .pay:active, .dropdown-menu .out:active{
-    background-color: transparent;
-    color: black;
-}

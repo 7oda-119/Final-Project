@@ -4,9 +4,37 @@
   min-height: 90;
   margin-bottom: 10px;
   padding: 20px;
-  border: 2px solid #6673e1;
-  border-radius: 8px;
-  background-color: #fff5f5;
+  box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 149, 232) 0px 0px 0px 1px inset;
+  background-color: rgba(255, 245, 245, 0.4);
+  animation: slideIn 1s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.my-jobs-Title{
+  text-align: center;
+  margin: 30px 0 20px 0;
+  animation: slideInRight 1s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .job-post-title {
@@ -31,6 +59,7 @@
   font-style: italic;
   color: #090808;
 }
+
 .hire-button {
   position: absolute;
   top: 280px;
@@ -59,12 +88,40 @@
   cursor: pointer;
 }
 
-/* JobPostsPage.css*/
+/* JobPostsPage.css */
+.search-job-posts{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .job-posts-container {
   max-width: 800px;
   margin: 0 auto;
-  
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .job-post-s{
@@ -100,44 +157,101 @@ max-width: 100px;
 margin-left: 20px;
 }
 
-.hire-s-button, .heart-s-button {
-  padding: 8px 16px;
+.hire-s-button {
+  padding: 0 16px;
   margin-right: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
-  
-}
-
-.hire-s-button {
   background-color: #007bff;
   color: #fff;
+  transition: 0.2s;
 }
 
-.heart-s-button {
-  background-color: #dc3545;
-  color: #fff;
+.hire-s-button:hover{
+  background-color: #0860be;
+  transform: scale(1.06);
+}
+.fav-s-button{
+  width: 50px;
+  height: 50px;
+  transition: 0.2s;
+}
+.fav-s-button:hover{
+  transform: scale(1.1);
+  width: 50px;
+  height: 50px;
+}
+
+.no-jobs{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.no-jobs h1{
+  max-width: 500px;
+  color: crimson;
+  font-weight: 500;
+  animation: slideInRight 1s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* EditJobPost.css */
 
 .edit-job-post-container {
   max-width: 700px;
-  height: 615px;
+  min-height: 600px;
   margin: 0 auto;
   padding: 20px;
-  border: 3px solid #625ee2;
-  border-radius: 8px;
+  box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 148, 232) 0px 0px 0px 1px inset;
+  border-radius: 10px;
   background-color: #f9f9f9;
+  position: relative;
+  animation: slideIn 1s ease;
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.edit-job-post-title{
+  animation: slideInRight 1s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 .edit-job-post-label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
 }
-
 
 .edit-job-post-input {
   width: calc(100% - 16px);
@@ -156,11 +270,10 @@ margin-left: 20px;
   border-radius: 4px;
 }
 
-
 .edit-job-post-submit {
   position: absolute;
-  top: 610px;
-  right: 420px;
+  bottom: 10px;
+  right: 40px;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -169,9 +282,8 @@ margin-left: 20px;
   cursor: pointer;
 }
  
-
 .edit-job-post-select{
- height: 30px;
+ height: 40px;
  width: 400px;
  border:2px solid #9794f8;
  border-radius: 5px;
@@ -180,7 +292,26 @@ margin-left: 20px;
 
 /* JobPostForm */
 
-.form-container {
+.create-job{
+  margin-top: 30px;
+}
+.create-job .create-job-title{
+  text-align: center;
+  animation: slideInRight 1s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.form-create-job {
   position: relative;
   max-width: 700px;
   min-height: 570px;
@@ -188,7 +319,19 @@ margin-left: 20px;
   padding: 20px;
   box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 148, 232) 0px 0px 0px 1px inset;
   border-radius: 10px;
-}
+  animation: slideIn 1s ease;
+  }
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 .form-label {
   display: block;
   margin-bottom: 5px;

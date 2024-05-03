@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from '..//image/logo.png'
 import { IoMdSettings } from "react-icons/io";
 import Cookie from 'cookie-universal'
-import './Navbar.css'
+import './Home.css'
 function Navbar() {
 
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function Navbar() {
   const handleSignOut =()=>{
     cookies.remove('freelanceCookie')
     cookies.remove('role')
-    navigate('/')
+    window.location.pathname='/signin'
   }
 
   const handleAccount =()=>{
@@ -28,41 +28,21 @@ function Navbar() {
 
   return ( 
     <>
-        <nav className="navbar navbar-expand-lg sticky-top nav " style={{backgroundColor:"#FEFAF6"}}>
+        <nav className="navbar navbar-expand-lg sticky-top nav shadow-sm" >
             <div className="container">
-                <Link className="navbar-brand" to={'/'}><img style={{width:'70px', height:'50px'}} src={logo}/></Link>
-                <Link className="nav-link active" aria-current="page" to={'/'}>Home</Link>
-                {token && role === 'Freelancer'? (
-                  <Link className="nav-link active" aria-current="page" to={'/findwork'}>Find work</Link>
-                ) : (
-                  <>
-                    {token && role === 'User'? (
-                      <>
-                        <Link className="nav-link active" aria-current="page" to={'/freelancers'}>Find freelancer</Link>
-                        <Link className="nav-link active" aria-current="page" to={'/createjob'}>Upload job</Link>
-                        <Link className="nav-link active" aria-current="page" to={'/myjobs'}>My jobs</Link>
-                      </>
-                    ) : null}
-                  </>
-                )}
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <Link className="navbar-brand" to={'/'}><img style={{width:'70px', height:'50px',}} src={logo}/></Link>
+                {!token ? (
+                  <Link className="nav-link " aria-current="page" to={'/'}>Home</Link>
+                ) : null}
+                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                     {!token?(
-                      <Link className="btn btn-outline-primary" to={'signin'}>Sign in</Link>
+                        <Link className=" nav-link" to={'signin'}>Sign in</Link>
                     ) : (
-                      <li className="nav-item dropdown">
-                        <a className="setting-icon nav-link " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <IoMdSettings />
-                        </a>
-                        <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style={{minWidth:'30px'}}>
-                          <li><button className="acc dropdown-item" onClick={handleAccount} >Account</button></li>
-                          <li><button className="pay dropdown-item" >Payment</button></li>
-                          <li><button className="out dropdown-item" onClick={handleSignOut}>Sign out</button></li>
-                        </ul>
-                      </li>
+                        <button className=" nav-link" >Payment</button>
                     )}
                   </ul>
                 </div>

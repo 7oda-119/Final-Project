@@ -16,7 +16,7 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
   const [Experience, setExperience] = useState('');
   const [HourlyRate, setHourlyRate] = useState('');
   const [PortfolioURl, setPortfolioURl] = useState('');
-  const [Country, setCountry] = useState();
+  const [Country, setCountry] = useState('');
   const [State, setSelectState] = useState();
   const [Address, setAddress] = useState();
   const [PhoneNumber, setPhoneNumber] = useState();
@@ -25,30 +25,30 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
   const [getState, setState] = useState([])
   const [cities, setCities] = useState([])
 
-    useEffect(()=>{
-        axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json').then(res=>setData(res.data)).catch(err=>console.log(err))
-    },[])
-    const country = [...new Set(data.map(item=> item.country))];
-    country.sort();
+  useEffect(()=>{
+      axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json').then(res=>setData(res.data)).catch(err=>console.log(err))
+  },[])
+  const country = [...new Set(data.map(item=> item.country))];
+  country.sort();
 
-    const handleCountry = (e) =>{
-        setCountry(e.target.value);
-      let states = data.filter(state => state.country === e.target.value); 
-      states = [...new Set(states.map(item=>item.subcountry))]
-      states.sort();
-      setState(states);
-    }
+  const handleCountry = (e) =>{
+    setCountry(e.target.value);
+    let states = data.filter(state => state.country === e.target.value); 
+    states = [...new Set(states.map(item=>item.subcountry))]
+    states.sort();
+    setState(states);
+  }
 
-    const handleState =(e)=>{
-        setSelectState(e.target.value);
-      let cities = data.filter(city => city.subcountry === e.target.value)
-      setCities(cities)
-    }
+  const handleState =(e)=>{
+    setSelectState(e.target.value);
+    let cities = data.filter(city => city.subcountry === e.target.value)
+    setCities(cities)
+  }
 
-    const cookies = Cookie();
-    const token = cookies.get('freelanceCookie');
+  const cookies = Cookie();
+  const token = cookies.get('freelanceCookie');
 
-      //fetch freelancer information
+  //fetch freelancer information
   useEffect(() => {
     fetchData();
   }, []);
@@ -80,30 +80,30 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
     }
   };
 
-  const updateProfileInfo =async()=>{
+  const updateProfileInfo = async()=>{
     const formData = new FormData();
-        formData.append('FirstName', FirstName);
-        formData.append('LastName', LastName);
-        formData.append('Age', Age);
-        formData.append('ZIP', ZIP);
-        formData.append('YourTitle', YourTitle);
-        formData.append('Description', Description);
-        formData.append('Education', Education);
-        formData.append('Experience', Experience);
-        formData.append('HourlyRate', HourlyRate);
-        formData.append('PortfolioURl', PortfolioURl);
-        formData.append('Country', Country);
-        formData.append('State', State);
-        formData.append('Address', Address);
-        formData.append('PhoneNumber', PhoneNumber);
+    formData.append('FirstName', FirstName);
+    formData.append('LastName', LastName);
+    formData.append('Age', Age);
+    formData.append('ZIP', ZIP);
+    formData.append('YourTitle', YourTitle);
+    formData.append('Description', Description);
+    formData.append('Education', Education);
+    formData.append('Experience', Experience);
+    formData.append('HourlyRate', HourlyRate);
+    formData.append('PortfolioURl', PortfolioURl);
+    formData.append('Country', Country);
+    formData.append('State', State);
+    formData.append('Address', Address);
+    formData.append('PhoneNumber', PhoneNumber);
     try{
       const response = await axios.post(`${baseUrl}/api/Account/Change-Name-Phone-Age-Language-ZIP-Address-Experience-Education-PortfolioURl-Description-YourTitle-HourlyRate-Freelancer`,formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         }
-      });
-      window.location.reload();
+    });
+    window.location.reload();
     }catch(err){
       console.log(err)
     }
@@ -115,7 +115,7 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Modal Title</h5>
+              <h5 className="modal-title">Edit</h5>
               <button type="button" className="btn-close" onClick={closeModal}></button>
             </div>
             <div className="modal-body">

@@ -3,8 +3,11 @@ import './JobPost.css';
 import { baseUrl } from '../Api/Api';
 import axios from 'axios';
 import Cookie from 'cookie-universal'
+import Heart from 'react-heart'
+import { useNavigate } from 'react-router-dom';
 const JobPostsPage = () => {
 
+  const navigate =useNavigate();
   const [jobPosts, setJobPosts] = useState([]);
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -24,7 +27,17 @@ const JobPostsPage = () => {
       console.log(response.data)
       setJobPosts(response.data.sort((a, b) => b.id - a.id));
       } catch (error) {
-        console.error(error.response.status);
+        const errorPages = error.response.status;
+        if (errorPages === 403) {
+          navigate('/error403');
+        } else if (errorPages === 401) {
+          navigate('/error401');
+        } else if (errorPages === 500) {
+          navigate('/error500');
+        }
+        else{
+          console.log(error.response);
+        }
       }
     };
 
@@ -39,7 +52,7 @@ const JobPostsPage = () => {
         console.log(response.data)
         setJobPosts(response.data.sort((a, b) => b.id - a.id))
       }catch(err){
-        if(err.response.data === 'NO jobs found by title full' || err.response.data === 'NO jobs found by title gra'){
+        if(err.response.data === `NO jobs found by title ${title}`){
           setJobPosts(null)
         }
         else(
@@ -48,19 +61,16 @@ const JobPostsPage = () => {
       }
     }
 
-  const handleFavoriteClick = (id) => {
-    setJobPosts(prevJobPosts => prevJobPosts.map(jobPost => {
-      if (jobPost.id === id) {
-        return { ...jobPost, isFavorited: !jobPost.isFavorited };
+  const [active, setActive] = useState(false)
+    const handleFavoriteClick =()=>{
+        setActive(!active)
       }
-      return jobPost;
-    }));
-  };
+      console.log(active)
 
   return ( 
     <div style={{minHeight:'90vh'}}>
       <div className='my-2'>
-        <div className="my-lg-0 d-flex justify-content-center">
+        <div className="search-job-posts">
           <div>
             <input className="form-control" type="search" value={title} placeholder="Search For Job" aria-label="Search" onChange={(e)=>setTitle(e.target.value)} />
           </div>
@@ -93,16 +103,16 @@ const JobPostsPage = () => {
               
               <div className="job-post-s-buttons">
                 <button className="hire-s-button">Hire</button>
-                <button className="heart-s-button" onClick={() => handleFavoriteClick(jobPost.id)}>
-                  {jobPost.isFavorited ? 'Is Favorited' : '\u2661 Favorite'}
+                <button className='fav-s-button' > 
+                  <Heart isActive={active} onClick={handleFavoriteClick} style={{ width: "10x" }}/> 
                 </button>
               </div>
             </div>
           ))}
           </div>
         ) : (
-          <div style={{maxWidth:'500px', minHeight:'78vh'}} className='container'>
-              <h1 className='text-danger font-weight-bold my-5'>We Are Sorry There Are No Jobs With This Name</h1>
+          <div className='no-jobs'>
+              <h1 >We Are Sorry There Are No Jobs With This Name</h1>
           </div>
         )}
         

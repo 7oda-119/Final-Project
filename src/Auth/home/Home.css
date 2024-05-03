@@ -1,0 +1,45 @@
+.navbar{
+    background-color: #ebeeff !important ;
+}
+.navbar .nav-link{
+    text-decoration: none ;
+    color: rgb(58, 78, 253) ;
+    font-size: 18px;
+    margin-left: 15px;
+    padding: 0 !important;
+}
+.navbar .nav-link:hover{
+    border-bottom: 2px solid #04107d;
+    color: #04107d;
+}
+.navbar .setting-icon{
+    margin-left: 20px;
+    font-size: 35px;
+    color: rgb(24, 96, 24);
+}
+
+
+.sidebar{
+    position: relative;
+}
+.sidebar .nav-link{
+    font-size: 20px;
+    margin: 10px 0 0 20px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: black !important;
+}
+.sidebar .nav-link:hover{
+    border-radius: 10px;
+    background-color: rgb(89, 89, 210);
+    color: white !important;
+}
+.sidebar .active{
+    border-radius: 10px;
+    background-color: rgb(89, 89, 210);
+    color: white !important;
+}
+.sidebar .bottom-sidebar{
+    position: absolute;
+    bottom: 50px;
+}

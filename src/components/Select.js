@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
+import { baseUrl } from '../Api/Api';
+import axios from 'axios';
 export default function Selected() {
 
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -10,7 +12,7 @@ export default function Selected() {
     
   };
 
-  const languageOptions = [
+  const languageOptionss = [
     { id: 'en', name: 'English' },
     { id: 'mer', name: 'Meru' },
     { id: 'pt_BR', name: 'Brazilian Portuguese' },
@@ -26,30 +28,46 @@ export default function Selected() {
     console.log(selectedSkills);
   }
 
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const [languageOptions, setLanguageOptions] = useState();
+  const [selectedLanguages, setSelectedLanguages] = useState();
+    //fetch skills
+    useEffect(() => {
+        fetchLanguages();
+    }, []);
+  
+    const fetchLanguages = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}/api/Language/Get-All-Language-With-Id`);
+            console.log(response.data);
+            setLanguageOptions(response.data)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleLanguageChange = (languageOptions) => {
+        const selectedLanguageID = languageOptions.map((option) => option.id);
+        setSelectedLanguages(selectedLanguageID);
+    };
+
   return (
     <div style={{width:'400px'}}>
-      {selectedSkills.map((skill, index) => (
-        <input
-          key={index}
-          type="text"
-          value={skill}
-          onChange={(event) => {
-            const updatedSkills = [...selectedSkills];
-            updatedSkills[index] = event.target.value;
-            setSelectedSkills(updatedSkills);
-          }}
-        />
-      ))}
-      <select value="" onChange={handleSkillChange}>
-        <option value="">Select a skill</option>
-        {languageOptions.map((option) => (
-          <option key={option.id} value={option.name}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleSub}>submit</button>
-      
+      <div className="App">
+      <Select
+        defaultValue={selectedLanguages}
+        options={languageOptions}
+        onChange={handleLanguageChange}
+        isMulti
+      />
+    </div>
     </div>
   );
 }

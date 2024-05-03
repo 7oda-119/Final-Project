@@ -17,7 +17,7 @@ export default function ReconfirmEmail() {
     try {
         const res = await axios.post(`${baseUrl}/Resend-Confirmation-Link?email=${email}`)
         console.log(res.data);
-        toast("check your Email box")
+        toast.success("Check your Email box");
     } catch (error) {
       console.log(error.res);
     }
@@ -29,8 +29,9 @@ export default function ReconfirmEmail() {
           <div className="cont py-4">
           <form onSubmit={handleSubmit}>
               <div>
-                  <h1><img src={logo} alt='logo'/>Task Sync</h1>
-                  <p> Enter the email address and we'll send you a link to confirm the email</p>
+                  <h1 className='mb-3'><img src={logo} alt='logo'/>Task Sync</h1>
+                  <p className='fw-bold'>Check your email box first we send a confirmation link there.</p>
+                  <p>If you don't receive the link please enter your email here.</p>
               </div>
               <div className='row d-flex justify-content-center'>
               <input className='form-control ' type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
@@ -40,10 +41,10 @@ export default function ReconfirmEmail() {
                   <button className='btn btn-primary' type='submit'>Send</button>
                 </div>
               </div>
-              <ToastContainer />
           </form>
           </div>
       </div>
+        <ToastContainer />
     </div>
   )
 }

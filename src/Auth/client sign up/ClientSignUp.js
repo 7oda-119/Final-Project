@@ -90,8 +90,8 @@ function ClientSignUp() {
                 },
             })
             console.log(response )
-            toast('Check your Email to confirm the Email')
             navigate('/reconfirm-email')
+            toast.success('Check your Email to confirm the Email');
         }
         catch(err){
             console.log(err)
@@ -102,42 +102,42 @@ function ClientSignUp() {
   return (
     <div className='box'>
         <div className="sec" id="sec">
-        <div className="sign-up">
-            <form onSubmit={handleSubmit}>
-                <h1>Create Account</h1>
-                <div className="social-icons">
-                <a href="#" className="icon"><FaGoogle /></a>
-                </div>
-                <span>or use your Email for registeration</span>
-                <input type="text" placeholder="FirstName" name='FirstName' value={FirstName} onChange={(e) => setFirstName(e.target.value)}/>
-                {errors.FirstName && <span className='erorr'>{errors.FirstName}</span>}
-                <input type="text" placeholder="LastName" name='LastName' value={LastName} onChange={(e) => setLastName(e.target.value)}/>
-                {errors.LastName && <span className='erorr'>{errors.LastName}</span>}
-                <input type="Email" placeholder="Email" name='Email' value={Email} onChange={(e) => setEmail(e.target.value)}/>
-                {errors.Email && <span className='erorr'>{errors.Email}</span>}
-                <input type="Password" placeholder="Password" name='Password' value={Password} onChange={(e) => setPassword(e.target.value)}/>
-                {errors.Password && <span className='erorr'>{errors.Password}</span>}
-                <input type="Password" placeholder="Confirm Password" name='ConfirmPassword' value={ConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                {errors.ConfirmPassword && <span className='erorr'>{errors.ConfirmPassword}</span>}
-                <select className='form-select my-1' value={Country} onChange={(e)=>handleCountry(e)}>
-                        <option value=''>select country</option>
-                        {country.map(item=> <option key={item} >{item}</option>)}
-                    </select>
-                    {errors.country && <span className='error'>{errors.country}</span>}
-                <button type='submit'>Sign Up</button>
-                <ToastContainer />
-            </form>
-        </div>
-        <div className="toggle-sec">
-            <div className="toggle">
-                <div className="toggle-panel">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
-                    <button type='button' onClick={handleSingIn} id="login">Sign In</button>
+            <div className="sign-up">
+                <form onSubmit={handleSubmit}>
+                    <h1>Create Account</h1>
+                    <div className="social-icons">
+                    <a href="#" className="icon"><FaGoogle /></a>
+                    </div>
+                    <span>or use your Email for registeration</span>
+                    <input type="text" placeholder="FirstName" name='FirstName' value={FirstName} onChange={(e) => setFirstName(e.target.value)}/>
+                    {errors.FirstName && <span className='erorr'>{errors.FirstName}</span>}
+                    <input type="text" placeholder="LastName" name='LastName' value={LastName} onChange={(e) => setLastName(e.target.value)}/>
+                    {errors.LastName && <span className='erorr'>{errors.LastName}</span>}
+                    <input type="Email" placeholder="Email" name='Email' value={Email} onChange={(e) => setEmail(e.target.value)}/>
+                    {errors.Email && <span className='erorr'>{errors.Email}</span>}
+                    <input type="Password" placeholder="Password" name='Password' value={Password} onChange={(e) => setPassword(e.target.value)}/>
+                    {errors.Password && <span className='erorr'>{errors.Password}</span>}
+                    <input type="Password" placeholder="Confirm Password" name='ConfirmPassword' value={ConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    {errors.ConfirmPassword && <span className='erorr'>{errors.ConfirmPassword}</span>}
+                    <select className='form-select my-1' value={Country} onChange={(e)=>handleCountry(e)}>
+                            <option value=''>select country</option>
+                            {country.map(item=> <option key={item} >{item}</option>)}
+                        </select>
+                        {errors.country && <span className='error'>{errors.country}</span>}
+                    <button type='submit'>Sign Up</button>
+                </form>
+            </div>
+            <div className="toggle-sec">
+                <div className="toggle">
+                    <div className="toggle-panel">
+                        <h1>Welcome Back!</h1>
+                        <p>Enter your personal details to use all of site features</p>
+                        <button type='button' onClick={handleSingIn} id="login">Sign In</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <ToastContainer />
     </div>
   )
 }

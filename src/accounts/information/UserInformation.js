@@ -5,7 +5,10 @@ import { baseUrl } from '../../Api/Api';
 import { FaUserEdit } from "react-icons/fa";
 import '../CSS.css'
 import EditInfoUser from './EditInfoUser';
+import { useNavigate } from 'react-router-dom';
 function Information() {
+
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,7 +36,16 @@ function Information() {
       setusername(response.data.username);
       setCountry(response.data.country);
       } catch (error) {
-        console.error(error);
+        const errorPages = error.response.status;
+        if (errorPages === 403) {
+          navigate('/error403');
+        } else if (errorPages === 401) {
+          navigate('/error401');
+        } else if (errorPages === 500) {
+          navigate('/error500');
+        } else{
+          console.log(error.response)
+        }
       }
     };
 

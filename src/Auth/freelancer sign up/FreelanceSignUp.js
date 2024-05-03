@@ -235,16 +235,16 @@ function FreelanceSignUp() {
         formData.append('SelectedLanguages', SelectedLanguages);
         formData.append('SelectedSkills', SelectedSkills) ;
         
-
         try{
             const response = await axios.post(`${baseUrl}/Register-Freelance`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                   },
             })
-            console.log(response )
-            toast('Check your Email to confirm the Email')
+            console.log(PhoneNumber)
+            console.log(response)
             navigate('/reconfirm-email')
+            toast.success('Check your Email to confirm the Email')
         }
         catch(err){
             console.log(err)
@@ -320,7 +320,7 @@ function FreelanceSignUp() {
                         placeholder='Select Skills'
                         options={skillOptions}
                         labelField="name"
-                        valueField="id"
+                        valueField="name"
                         multi
                         onChange={handleLSkillChange}
                         color='#65B741'
@@ -330,7 +330,7 @@ function FreelanceSignUp() {
                         placeholder='Select Languages'
                         options={languageOptions}
                         labelField="value"
-                        valueField="id"
+                        valueField="value"
                         multi
                         onChange={handleLanguageChange}
                         color='#65B741'

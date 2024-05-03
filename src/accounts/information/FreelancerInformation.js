@@ -8,27 +8,29 @@ import axios from 'axios';
 import { baseUrl } from '../../Api/Api';
 import '.././CSS.css'
 import EditInfoFreelancer from './EditInfoFreelancer';
+import { useNavigate } from 'react-router-dom';
 export default function Test() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [username, setusername] = useState('');
-    const [country, setCountry] = useState('');
-    const [state, setState] = useState('');
-    const [address, setAddress] = useState('');
-    const [age, setAge] = useState('');
-    const [description, setDescription] = useState('');
-    const [education, setEducation] = useState('');
-    const [experience, setExperience] = useState('');
-    const [phoneNumber, setPoneNumber] = useState('');
-    const [hourlyRate, setHourlyRate] = useState('');
-    const [yourTitle, setYourTitle] = useState('');
-    const [zip, setZip] = useState('');
-    const [portfolioURL, setPortfolioURL] = useState('');
-    const [profilePicture, setProfilePicture] = useState();
-    const [selectedLangueges, setSelectedLangueges] = useState([]);
-    const [selectedSkills, setSelectedSkills] = useState([]);
 
+  const navigate = useNavigate();
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setusername] = useState('');
+  const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [address, setAddress] = useState('');
+  const [age, setAge] = useState('');
+  const [description, setDescription] = useState('');
+  const [education, setEducation] = useState('');
+  const [experience, setExperience] = useState('');
+  const [phoneNumber, setPoneNumber] = useState('');
+  const [hourlyRate, setHourlyRate] = useState('');
+  const [yourTitle, setYourTitle] = useState('');
+  const [zip, setZip] = useState('');
+  const [portfolioURL, setPortfolioURL] = useState('');
+  const [profilePicture, setProfilePicture] = useState();
+  const [selectedLangueges, setSelectedLangueges] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
      //call token 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -67,7 +69,16 @@ export default function Test() {
       setSelectedLangueges(response.data.selectedLanguages);
       setYourTitle(response.data.yourTitle);
     } catch (error) {
-      console.error(error);
+      const errorPages = error.response.status;
+      if (errorPages === 403) {
+        navigate('/error403');
+      } else if (errorPages === 401) {
+        navigate('/error401');
+      } else if (errorPages === 500) {
+        navigate('/error500');
+      } else{
+        console.log(error.response)
+      }
     }
   };
 
@@ -101,7 +112,7 @@ export default function Test() {
                 <button className='editInfo btn btn-success' onClick={openInfoModal}>Edit Information</button>
                 <button className='edit-sk-lang btn btn-success' >Edit Language&Skills</button>
             </div>
-            <div className=' col-6 row d-flex justify-content-between'>
+            <div className=' col-10 row d-flex justify-content-between'>
                 <h4>My Info</h4>
                 <div className='rate col-4 py-3 ' style={{background:"white"}}>
                     <div className='d-flex justify-content-center'>

@@ -20,10 +20,10 @@ const JobPostForm = () => {
     try {
       const response = await axios.get(`${baseUrl}/api/Category/Get-All-Categories-With-Id`);
       setCategories(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
   const [title, setTitle] = useState('')
@@ -51,19 +51,16 @@ const JobPostForm = () => {
       toast('success')
       console.log(res)
       navigate('/myjobs')
-    } catch (error) {
-        console.log(error.response.data); 
-      
-    }
-    
-    
+    }catch (error) {
+      console.log(error.response.data); 
+    }  
   };
 
   return (
-    <div style={{minHeight:'84vh'}}>
-      <div className='mt-5'>
-        <h3 className='text-center'>Creating Job</h3>
-        <div className="form-container mt-3">
+    <div style={{minHeight:'86vh'}}>
+      <div className='create-job'>
+        <h3 className='create-job-title'>Creating Job</h3>
+        <div className="form-create-job mt-3">
           <form >
             <label htmlFor="title" className="form-label">Title:</label>
             <input type="text" id="title" name="title" value={title} onChange={(e)=>setTitle(e.target.value)} className="form-input" required />
