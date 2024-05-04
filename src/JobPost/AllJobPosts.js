@@ -104,7 +104,7 @@ const JobPostsPage = () => {
               <div className="job-post-s-buttons">
                 <button className="hire-s-button">Hire</button>
                 <button className='fav-s-button' > 
-                  <Heart isActive={active} onClick={handleFavoriteClick} style={{ width: "10x" }}/> 
+                  <Heart isActive={jobPost.isDeleted} onClick={handleFavoriteClick} style={{ width: "30px" }}/> 
                 </button>
               </div>
             </div>

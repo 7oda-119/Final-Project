@@ -4,11 +4,14 @@ import { baseUrl } from '../Api/Api';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookie from 'cookie-universal'
+import Heart from 'react-heart'
+import { Rating } from '@smastrom/react-rating'
 const FreelancersPage = () => {
 
   const navigate = useNavigate();
   const [freelancers, setFreelancers] = useState([]); 
   const [name, setName] = useState('');
+  const [rating, setRating] = useState()
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -62,6 +65,21 @@ const FreelancersPage = () => {
         }
       }
     }
+
+    //add and delete fav
+  const addAndDeleteFav= async(Fid)=>{
+    try{
+      const response = await axios.post(`${baseUrl}/api/FreeFav/New-Delete-Fav-Freelancer?Fid=${Fid}`,{ Fid },{
+        headers: {
+           Authorization: `Bearer ${token}`
+        }
+      })
+      fetchData();
+      console.log('OK de');
+    } catch(error){
+      console.log(error.response)
+      }
+   };
   return (
     <div className='find-freelancers'>
         <div className="freelancers-container">
@@ -77,18 +95,20 @@ const FreelancersPage = () => {
           </div>
           <div>
             {freelancers ?(<> {freelancers.map((data)=>
-              <div key={freelancers.id} className="freelancer">
+              <div key={data.id} className="freelancer">
               <img src={data.profilePicture} alt="Profile" className="profile-picture" />
                 <div className="freelancer-info">
                   <div className="title-container">
-                    <h3 className="title">{data.fullName}</h3>
+                    <Link to={`Profile/${data.id}`} className="full-name">{data.fullName}</Link>
                   </div>
-                  <p className="full-name">{data.yourTitle}</p>
+                  <p className="title">{data.yourTitle}</p>
                   <p className="hourly-rate">Hourly Rate: ${data.hourlyRate}/houre</p>
                   <p className="description">{data.description}</p>
-                  <div>
-                    <Link className="btn-hire" to={`Profile/${data.id}`} >Profile</Link>
-                    <button className="btn-favorite">Favorite</button>
+                  <div className="free-fav-s-buttons">
+                    <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>
+                    <button className='fav-s-button'>
+                    <Heart isActive={data.isFav} onClick={()=>addAndDeleteFav(data.id)} />
+                    </button>
                   </div>
                 </div>
               </div>

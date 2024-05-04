@@ -39,6 +39,7 @@ import Sidebar from './Auth/home/Sidebar';
 import Cookie from 'cookie-universal'
 import MyFavJobs from './Favorites/MyFavJobs';
 import FavFreelancers from './Favorites/FavFreelancers';
+import JobDetails from './Favorites/JobDetails';
 function App() {
   
   const cookies = Cookie();
@@ -69,6 +70,7 @@ function App() {
               <Route path='findwork' element={<AllJobPosts />}/>
               <Route path='favjobs' element={<MyFavJobs />}/>
               <Route path='favfreelancers' element={<FavFreelancers />}/>
+              <Route path='jobDeatais' element={<JobDetails />}/>
 
               <Route path='freelancers' element={<FreelancersPage />}/>
               <Route path='freelancers/Profile/:id' element={<ProfileFree />}/> 
@@ -81,17 +83,18 @@ function App() {
               <Route path='Languages' element={<LanguageList />}/>
             </Route>
 
-            <Route path='error404' element={<Error404 />}/>
-            <Route path='error403' element={<Error403 />}/>
-            <Route path='error401' element={<Error401 />}/>
-            <Route path='error500' element={<Error500 />}/>
             <Route path='select' element={<Select />}/>
             <Route path='selectimage' element={<SelectImage />}/>
             <Route path='heart' element={<Heart />}/>
             <Route path='contract' element={<ContractDetails />}/>
             <Route path='contractform' element={<Form />}/>
 
+            <Route path='error403' element={<Error403 />}/>
+            <Route path='error401' element={<Error401 />}/>
+            <Route path='error500' element={<Error500 />}/>
+            <Route path='*' element={<Error404 />}/>
           </Routes>
+
         </div>
       </div>
     </div>

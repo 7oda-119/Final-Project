@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
 import { baseUrl } from '../Api/Api';
+import Heart from 'react-heart'
 export default function ProfileFree() {
     const navigate = useNavigate();
     let {id} = useParams();
@@ -27,7 +28,8 @@ export default function ProfileFree() {
     const [profilePicture, setProfilePicture] = useState();
     const [selectedLangueges, setSelectedLangueges] = useState([]);
     const [selectedSkills, setSelectedSkills] = useState([]);
-    const [rating, setRating] = useState()
+    const [rating, setRating] = useState();
+    const [isFav, setIsFav] = useState();
 
     const cookies = Cookie();
     const token = cookies.get('freelanceCookie')
@@ -63,15 +65,39 @@ export default function ProfileFree() {
       setSelectedLangueges(response.data.selectedLanguages);
       setYourTitle(response.data.yourTitle);
       setRating(response.data.rate);
+      setIsFav(response.data.isFav);
     } catch (error) {
-      console.error(error);
+      const errorPages = error.response.status;
+      if (errorPages === 403) {
+        navigate('/error403');
+      } else if (errorPages === 401) {
+        navigate('/error401');
+      } else if (errorPages === 500) {
+        navigate('/error500');
+      }else{
+        console.log(error.response);
+      }
     }
   };
+
+  //add and delete fav
+  const addAndDeleteFav= async()=>{
+    try{
+      const response = await axios.post(`${baseUrl}/api/FreeFav/New-Delete-Fav-Freelancer?Fid=${id}`,{ Fid: id },{
+        headers: {
+           Authorization: `Bearer ${token}`
+        }
+      })
+      fetchData();
+    } catch(error){
+      console.log(error.response)
+      }
+   };
 
   return (
     <div style={{minHeight: '84vh'}}>
       <div className='account d-flex justify-content-center '>
-        <div className="account-info col-lg-10 row ">
+        <div className="account-info col-lg-10 row "> 
           <div className="head d-flex py-3 " > 
             <div>
               <img className='user-photo' src={profilePicture} alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}}/>
@@ -81,7 +107,10 @@ export default function ProfileFree() {
               <span className='d-block my-1'>{username}</span>
               <span className='d-block my-1'><IoLocationOutline className='d-inline'/>{address}</span>
               <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>
-            </div>    
+            </div>  
+            <button className='pro-fav-s-button'>
+              <Heart isActive={isFav} style={{width:"30px"}} onClick={addAndDeleteFav}/>
+          </button>  
           </div>
           <div className="row">
             <div className="Skills col-lg-5 py-3">

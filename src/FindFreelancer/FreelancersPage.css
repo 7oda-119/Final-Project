@@ -26,6 +26,7 @@
 }
 
 .freelancer {
+  position: relative;
   display: flex;
   align-items: flex-start;
   margin-bottom: 40px;
@@ -34,6 +35,10 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation: slideInRight 1s ease-in-out;
+  transition: 0.2s ease;
+}
+.freelancer:hover{
+  transform: scale(1.07);
 }
 
 @keyframes slideInRight {
@@ -47,7 +52,7 @@
   }
 }
 
-.profile-picture {
+.freelancer .profile-picture {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -55,33 +60,70 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.freelancer-info {
+.freelancer .freelancer-info {
   flex: 1;
 }
 
-.title {
+.freelancer .title {
   font-size: 20px;
   margin-bottom: 10px;
   color: #333;
 }
 
-.hourly-rate {
+.freelancer .hourly-rate {
   font-size: 16px;
   margin-bottom: 10px;
   color: #666;
 }
 
-.full-name {
+.freelancer .full-name {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #222;
+  text-decoration: none;
 }
-
+.freelancer .full-name:hover{
+  color: #038f54;
+}
 .description {
   font-size: 16px;
   color: #888;
   margin-bottom: 20px;
+}
+.free-fav-s-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  max-width: 110px;
+  margin-left: 20px;
+}
+
+.profile-s-button{
+  text-decoration: none;
+  margin: 5px 10px 0 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  transition: 0.2s;
+}
+.profile-s-button:hover{
+  background-color: #0860be;
+  transform: scale(1.05);
+}
+.fav-s-button{
+  width: 30x;
+  height: 30x;
+  transition: 0.2s;
+  margin-left: 10px;
+}
+.fav-s-button:hover{
+  transform: scale(1.1);
+  width: 50px;
+  height: 50px;
 }
 
 .btn-hire, .btn-favorite {
@@ -147,9 +189,16 @@
 }
 
 .account-info{
+  position: relative;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   border-radius: 20px;
+}
+
+.pro-fav-s-button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .account-info .head{

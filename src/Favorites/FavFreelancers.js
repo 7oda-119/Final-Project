@@ -1,36 +1,98 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Heart from 'react-heart'
 import './Favorites.css'
+import axios from 'axios'
+import { baseUrl } from '../Api/Api'
+import Cookie from 'cookie-universal'
+import { Rating } from '@smastrom/react-rating'
 function FavFreelancers() {
 
-    const [active, setActive] = useState(true)
-    const handleFavoriteClick =()=>{
-        setActive(!active)
+    const navigate = useNavigate();
+    const goToProfile =(id)=>{
+     navigate(`/freelancers/Profile/${id}`)
+    }
+
+  const [myFavFree, setMyFavFree] = useState([]);
+  const cookies = Cookie();
+  const token = cookies.get('freelanceCookie')
+
+  useEffect(() => {
+    fetchFavFree();
+  }, []);
+  const fetchFavFree = async()=>{
+    try{
+      const response = await axios.get(`${baseUrl}/api/FreeFav/Get-My-Fav-Free`,{
+        headers: {
+           Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response.data);
+      setMyFavFree(response.data)
+    }catch(error){
+      const errorPages = error.response.status;
+      if (errorPages === 403) {
+        navigate('/error403');
+      } else if (errorPages === 401) {
+        navigate('/error401');
+      } else if (errorPages === 500) {
+        navigate('/error500');
+      }else{
+        console.log(error.response);
       }
-      console.log(active)
+    }
+  }
+
+  //add and delete fav
+  const addAndDeleteFav= async(Fid)=>{
+    try{
+      const response = await axios.post(`${baseUrl}/api/FreeFav/New-Delete-Fav-Freelancer?Fid=${Fid}`,{ Fid },{
+        headers: {
+           Authorization: `Bearer ${token}`
+        }
+      })
+      fetchFavFree();
+    } catch(error){
+      console.log(error.response)
+      }
+   };
+  
+   
 
   return (
-    <div className='fav-freelancers'>
-        <div className="fav-freelancers-container">
-              <div className="fav-freelancer">
-              <img src='' alt="Profile" className="profile-picture" />
-                <div className="fav-freelancer-info">
-                  <div className="fav-title-container">
-                    <h3 className="title">fullName</h3>
+    <div className='find-freelancers'>
+      <div className='fav-title-fraalancer'>
+        <h4 className='m-auto'>Favorites Freelancers</h4>
+      </div>
+      <div className="freelancers-container">
+        {Array.isArray(myFavFree) && myFavFree.length > 0?(
+          <> 
+            {myFavFree.map((data)=>(
+              <div key={data.freelancerID} className="freelancer">
+              <img src={data.profilePicture} alt="Profile" className="profile-picture" />
+                <div className="freelancer-info">
+                  <div className="title-container">
+                    <button onClick={()=>goToProfile(data.freelancerID)} className="full-name">{data.fullName}</button>
                   </div>
-                  <p className="full-name">yourTitle</p>
-                  <p className="hourly-rate">Hourly Rate: $hourlyRate/houre</p>
-                  <p className="description">description</p>
+                  <p className="title">{data.yourTitle}</p>
+                  <p className="hourly-rate">Hourly Rate: ${data.hourlyRate}/houre</p>
+                  <p className="description">{data.description}</p>
                   <div className="free-fav-s-buttons">
-                    <Link className="profile-s-button">Profile</Link>
-                    <button className='fav-s-button' > 
-                    <Heart isActive={active} onClick={handleFavoriteClick} /> 
+                    <Rating readOnly  style={{ maxWidth: '100px' }} value={data.rate}/>
+                    <button className='fav-s-button'>
+                    <Heart isActive={data.isFav} onClick={()=>addAndDeleteFav(data.freelancerID)} />
                     </button>
-                </div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </>
+          ) : (
+          <div className='no-freelancer'>
+            <h1>There Are No Favorite Freelancers Yet, Add To Favorites First.</h1>
           </div>
+        )}
+      </div>
     </div>
   )
 }
