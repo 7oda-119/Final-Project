@@ -40,6 +40,7 @@ import Cookie from 'cookie-universal'
 import MyFavJobs from './Favorites/MyFavJobs';
 import FavFreelancers from './Favorites/FavFreelancers';
 import JobDetails from './Favorites/JobDetails';
+import Loader from './components/Loader';
 function App() {
   
   const cookies = Cookie();
@@ -47,11 +48,11 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div style={{ display: 'flex', flexDirection: 'row', width: token ? '' : '100%' }} >
+      <div style={{ display: 'flex', flexDirection: 'row', width: token ? '' : '90%' }} >
         {token && <div style={{ flexBasis: '20%' }}>
           <Sidebar />
         </div>}
-        <div style={{ flexBasis: token ? '96%' : '100%' }}>
+        <div style={{ flexBasis: token ? '90%' : '90%' }}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='signin' element={<SignIn />}/>
@@ -93,6 +94,7 @@ function App() {
             <Route path='error401' element={<Error401 />}/>
             <Route path='error500' element={<Error500 />}/>
             <Route path='*' element={<Error404 />}/>
+            <Route path='loader' element={<Loader />}/>
           </Routes>
 
         </div>

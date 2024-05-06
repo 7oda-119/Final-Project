@@ -41,7 +41,7 @@ function ResetPassword() {
     }
   
   return (
-    <div style={{minHeight:'90vh'}}>
+    <div className='box-size'>
       <div className='d-flex justify-content-center'>
           <div className='reset-pass row py-5 my-5'>
               <h4>Reset Your Password</h4>

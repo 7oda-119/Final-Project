@@ -61,11 +61,20 @@ const JobPostsPage = () => {
       }
     }
 
-  const [active, setActive] = useState(false)
-    const handleFavoriteClick =()=>{
-        setActive(!active)
-      }
-      console.log(active)
+    //add and delete fav job
+    const addAndDeleteFav= async(jobId)=>{
+      try{
+        const response = await axios.post(`${baseUrl}/api/FavJobPost/New-And-Delete-JobPost-Fav?jobId=${jobId}`,{ jobId },{
+          headers: {
+             Authorization: `Bearer ${token}`
+          }
+        })
+        console.log('OK de');
+        fetcJobs();
+      } catch(error){
+        console.log(error.response)
+        }
+     };
 
   return ( 
     <div style={{minHeight:'90vh'}}>
@@ -104,7 +113,7 @@ const JobPostsPage = () => {
               <div className="job-post-s-buttons">
                 <button className="hire-s-button">Hire</button>
                 <button className='fav-s-button' > 
-                  <Heart isActive={jobPost.isDeleted} onClick={handleFavoriteClick} style={{ width: "30px" }}/> 
+                  <Heart isActive={jobPost.isFav} onClick={()=>addAndDeleteFav(jobPost.id)} style={{ width: "30px" }}/> 
                 </button>
               </div>
             </div>

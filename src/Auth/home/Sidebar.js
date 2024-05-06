@@ -46,7 +46,7 @@ export default function Sidebar() {
                     {token && role === 'Freelancer'? (
                         <>
                             <Link className={active===1 ?"active nav-link " : "nav-link "} onClick={e=>setActive(1)} to={'/findwork'}><MdFindInPage className='d-inline'/>Find work</Link>
-                            <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/favjobs'}><MdOutlineFavorite className='d-inline'/>Favorites</Link>
+                            <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/favjobs'}><MdOutlineFavorite className='d-inline'/>jobs</Link>
                         </>
                     ) : (
                     token && role === 'User'? (
@@ -54,7 +54,7 @@ export default function Sidebar() {
                         <Link className={active===1 ?"active nav-link " : "nav-link "} onClick={e=>setActive(1)} to={'/freelancers'}><MdFindInPage className='d-inline' /> Find freelancer</Link>
                         <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/createjob'}><MdUpload className='d-inline'/> Upload job</Link>
                         <Link className={active===3 ?"active nav-link " : "nav-link "} onClick={e=>setActive(3)} to={'/myjobs'}><TbCircleLetterJ className='d-inline'/> My jobs</Link>
-                        <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/favfreelancers'}><TbCircleLetterJ className='d-inline'/> Freelancers</Link>
+                        <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/favfreelancers'}><MdOutlineFavorite className='d-inline'/> Freelancers</Link>
                         
                         </>
                     ) : token && role === 'Admin'? (

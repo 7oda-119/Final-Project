@@ -113,7 +113,6 @@
   margin: 0 auto;
   animation: slideInRight 0.5s ease-in-out;
 }
-
 @keyframes slideInRight {
   from {
     transform: translateX(50px);
@@ -124,6 +123,14 @@
     opacity: 1;
   }
 }
+
+.job-post-container{
+  transition: 0.3s;
+}
+.job-post-container:hover{
+  transform: scale(1.07);
+}
+
 
 .job-post-s{
   margin-bottom: 20px;

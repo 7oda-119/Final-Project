@@ -27,7 +27,7 @@ function Congratulation() {
   };
 
   return (
-    <div style={{minHeight:'90vh'}}>
+    <div className='box-size'>
         <div className='forget d-flex justify-content-center'>
           <div className="cont py-5">
             <form onSubmit={handleConfirm}>

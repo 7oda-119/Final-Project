@@ -1,3 +1,7 @@
+.box-size{
+    width: 124.37%;
+    min-height: 90vh;
+}
 .cont{
     display: flex;
     align-items: center;

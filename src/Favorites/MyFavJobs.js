@@ -55,15 +55,15 @@ function MyFavJobs() {
    };
 
   return (
-    <div style={{minHeight:'89vh'}}>
+    <div style={{minHeight:'88vh'}}>
       <div className="job-posts-container">
-        <h2 className='mt-2'>All Job Posts</h2>
+        <h2 className='mt-3'>All Job Posts</h2>
         {myFavJobs.length>0 ? (
           <div>{myFavJobs.map(job => (
-            <div key={job.id} className="job-post-container">
+            <div key={job.jobPostId} className="job-post-container">
               <h3 className="job-post-s-title">{job.categoryName}</h3>
               <p className="job-post-detail">
-                <span className="job-post-label">Title:</span> {job.title}
+                <span className="job-post-label">Title:</span> {job.jobPostTiilte}
               </p>
               <p className="job-post-detail">
                 <span className="job-post-label">Description:</span> {job.description}
@@ -89,7 +89,7 @@ function MyFavJobs() {
           </div>
         ) : (
           <div className='no-jobs'>
-              <h1 >We Are Sorry There Are No Jobs With This Name</h1>
+              <h1 >There Are No Favorite Jobs Yet, Add To Favorites First.</h1>
           </div>
         )}
         
