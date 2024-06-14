@@ -1,0 +1,211 @@
+
+  .apply-tasks-container {
+    margin: auto;
+    margin-top: 20px;
+    max-width: 800px;
+    animation: fadeIn 0.5s;
+  }
+  
+  .apply-tasks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .apply-task-container {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s;
+  }
+  
+  .apply-task-header {
+    display: flex;
+    align-items: center;
+  }
+
+  .apply-task-status {
+    font-size: 18px;
+    font-weight: 500;
+    color: #666;
+  }
+  
+  .apply-task-title {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .apply-task-details {
+    margin-top: 20px;
+  }
+  
+  .apply-task-label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #666;
+  }
+  
+  .apply-task-actions {
+    margin-top: 20px;
+    text-align: right;
+  }
+
+  
+  .cancel-button {
+    background-color: #e03333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .cancel-button:hover {
+    background-color: #a92525;
+    transform: scale(1.03);
+  }
+  
+  .contract-button{
+    background-color: rgb(71, 63, 217);
+    color: #fff;
+    padding: 10px 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .chat-button{
+    background-color: rgb(71, 63, 217);
+    color: #fff;
+    padding: 8px 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+ 
+  .chat-button:hover{
+    background-color: #381a9d;
+    transform: scale(1.03);
+  }
+  .contract-button:hover{
+    background-color: #381a9d;
+    transform: scale(1.03);
+  }
+  .no-jobs {
+    text-align: center;
+    margin-top: 40px;
+    animation: fadeIn 0.5s;
+  }
+  
+  .no-jobs h1 {
+    font-weight: 600;
+    color: crimson;
+    text-transform: capitalize;
+  }
+  
+  .toast-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  .toast {
+    color: crimson;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /*applicants*/
+  .applicants-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .applicant {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+  }
+  .applicant:hover{
+    transform: scale(1.03);
+  }
+  
+  .applicant .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .applicant .applicant-info {
+    flex: 1;
+  }
+  
+  .applicant .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .applicant .hourly-rate {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  .applicant .full-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #222;
+    text-decoration: none;
+  }
+  .applicant .full-name:hover{
+    color: #038f54;
+  }
+  .description {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 20px;
+  } 
+  .btn-Applicants{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+  .no-applicant{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .no-applicant h1{
+    max-width: 500px;
+    color: crimson;
+    font-weight: 500;
+  }
+  

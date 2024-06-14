@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './JobPost.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { baseUrl } from '.././Api/Api';
 import Cookie from 'cookie-universal'
@@ -9,8 +9,6 @@ import moment from 'moment';
 const EditJobPost = () => {
   const navigate = useNavigate();
     let {id} = useParams();
-    console.log(id)
-
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -28,7 +26,7 @@ const EditJobPost = () => {
   }, []);
 
   const handleEdit = async () => {
-    try {
+    try { 
       const response = await axios.get(`${baseUrl}/api/JobPosts/Get-job-post-by-Id?id=${id}`, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -55,7 +53,7 @@ const EditJobPost = () => {
   const handleUpdateJob = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${baseUrl}/api/JobPosts/${id}`,{
+      await axios.put(`${baseUrl}/api/JobPosts/update jobpost?id=${id}`,{
         title, description, price, durationTime : `${date}T${time}`
       },
       {
@@ -99,7 +97,7 @@ const EditJobPost = () => {
             <label htmlFor="durationTime" className="edit-job-post-label">Duration Time:</label>
             <input id="durationTime" type="time" value={time} onChange={(e) => setTime(e.target.value)} className="edit-job-post-input" required />
           </div>
-
+          <Link type='button' className='edit-job-post-cancel' to={'/myjobs'}>Cancel</Link>
           <button type="submit" className="edit-job-post-submit">Update Job Post</button>
         </form>
       </div>

@@ -64,8 +64,8 @@ export default function EditInfoUser({ isOpen, closeModal }) {
   return (
     <div>
         <div className={`modal ${isOpen ? 'show' : ''}`} style={{ display: isOpen ? 'block' : 'none' }}>
-        <div className="modal-dialog">
-          <div className="modal-content">
+        <div className="modal-dialog" > 
+          <div className="modal-content" style={{marginLeft:'80px', marginTop:'100px'}}>
             <div className="modal-header">
               <h5 className="modal-title">Update Information</h5>
               <button type="button" className="btn-close" onClick={closeModal}></button>

@@ -7,8 +7,7 @@ import Cookie from 'cookie-universal'
 import axios from 'axios';
 import { baseUrl } from '../../Api/Api';
 import '.././CSS.css'
-import EditInfoFreelancer from './EditInfoFreelancer';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 export default function Test() {
 
   const navigate = useNavigate();
@@ -94,22 +93,14 @@ export default function Test() {
     setIsModalOpen(false);
   };
 
-  //open modal of freelancer information
-  const [modalInfoOpen, setModalInfoOpen] = useState(false);
-    
-  const openInfoModal = () => {
-    setModalInfoOpen(true);
-  };
-  
-  const closeInfiModal = () => {
-    setModalInfoOpen(false);
-  };
-
+  const navigateToEdit = () =>{
+    navigate('/edit-freelancer');
+  }
   return (
     <div className='AccFree row' style={{minHeight:'83vh'}}>
         <div className=' col-12 row d-flex justify-content-center'>
             <div>
-                <button className='editInfo btn btn-success' onClick={openInfoModal}>Edit Information</button>
+                <button className='editInfo btn btn-success' onClick={navigateToEdit}>Edit Information</button>
                 <button className='edit-sk-lang btn btn-success' >Edit Language&Skills</button>
             </div>
             <div className=' col-10 row d-flex justify-content-between'>
@@ -117,7 +108,7 @@ export default function Test() {
                 <div className='rate col-4 py-3 ' style={{background:"white"}}>
                     <div className='d-flex justify-content-center'>
                         <img className='user-photo' src='https://t4.ftcdn.net/jpg/00/65/10/47/360_F_65104718_x17a76wzWKIm3BlhA6uyYVkDs9982c6q.jpg' alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}}/>
-                        <AiFillEdit className='edit-img' onClick={openImageModal}/>
+                        <button onClick={openImageModal}><AiFillEdit className='edit-img'/></button>
                     </div>
                     <div className='d-flex justify-content-center mt-2'>
                         <div className='text-center'>
@@ -162,7 +153,6 @@ export default function Test() {
                 </div>
             </div>
         </div>
-        <EditInfoFreelancer isOpen={modalInfoOpen} closeModal={closeInfiModal}  />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Cookie from 'cookie-universal'
 import Heart from 'react-heart'
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 const JobPostsPage = () => {
 
   const navigate =useNavigate();
@@ -41,40 +42,68 @@ const JobPostsPage = () => {
       }
     };
 
-    const [title, setTitle] = useState('');
-    const searchForJob = async()=>{
-      try{
-        const response = await axios.get(`${baseUrl}/api/JobPosts/Get-All-Project-With-Same-Title?title=${title}`,{
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-        console.log(response.data)
-        setJobPosts(response.data.sort((a, b) => b.id - a.id))
-      }catch(err){
-        if(err.response.data === `NO jobs found by title ${title}`){
-          setJobPosts(null)
-        }
-        else(
-          console.log(err.response)
-        )
+  const [title, setTitle] = useState('');
+  const searchForJob = async()=>{
+    try{
+      const response = await axios.get(`${baseUrl}/api/JobPosts/Get-All-Project-With-Same-Title?title=${title}`,{
+      headers: {
+        Authorization: `Bearer ${token}`
       }
+    });
+      console.log(response.data)
+      setJobPosts(response.data.sort((a, b) => b.id - a.id))
+    }catch(err){
+      if(err.response.data === `NO jobs found by title ${title}`){
+        setJobPosts(null)
+      }
+      else(
+        console.log(err.response)
+      )
     }
-
-    //add and delete fav job
-    const addAndDeleteFav= async(jobId)=>{
-      try{
-        const response = await axios.post(`${baseUrl}/api/FavJobPost/New-And-Delete-JobPost-Fav?jobId=${jobId}`,{ jobId },{
-          headers: {
-             Authorization: `Bearer ${token}`
-          }
-        })
-        console.log('OK de');
-        fetcJobs();
-      } catch(error){
-        console.log(error.response)
+  }
+  //add and delete fav job
+  const addAndDeleteFav= async(jobId)=>{
+    try{
+      const response = await axios.post(`${baseUrl}/api/FavJobPost/New-And-Delete-JobPost-Fav?jobId=${jobId}`,{ jobId },{
+        headers: {
+           Authorization: `Bearer ${token}`
         }
-     };
+      })
+      toast.success('success. Check your Favorite Box.');
+      fetcJobs();
+    } catch(error){
+      console.log(error.response)
+      }
+   };
+  //apply the job
+  const applyTask= async(jobId, title)=>{
+    try{
+      const response = await axios.post(`${baseUrl}/api/ApplyTasks/Freelancer-Apply-For-Task?jobId=${jobId}`,{ jobId },{
+        headers: {
+           Authorization: `Bearer ${token}`
+        }
+      })
+      toast.success(`The applying on ${title} has been successfully. Check your Appliesd Task box.`);
+      fetcJobs();
+    } catch(error){
+      console.log(error.response)
+      }
+   };
+
+   //delete applied task
+  const deleteTask = async (taskId, title) => {
+    try {
+      const response = await axios.put(`${baseUrl}/api/ApplyTasks/Freelancer-Delete-Task?taskId=${taskId}`, { taskId }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetcJobs();
+      toast.success(`The deleting ${title} has been successfully.`);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return ( 
     <div style={{minHeight:'90vh'}}>
@@ -111,7 +140,11 @@ const JobPostsPage = () => {
               </p>
               
               <div className="job-post-s-buttons">
-                <button className="hire-s-button">Hire</button>
+                {jobPost.isApplied === false ? (
+                  <button className="hire-s-button" onClick={() => applyTask(jobPost.id, jobPost.title)}>Hire</button>
+                ) : (
+                  <button className='cancel-s-button' >Cancel</button>
+                )}
                 <button className='fav-s-button' > 
                   <Heart isActive={jobPost.isFav} onClick={()=>addAndDeleteFav(jobPost.id)} style={{ width: "30px" }}/> 
                 </button>
@@ -126,6 +159,7 @@ const JobPostsPage = () => {
         )}
         
       </div>
+      <ToastContainer position="top-center"/>
     </div>
   );
 };

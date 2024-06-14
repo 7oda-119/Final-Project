@@ -35,7 +35,7 @@ const JobPostPage = () => {
   const handleDeleteJob = async (jobId) => {
     if (window.confirm('Are you sure you want to delete this job post?')) {
       try {
-        await axios.delete(`${baseUrl}/api/JobPosts/${jobId}`,{
+        await axios.put(`${baseUrl}/api/JobPosts/Cliend delete job?jobId=${jobId}`, {jobId}, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -68,6 +68,7 @@ const JobPostPage = () => {
                 Delete
               </button>
             </div>
+            <Link className='btn-applicant btn btn-primary' to={`applicants/${job.id}`}>Applicant</Link>
           </div>
         </div>
       </div>)}

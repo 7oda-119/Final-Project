@@ -39,7 +39,7 @@ const JobPostForm = () => {
   const handleSubmit = async (e) => {
     console.log(`${date}T${time}`)
     try {
-      const res = await axios.post(`${baseUrl}/api/JobPosts`, { 
+      const res = await axios.post(`${baseUrl}/api/JobPosts/Cliend  PostJob`, { 
         title, 
         description,
         price,

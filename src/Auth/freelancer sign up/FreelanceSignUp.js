@@ -8,7 +8,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { ToastContainer, toast } from 'react-toastify';
 import { baseUrl } from '../../Api/Api';
-
+import cityData from '../../cityData.json'
 function FreelanceSignUp() {
 
     const navigate = useNavigate();
@@ -42,13 +42,11 @@ function FreelanceSignUp() {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState(cityData)
     const [getState, setState] = useState([])
     const [cities, setCities] = useState([])
 
-    useEffect(()=>{
-        axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json').then(res=>setData(res.data)).catch(err=>console.log(err))
-    },[])
+    
     const country = [...new Set(data.map(item=> item.country))];
     country.sort();
 

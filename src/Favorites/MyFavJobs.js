@@ -5,6 +5,7 @@ import axios from 'axios'
 import { baseUrl } from '../Api/Api'
 import Cookie from 'cookie-universal'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 function MyFavJobs() {
 
   const navigate = useNavigate();
@@ -48,7 +49,22 @@ function MyFavJobs() {
         }
       })
       fetchFavJobs();
-      console.log('OK de');
+      toast.success('The deleting has been successfully.');
+    } catch(error){
+      console.log(error.response)
+      }
+   };
+
+   //apply the job
+   const applyTask= async(jobId, title)=>{
+    try{
+      const response = await axios.post(`${baseUrl}/api/ApplyTasks/Freelancer-Apply-For-Task?jobId=${jobId}`,{ jobId },{
+        headers: {
+           Authorization: `Bearer ${token}`
+        }
+      })
+      toast.success(`The applying on ${title} has been successfully.`);
+      fetchFavJobs();
     } catch(error){
       console.log(error.response)
       }
@@ -79,7 +95,7 @@ function MyFavJobs() {
               </p>
               
               <div className="job-post-s-buttons">
-                <button className="hire-s-button">Hire</button>
+                <button className="hire-s-button" onClick={()=>applyTask(job.jobPostId, job.jobPostTiilte)}>Hire</button>
                 <button className='fav-s-button' > 
                   <Heart isActive={job.isFav} onClick={()=>deleteFav(job.jobPostId)} style={{ width: "30px" }}/> 
                 </button>
@@ -94,6 +110,7 @@ function MyFavJobs() {
         )}
         
       </div>
+      <ToastContainer position="top-center"/>
   </div>
   )
 }

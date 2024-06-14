@@ -103,38 +103,6 @@
     border-radius: 30px;
     display: inline;
 }
-/* Freelancer Profile */
-.account{
-    margin: 50px 150px 0 150px;
-    padding: 20px 0 50px 0;
-    min-height: 450px;
-}
-
-.account-info{
-    display: flex;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
-    border-radius: 20px;
-}
-
-.account-info .head{
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.account .Skills{
-    border-right: 2px solid rgba(0, 0, 0, 0.1);
-}
-.Skills span{
-    background-color: #EEF0E5;
-    margin-left: 10px;
-    padding: 5px;
-    border-radius: 30px;
-}
-
-.linkedin{
-    text-decoration: none;
-    padding: 0 0 0 25px;
-}
 
 /* protfolio */
 .portfolio{
@@ -161,7 +129,7 @@
 .AccFree .rate .edit-img{
     position: absolute;
     top: 95px;
-    left: 145px;
+    right: 120px;
     color: rgb(25, 137, 25);
 }
 

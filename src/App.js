@@ -41,6 +41,12 @@ import MyFavJobs from './Favorites/MyFavJobs';
 import FavFreelancers from './Favorites/FavFreelancers';
 import JobDetails from './Favorites/JobDetails';
 import Loader from './components/Loader';
+import FreeAppliedTasks from './Apply Tasks/FreeAppliedTasks';
+import EditInfoFreelancer from './accounts/information/EditInfoFreelancer';
+import JobApplicants from './Apply Tasks/JobApplicants';
+import FreeAcceptedForTasks from './Apply Tasks/FreeAcceptesTasks';
+import ClientAcceptedFrees from './Apply Tasks/ClientAcceptFree';
+import SkillSelectionForm from './components/SkillSelectionForm';
 function App() {
   
   const cookies = Cookie();
@@ -68,6 +74,7 @@ function App() {
             <Route element={<RequireAuth/>}>
               <Route path='account-user' element={<UserAccount/>}/>
               <Route path='account-freelancer' element={<FreelancerAccount/>}/>
+              <Route path='edit-freelancer' element={<EditInfoFreelancer/>}/>
               <Route path='findwork' element={<AllJobPosts />}/>
               <Route path='favjobs' element={<MyFavJobs />}/>
               <Route path='favfreelancers' element={<FavFreelancers />}/>
@@ -79,6 +86,11 @@ function App() {
               <Route path='myjobs' element={<MyJobs />}/>
               <Route path='myjobs/editjob/:id' element={<EditJobPost />}/>
 
+              <Route path='appliedTasks' element={<FreeAppliedTasks />}/>
+              <Route path='acceptedApplicantsFree' element={<FreeAcceptedForTasks />}/>
+              <Route path='acceptedApplicantsClient' element={<ClientAcceptedFrees />}/>
+              <Route path='myjobs/applicants/:jobId' element={<JobApplicants />}/>
+
               <Route path='categories' element={<CategoriesList />}/>
               <Route path='skills' element={<SkillList />}/>
               <Route path='Languages' element={<LanguageList />}/>
@@ -87,7 +99,7 @@ function App() {
             <Route path='select' element={<Select />}/>
             <Route path='selectimage' element={<SelectImage />}/>
             <Route path='heart' element={<Heart />}/>
-            <Route path='contract' element={<ContractDetails />}/>
+            <Route path='create-contract/:' element={<ContractDetails />}/>
             <Route path='contractform' element={<Form />}/>
 
             <Route path='error403' element={<Error403 />}/>
@@ -95,6 +107,8 @@ function App() {
             <Route path='error500' element={<Error500 />}/>
             <Route path='*' element={<Error404 />}/>
             <Route path='loader' element={<Loader />}/>
+            <Route path='SkillSelectionForm' element={<SkillSelectionForm />}/>
+
           </Routes>
 
         </div>

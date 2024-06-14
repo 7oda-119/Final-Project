@@ -1,11 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import React, { useEffect, useState } from 'react';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import { baseUrl } from '../../Api/Api';
-import Cookie from 'cookie-universal'
-
-export default function EditInfoFreelancer({ isOpen, closeModal }) {
+import Cookie from 'cookie-universal';
+import { FaPerson } from "react-icons/fa6";
+import { CiCalendar } from "react-icons/ci";
+import { FaBriefcase } from "react-icons/fa";
+import { BsCashCoin } from "react-icons/bs";
+import { BsGeoAlt } from "react-icons/bs";
+import { BsLink45Deg } from "react-icons/bs";
+import cityData from '../../cityData.json'
+export default function EditInfoFreelancer() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [Age, setAge] = useState('');
@@ -21,29 +27,30 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
   const [Address, setAddress] = useState();
   const [PhoneNumber, setPhoneNumber] = useState();
 
-  const [data, setData] = useState([])
-  const [getState, setState] = useState([])
-  const [cities, setCities] = useState([])
+  const [data, setData] = useState(cityData);
+  const [getState, setState] = useState([]);
+  const [cities, setCities] = useState([]);
 
-  useEffect(()=>{
-      axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json').then(res=>setData(res.data)).catch(err=>console.log(err))
-  },[])
-  const country = [...new Set(data.map(item=> item.country))];
+  const country = [...new Set(data.map((item) => item.country))];
   country.sort();
 
-  const handleCountry = (e) =>{
+  useEffect(() => {
+    handleCountry({ target: { value: Country } });
+    handleState({ target: { value: State } });
+  }, [Country, State]);
+  const handleCountry = (e) => {
     setCountry(e.target.value);
-    let states = data.filter(state => state.country === e.target.value); 
-    states = [...new Set(states.map(item=>item.subcountry))]
+    let states = data.filter((state) => state.country === e.target.value);
+    states = [...new Set(states.map((item) => item.subcountry))];
     states.sort();
     setState(states);
-  }
+  };
 
-  const handleState =(e)=>{
+  const handleState = (e) => {
     setSelectState(e.target.value);
-    let cities = data.filter(city => city.subcountry === e.target.value)
-    setCities(cities)
-  }
+    let cities = data.filter((city) => city.subcountry === e.target.value);
+    setCities(cities);
+  };
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie');
@@ -51,16 +58,20 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
   //fetch freelancer information
   useEffect(() => {
     fetchData();
+    
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/Account/Freelancer-Account`,{
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await axios.get(
+        `${baseUrl}/api/Account/Freelancer-Account`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
-      console.log(response.data)
+      );
+      console.log(response.data);
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
       setCountry(response.data.country);
@@ -80,7 +91,7 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
     }
   };
 
-  const updateProfileInfo = async()=>{
+  const updateProfileInfo = async () => {
     const formData = new FormData();
     formData.append('FirstName', FirstName);
     formData.append('LastName', LastName);
@@ -96,99 +107,136 @@ export default function EditInfoFreelancer({ isOpen, closeModal }) {
     formData.append('State', State);
     formData.append('Address', Address);
     formData.append('PhoneNumber', PhoneNumber);
-    try{
-      const response = await axios.post(`${baseUrl}/api/Account/Change-Name-Phone-Age-Language-ZIP-Address-Experience-Education-PortfolioURl-Description-YourTitle-HourlyRate-Freelancer`,formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+    try {
+      const response = await axios.post(
+        `${baseUrl}/api/Account/Change-Name-Phone-Age-Language-ZIP-Address-Experience-Education-PortfolioURl-Description-YourTitle-HourlyRate-Freelancer`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
         }
-    });
-    window.location.reload();
-    }catch(err){
-      console.log(err)
+      );
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
     }
-  }
-  
+  };
+
   return (
-    <div>
-      <div className={`modal ${isOpen ? 'show' : ''}`} style={{ display: isOpen ? 'block' : 'none' }}>
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Edit</h5>
-              <button type="button" className="btn-close" onClick={closeModal}></button>
+    <div className="container" style={{ minHeight: '90vh', paddingTop: '20px' }}>
+    <div className="row justify-content-center">
+      <div className="col-md-12 col-lg-10">
+        <h1 className="mb-4 text-center">Edit Profile</h1>
+        
+        <div className="row mb-3">
+          <div className="col-md-5">
+            <label className="form-label">First Name</label>
+            <div className="input-group">
+              <span className="input-group-text"><FaPerson /></span>
+              <input type="text" className="form-control" placeholder="John" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
             </div>
-            <div className="modal-body">
-              <div className="mb-1">
-                <label className='form-label mb-1' >First Name</label>
-                <input type="text" className="form-control" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
-              </div>
-              <div className="mb-1">
-                <label className='form-label mb-1'>Last Name</label>
-                <input type="text" className="form-control" value={LastName} onChange={(e) => setLastName(e.target.value)} />
-              </div>
-              <div className="mb-1">
-              <label className='form-label mb-1'>Age</label>
-                <input type="number" className="form-control" value={Age} onChange={(e) => setAge(e.target.value)} />
-              </div>
-              <div className="mb-1">
-              <label className='form-label mb-1'>Phone Number</label>
-              <PhoneInput value={PhoneNumber} onChange={setPhoneNumber}/>
-              </div>
-              <div className="mb-1">
-              <label className='form-label mb-1'>Zip Code</label>
-                <input type="text" className="form-control" value={ZIP} onChange={(e) => setZIP(e.target.value)} />
-              </div>
-              <div className="mb-1">
-                <select className='form-select my-1' value={Country} onChange={(e)=>handleCountry(e)}>
-                  <option value=''>select country</option>
-                  {country.map(item=> <option key={item} >{item}</option>)}
-                </select>
-              </div>
-              <div className="mb-1">
-                <select className='form-select my-1' value={State} onChange={(e)=>handleState(e)}>
-                  <option value=''>select state</option>
-                  {getState.map(item=> <option key={item} >{item}</option>)}
-                </select>                    
-              </div>
-              <div className="mb-1">
-                <select className='form-select my-1' value={Address} onChange={(e)=>setAddress(e.target.value)}>
-                  <option value=''>select city</option>
-                  {cities.map(item=> <option key={item.name} >{item.name}</option>)}
-                </select>
-              </div>
-              <div className="mb-1">
-                <label className='form-label mb-1'>Education</label>
-                <input type="text" className="form-control" value={Education} onChange={(e) => setEducation(e.target.value)} />
-              </div>
-              <div className="mb-1">
-                <label className='form-label mb-1'>Portfolio URL</label>
-                <input type="url" className="form-control" value={PortfolioURl} onChange={(e) => setPortfolioURl(e.target.value)} />
-              </div>
-              <div className="mb-1">
-                <label className='form-label mb-1'>Experience</label>
-                <textarea className="form-control" value={Experience} onChange={(e) => setExperience(e.target.value)} rows="3"></textarea>
-              </div>
-              <div className="mb-1">
-                <label className='form-label mb-1'>Description</label>
-                <textarea className="form-control" value={Description} onChange={(e) => setDescription(e.target.value)} rows="3"></textarea>
-              </div>
-              <div className="mb-1">
-                <label className='form-label mb-1'>Your Position</label>
-                <input type="text" className="form-control" id="phone" value={YourTitle} onChange={(e) => setYourTitle(e.target.value)} />
-              </div>
-              <div className="mb-1">
-              <label className='form-label mb-1'>Hourly Rate</label>
-                <input type="text" className="form-control" id="phone" value={HourlyRate} onChange={(e) => setHourlyRate(e.target.value)} />
-              </div>
+          </div>
+          <div className="col-md-5">
+            <label className="form-label">Last Name</label>
+            <div className="input-group">
+              <span className="input-group-text"><FaPerson /></span>
+              <input type="text" className="form-control" placeholder="Doe" value={LastName} onChange={(e) => setLastName(e.target.value)} />
             </div>
-            <div className="modal-footer">
-              <button type="button" className='btn btn-secondary' onClick={closeModal}>Close</button>
-              <button type="button" className='btn btn-primary' onClick={updateProfileInfo}>Save</button>
+          </div>
+          <div className="col-md-2">
+            <label className="form-label">Age</label>
+            <div className="input-group">
+              <span className="input-group-text"><CiCalendar /></span>
+              <input type="number" className="form-control" value={Age} onChange={(e) => setAge(e.target.value)} />
             </div>
           </div>
         </div>
+        <div className="row mb-3">
+          <div className="col-md-3">
+            <label className="form-label">Your Position</label>
+            <div className="input-group">
+              <span className="input-group-text"><FaBriefcase /></span>
+              <input type="text" className="form-control" placeholder="Software Engineer" value={YourTitle} onChange={(e) => setYourTitle(e.target.value)} />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <label className="form-label">Hourly Rate</label>
+            <div className="input-group">
+              <span className="input-group-text"><BsCashCoin /></span>
+              <input type="text" className="form-control" placeholder="$50" value={HourlyRate} onChange={(e) => setHourlyRate(e.target.value)} />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <label className="form-label">Zip Code</label>
+            <div className="input-group">
+              <span className="input-group-text"><BsGeoAlt /></span>
+              <input type="text" className="form-control" placeholder="12345" value={ZIP} onChange={(e) => setZIP(e.target.value)} />
+            </div>
+          </div>
+          <div className="col-md-3 mt-2">
+            <label className="form-label">Phone Number</label>
+            <div>
+              <PhoneInput value={PhoneNumber} onChange={setPhoneNumber} />
+            </div>
+          </div>
+        </div>
+        
+        <div className="row mb-3">
+          <div className="col-md-4">
+            <label className="form-label">Select Country</label>
+            <select className="form-select" value={Country} onChange={(e) => handleCountry(e)}>
+              <option value=''>Select country</option>
+              {country.map((item) => <option key={item}>{item}</option>)}
+            </select>
+          </div>
+          <div className="col-md-4">
+            <label className="form-label">Select State</label>
+            <select className="form-select" value={State} onChange={(e) => handleState(e)}>
+              <option value=''>Select state</option>
+              {getState.map((item) => <option key={item}>{item}</option>)}
+            </select>
+          </div>
+          <div className="col-md-4">
+          <label className="form-label">Select City</label>
+            <select className="form-select" value={Address} onChange={(e) => setAddress(e.target.value)}>
+              <option value=''>Select city</option>
+              {cities.map((item) => <option key={item.name}>{item.name}</option>)}
+            </select>
+          </div>
+        </div>
+        
+        <div className="row mb-3">
+          <div className="col-md-4">
+            <label className="form-label">Description</label>
+            <textarea className="form-control" placeholder="Brief description about yourself" value={Description} onChange={(e) => setDescription(e.target.value)} />
+          </div>
+          <div className="col-md-4">
+            <label className="form-label">Education</label>
+            <textarea className="form-control" placeholder="Your education background" value={Education} onChange={(e) => setEducation(e.target.value)} />
+          </div>
+          <div className="col-md-4">
+            <label className="form-label">Experience</label>
+            <textarea className="form-control" placeholder="Your work experience" value={Experience} onChange={(e) => setExperience(e.target.value)} />
+          </div>
+        </div>
+        
+        <div className="row mb-3">
+          <div className="col-md-12">
+            <label className="form-label">Portfolio URL</label>
+            <div className="input-group">
+              <span className="input-group-text"><BsLink45Deg /></span>
+              <input type="text" className="form-control" placeholder="https://yourportfolio.com" value={PortfolioURl} onChange={(e) => setPortfolioURl(e.target.value)} />
+            </div>
+          </div>
+        </div>
+        
+        <div className="text-center">
+          <button className="btn btn-primary btn-lg" onClick={updateProfileInfo}>Update Profile</button>
+        </div>
       </div>
     </div>
-  )
+  </div>
+  );
 }
