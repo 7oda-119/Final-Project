@@ -59,19 +59,11 @@ function EditLandSkill() {
         formData.append('SelectedLanguages', skill); 
       });
     
-    try{
-        const response = await axios.post(`${baseUrl}/api/Account/ChangeSkilles-Freelancer`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${token}`,
-              },
-        })
-    }
-    catch(err){
-        console.log(err)
-    }
+    console.log(AddedLanguages)
+    console.log(AddedSkills)
 }
-  const value = [{id:1, name:'skill1'}, {id:2, name:'skill2'}]
+  const value1 = [{id:1, name:'skill1'}, {id:2, name:'skill2'}]
+  const value2 = [{id:'lan1', value:'lang1'}, {id:'lan2', value:'lang2'}]
     return (
         <div class="container mt-5">
         <Select 
@@ -82,7 +74,7 @@ function EditLandSkill() {
             multi
             onChange={handleLSkillChange}
             color='#65B741'
-            values={value}
+            values={value1}
             />
           <Select 
               placeholder='Add Languages'
@@ -92,6 +84,7 @@ function EditLandSkill() {
               multi
               onChange={handleLanguageChange}
               color='#65B741'
+              values={value2}
           />
           
             <button className='btn btn-primary' onClick={handleSubmit}>ADD</button>
