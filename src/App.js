@@ -28,8 +28,8 @@ import ProfileFree from './FindFreelancer/ProfileFree';
 import FreelancersPage from './FindFreelancer/FreelancersPage';
 import CreateJob from './JobPost/CreateJobPost';
 import MyJobs from './JobPost/MyJobPosts';
-import ContractDetails from './ContractForm/ContractDetails';
-import Form from './ContractForm/Form';
+import ContractDetails from './Contract/ContractDetails';
+import CreateContract from './Contract/CreateContract';
 import CategoriesList from './Admin/CategoriesList';
 import SkillList from './Admin/SkillList';
 import LanguageList from './Admin/LanguageList';
@@ -47,6 +47,10 @@ import JobApplicants from './Apply Tasks/JobApplicants';
 import FreeAcceptedForTasks from './Apply Tasks/FreeAcceptesTasks';
 import ClientAcceptedFrees from './Apply Tasks/ClientAcceptFree';
 import SkillSelectionForm from './components/SkillSelectionForm';
+import EditLandSkill from './accounts/information/EditLandSkill';
+import CardProf from './components/CardProf';
+import Cardd from './components/Card';
+import AllContracts from './Contract/AllContracts';
 function App() {
   
   const cookies = Cookie();
@@ -99,15 +103,18 @@ function App() {
             <Route path='select' element={<Select />}/>
             <Route path='selectimage' element={<SelectImage />}/>
             <Route path='heart' element={<Heart />}/>
-            <Route path='create-contract/:' element={<ContractDetails />}/>
-            <Route path='contractform' element={<Form />}/>
+            <Route path='all-contracts' element={<AllContracts />}/>
+            <Route path='ContractDetails/:id' element={<ContractDetails />}/>
+            <Route path='create-contract/:FreelancerId/:JopPostId' element={<CreateContract />}/>
 
+            <Route path='cardprof' element={<CardProf />}/>
             <Route path='error403' element={<Error403 />}/>
             <Route path='error401' element={<Error401 />}/>
             <Route path='error500' element={<Error500 />}/>
             <Route path='*' element={<Error404 />}/>
             <Route path='loader' element={<Loader />}/>
             <Route path='SkillSelectionForm' element={<SkillSelectionForm />}/>
+            <Route path='EditLandSkill' element={<EditLandSkill/>}/>
 
           </Routes>
 

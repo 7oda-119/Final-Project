@@ -49,7 +49,7 @@ function Information() {
       }
     };
 
-    //open modal of freelancer information
+    //open modal for edit user information
     const [modalInfoOpen, setModalInfoOpen] = useState(false);
       
     const openInfoModal = () => {

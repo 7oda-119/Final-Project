@@ -6,6 +6,8 @@ import Cookie from 'cookie-universal'
 import Heart from 'react-heart'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import MakeOffer from '../Apply Tasks/MakeOffer';
+import moment from 'moment';
 const JobPostsPage = () => {
 
   const navigate =useNavigate();
@@ -75,23 +77,28 @@ const JobPostsPage = () => {
       console.log(error.response)
       }
    };
-  //apply the job
-  const applyTask= async(jobId, title)=>{
-    try{
-      const response = await axios.post(`${baseUrl}/api/ApplyTasks/Freelancer-Apply-For-Task?jobId=${jobId}`,{ jobId },{
-        headers: {
-           Authorization: `Bearer ${token}`
-        }
-      })
-      toast.success(`The applying on ${title} has been successfully. Check your Appliesd Task box.`);
-      fetcJobs();
-    } catch(error){
-      console.log(error.response)
-      }
-   };
+
+  
+   
+
+   //open modal for apply task
+   const [jobPostId, setJobPostId] = useState();
+   const [jobPostTitle, setJobPostTile] = useState('');
+
+   const [modalInfoOpen, setModalInfoOpen] = useState(false);
+      
+   const openInfoModal = (jobId, jobTitle) => {
+    setModalInfoOpen(true);
+    setJobPostId(jobId);
+    setJobPostTile(jobTitle)
+  };
+   
+  const closeInfoModal = () => {
+    setModalInfoOpen(false);
+  };
 
    //delete applied task
-  const deleteTask = async (taskId, title) => {
+  const deleteAppliedTask = async (taskId, title) => {
     try {
       const response = await axios.put(`${baseUrl}/api/ApplyTasks/Freelancer-Delete-Task?taskId=${taskId}`, { taskId }, {
         headers: {
@@ -122,7 +129,7 @@ const JobPostsPage = () => {
         {jobPosts ? (
           <div>{jobPosts.map(jobPost => (
             <div key={jobPost.id} className="job-post-container">
-              <h3 className="job-post-s-title">{jobPost.categoryName}</h3>
+              <h3 className="job-post-s-title">{jobPost.categoryName} Needed</h3>
               <p className="job-post-detail">
                 <span className="job-post-label">Title:</span> {jobPost.title}
               </p>
@@ -130,10 +137,10 @@ const JobPostsPage = () => {
                 <span className="job-post-label">Description:</span> {jobPost.description}
               </p>
               <p className="job-post-detail">
-                <span className="job-post-label">Price:</span> {jobPost.price}
+                <span className="job-post-label">Price:</span> ${jobPost.price}
               </p>
               <p className="job-post-detail">
-                <span className="job-post-label">Duration:</span> {jobPost.durationTime}
+                <span className="job-post-label">Duration:</span> {moment(jobPost.durationTime).format('DD-MM-YYYY')}
               </p>
               <p className="job-post-detail">
                 <span className="job-post-label">User Name:</span> {jobPost.userFullName}
@@ -141,9 +148,9 @@ const JobPostsPage = () => {
               
               <div className="job-post-s-buttons">
                 {jobPost.isApplied === false ? (
-                  <button className="hire-s-button" onClick={() => applyTask(jobPost.id, jobPost.title)}>Hire</button>
+                  <button className="hire-s-button" onClick={() => openInfoModal(jobPost.id, jobPost.title)}>Hire</button>
                 ) : (
-                  <button className='cancel-s-button' >Cancel</button>
+                  <button className='hired-s-button' onClick={() => deleteAppliedTask(jobPost.taskId, jobPost.title)}>Hired</button>
                 )}
                 <button className='fav-s-button' > 
                   <Heart isActive={jobPost.isFav} onClick={()=>addAndDeleteFav(jobPost.id)} style={{ width: "30px" }}/> 
@@ -159,6 +166,7 @@ const JobPostsPage = () => {
         )}
         
       </div>
+      <MakeOffer isOpen={modalInfoOpen} closeModal={closeInfoModal} jobId={jobPostId} jobTitle={jobPostTitle} token={token} fetchJobs={fetcJobs}/>
       <ToastContainer position="top-center"/>
     </div>
   );

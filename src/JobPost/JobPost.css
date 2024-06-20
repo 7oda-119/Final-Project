@@ -1,13 +1,16 @@
 /* JobPostPage.css*/
 .job-post-container {
-  max-width: 800px;
+  max-width: 750px;
   min-height: 90;
-  margin-bottom: 10px;
+  
   padding: 20px;
   box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 149, 232) 0px 0px 0px 1px inset;
   background-color: rgba(255, 245, 245, 0.4);
   animation: slideIn 1s ease;
   position: relative;
+  margin: 0 auto; /* Centers the element horizontally */
+  margin-bottom: 15px;
+  display: block; /* Ensures the element takes up full width available */
 }
 
 @keyframes slideIn {
@@ -188,7 +191,7 @@
   transform: scale(1.06);
 }
 
-.cancel-s-button {
+.hired-s-button {
   margin-top: 5px;
   margin-right: 3px;
   height: 40px;
@@ -196,13 +199,13 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  background-color: #d01d44;
+  background-color: #5c1dd0;
   color: #fff;
   transition: 0.2s;
 }
 
-.cancel-s-button:hover{
-  background-color: #ae1839;
+.hired-s-button:hover{
+  background-color: #4f2a93;
   transform: scale(1.06);
 }
 .fav-s-button{
@@ -244,8 +247,9 @@
 
 .edit-job-post-container {
   max-width: 700px;
-  min-height: 600px;
+  min-height: 540px;
   margin: 0 auto;
+  margin-top: 30px;
   padding: 20px;
   box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 148, 232) 0px 0px 0px 1px inset;
   border-radius: 10px;
@@ -296,7 +300,7 @@
 
 .edit-job-post-textarea {
   width: calc(100% - 10px);
-  height: 70px;
+  height: 100px;
   padding: 8px;
   margin-bottom: 16px;
   border:1px solid #625ee2;
@@ -344,11 +348,10 @@
 /* JobPostForm */
 
 .create-job{
-  margin-top: 30px;
+  padding-top: 50px;
 }
 .create-job .create-job-title{
   text-align: center;
-  animation: slideInRight 1s ease-in-out;
 }
 
 @keyframes slideInRight {
@@ -365,7 +368,7 @@
 .form-create-job {
   position: relative;
   max-width: 700px;
-  min-height: 570px;
+  min-height: 550px;
   margin: 0 auto;
   padding: 20px;
   box-shadow: rgba(23, 23, 24, 0.05) 0px 0px 0px 1px, rgb(93, 148, 232) 0px 0px 0px 1px inset;

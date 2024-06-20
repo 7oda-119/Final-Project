@@ -1,149 +1,123 @@
 
-  .apply-tasks-container {
-    margin: auto;
-    margin-top: 20px;
-    max-width: 800px;
-    animation: fadeIn 0.5s;
-  }
-  
-  .apply-tasks-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .apply-task-container {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s;
-  }
-  
-  .apply-task-header {
-    display: flex;
-    align-items: center;
-  }
+.apply-tasks-list { /*not necessary*/
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .apply-task-status {
-    font-size: 18px;
-    font-weight: 500;
-    color: #666;
-  }
-  
-  .apply-task-title {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  .apply-task-details {
-    margin-top: 20px;
-  }
-  
-  .apply-task-label {
-    font-weight: bold;
-    margin-right: 10px;
-    color: #666;
-  }
-  
-  .apply-task-actions {
-    margin-top: 20px;
-    text-align: right;
-  }
+.apply-task-container {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  max-width: 800px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s;
+  border-radius: 20px;
+  transition: 0.3s ease-out;
+}
+.apply-task-container:hover{
+  background-color: #7c7c7c18;  
+}
 
-  
-  .cancel-button {
-    background-color: #e03333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .cancel-button:hover {
-    background-color: #a92525;
-    transform: scale(1.03);
-  }
-  
-  .contract-button{
-    background-color: rgb(71, 63, 217);
-    color: #fff;
-    padding: 10px 10px;
-    margin-right: 10px;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+.apply-task-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
 
-  .chat-button{
-    background-color: rgb(71, 63, 217);
-    color: #fff;
-    padding: 8px 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
- 
-  .chat-button:hover{
-    background-color: #381a9d;
-    transform: scale(1.03);
-  }
-  .contract-button:hover{
-    background-color: #381a9d;
-    transform: scale(1.03);
-  }
-  .no-jobs {
-    text-align: center;
-    margin-top: 40px;
-    animation: fadeIn 0.5s;
-  }
-  
-  .no-jobs h1 {
-    font-weight: 600;
-    color: crimson;
-    text-transform: capitalize;
-  }
-  
-  .toast-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-  }
-  
-  .toast {
-    color: crimson;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+.apply-task-status {
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+}
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+.apply-task-title {
+  font-size: 20px;
+  display: inline-block;
+  margin-right: 10px;
+  color: #2c3e50; /* Add color */
+}
 
+.apply-task-details {
+  margin-top: 20px;
+}
+.apply-task-details p {
+  font-size: 20px;
+}
+.appliebd-client-name,
+.accepted-freelancer-name,
+.accepted-price{
+  text-align: center;
+}
+
+.apply-task-label {
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #555;
+}
+
+.apply-task-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.contract-button {
+  background-color: rgb(122, 70, 245);
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px; 
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;  /* because Link has Inline Styles properity*/
+  transition: 0.3s;
+}
+
+.contract-button:hover {
+  background-color: #381a9d;
+  transform: scale(1.1);
+}
+
+.chat-button {
+  background-color: rgb(122, 70, 245);
+  color: #fff;
+  padding: 8px 15px;
+  margin: 5px; /* Add margin for spacing */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.chat-button:hover {
+  background-color: #381a9d;
+  transform: scale(1.1);
+}
+
+.no-jobs {
+  text-align: center;
+  margin-top: 40px;
+  animation: fadeIn 0.5s;
+}
+
+.no-jobs h1 {
+  font-weight: 600;
+  color: crimson;
+  text-transform: capitalize;
+}
   /*applicants*/
   .applicants-container {
-    position: relative;
     max-width: 800px;
     margin: 0 auto;
   }
   .applicant {
-    display: flex;
-    align-items: flex-start;
+    position: relative;
     margin-bottom: 15px;
     background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
@@ -162,41 +136,87 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  .applicant .applicant-info {
-    flex: 1;
+  .applicant-info {
+    text-align: center;
+  }
+  .applicant-info p {
+    text-align: center;
   }
   
   .applicant .title {
+    display: inline-block;
     font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
+    margin-left: 15px;
   }
   
   .applicant .hourly-rate {
     font-size: 16px;
     margin-bottom: 10px;
-    color: #666;
   }
   
   .applicant .full-name {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
     color: #222;
     text-decoration: none;
   }
   .applicant .full-name:hover{
-    color: #038f54;
+    color: #088651;
   }
-  .description {
-    font-size: 16px;
-    color: #888;
-    margin-bottom: 20px;
+  .applicant .description {
+    font-size: 17px;
   } 
+  .applicant .ofer-description,
+  .applicant-info .ofer-description {
+    margin-left: 10px;
+    font-size: 18px;
+    display: inline-block;
+  } 
+  .applicant label,
+  .applicant-info label{
+    font-size: 18px;
+    display: inline-block;
+    color: #545454;
+  }
+
   .btn-Applicants{
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: 10px;
+    right: 10px;
+  }
+  .btn-Applicants .accepted{
+    background-color: #0d6efd;
+    color: #fff;
+    font-size: 18px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    cursor: default;
+  }
+  .btn-Applicants .accept{
+    background-color: #0d6efd;
+    color: #fff;
+    font-size: 18px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  .btn-Applicants .accept:hover{
+    background-color: #1f65cd;
+    transform: scale(1.1);
+  }
+  
+  .btn-Applicants .reject{
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 18px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    margin-left: 7px;
+    transition: 0.3s;
+  }
+  .btn-Applicants .reject:hover{
+    background-color: #c82333;
+    transform: scale(1.1);
   }
   .no-applicant{
     display: flex;

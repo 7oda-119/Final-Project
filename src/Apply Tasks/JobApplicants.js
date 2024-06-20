@@ -74,22 +74,32 @@ function JobApplicants() {
       {applicants.length > 0? (
         applicants.map((data) => (
           <div key={data.taskId} className="applicant">
-            <img src={data.freelancerProfilePictureUrl} alt="Profile" className="profile-picture" />
+            
             <div className="applicant-info">
               <div className="title-container">
                 <Link to={`/freelancers/Profile/${data.freelancerId}`} className="full-name">
-                  {data.freelancerFullName}
+                   { data.freelancerFullName}
                 </Link>
+                <p className="title">( {data.freelancertitle} )</p>
               </div>
-              <p className="title">{data.freelancertitle}</p>
-              <p className="hourly-rate">Hourly Rate: ${data.freelancerhourlyRate}/hour</p>
               <p className="description">{data.freelancerDescription}</p>
+              <p>
+                <span className="apply-task-label">Offer description:</span>{data.offerDescription}
+              </p>
+              <div>
+                <label>Price offer: </label>
+                <p className="ofer-description"> ${data.totalAmount}</p>
+              </div>
             </div>
-            <div className="btn-Applicants btn-group">
-              <button className="btn btn-primary" onClick={() => accept(data.taskId, data.freelancerFullName)}>
+            <div className="btn-Applicants ">
+            {data.status === "Pending" ? (
+              <button className="accept" onClick={() => accept(data.taskId, data.freelancerFullName)}>
                 Accept
               </button>
-              <button className="btn btn-danger" onClick={() => reject(data.taskId, data.freelancerFullName)}>
+              ) : (
+                <button className="accepted">Accepted</button>
+              )}
+              <button className="reject" onClick={() => reject(data.taskId, data.freelancerFullName)}>
                 Reject
               </button>
             </div>

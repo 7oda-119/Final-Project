@@ -11,6 +11,7 @@ import { TbCircleLetterS } from "react-icons/tb";
 import { TbCircleLetterL } from "react-icons/tb";
 import { MdOutlineFavorite } from "react-icons/md";
 import { IoBagRemoveSharp } from "react-icons/io5";
+import { FaFileContract } from "react-icons/fa";
 import './Home.css'
 export default function Sidebar() {
 
@@ -27,7 +28,7 @@ export default function Sidebar() {
         }else if(role === 'User'){
             navigate('/account-user')
         }
-        setActive(6)
+        setActive(7)
     }
     
     const handleSignOut =()=>{
@@ -55,10 +56,11 @@ export default function Sidebar() {
                     token && role === 'User'? (
                         <>
                         <Link className={active===1 ?"active nav-link " : "nav-link "} onClick={e=>setActive(1)} to={'/freelancers'}><MdFindInPage className='d-inline' /> Find freelancer</Link>
-                        <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/createjob'}><MdUpload className='d-inline'/> Upload job</Link>
-                        <Link className={active===3 ?"active nav-link " : "nav-link "} onClick={e=>setActive(3)} to={'/myjobs'}><TbCircleLetterJ className='d-inline'/> My jobs</Link>
-                        <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/acceptedApplicantsClient'}><TbCircleLetterJ className='d-inline'/> Accepted Applications</Link>
-                        <Link className={active===5 ?"active nav-link " : "nav-link "} onClick={e=>setActive(5)} to={'/favfreelancers'}><MdOutlineFavorite className='d-inline'/> Freelancers</Link>
+                        <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/favfreelancers'}><MdOutlineFavorite className='d-inline'/> Freelancers</Link>
+                        <Link className={active===3 ?"active nav-link " : "nav-link "} onClick={e=>setActive(3)} to={'/createjob'}><MdUpload className='d-inline'/> Upload job</Link>
+                        <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/myjobs'}><TbCircleLetterJ className='d-inline'/> My jobs</Link>
+                        <Link className={active===5 ?"active nav-link " : "nav-link "} onClick={e=>setActive(5)} to={'/acceptedApplicantsClient'}><TbCircleLetterJ className='d-inline'/> Accepted Applications</Link>
+                        <Link className={active===6 ?"active nav-link " : "nav-link "} onClick={e=>setActive(6)} to={'/all-contracts'}><FaFileContract className='d-inline'/> Contracts</Link>
                         
                         </>
                     ) : token && role === 'Admin'? (
@@ -71,7 +73,7 @@ export default function Sidebar() {
                     )}
                         {token?(
                             <div className='bottom-sidebar'>
-                                <button className={active===6 ?"active nav-link " : "nav-link "} onClick={handleAccount}><MdAccountCircle className='d-inline'/> Account</button>
+                                <button className={active===7 ?"active nav-link " : "nav-link "} onClick={handleAccount}><MdAccountCircle className='d-inline'/> Account</button>
                                 <button className="nav-link " onClick={handleSignOut}><RiLogoutCircleLine className='d-inline'/> Sign out</button>
                             </div>
                         ) : null}

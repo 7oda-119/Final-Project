@@ -5,10 +5,9 @@ import axios from 'axios';
 import { baseUrl } from '.././Api/Api';
 import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
-import moment from 'moment';
 const EditJobPost = () => {
   const navigate = useNavigate();
-    let {id} = useParams();
+  let {id} = useParams();
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -16,8 +15,7 @@ const EditJobPost = () => {
   //show data in edit
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [durationTime, setDurationTime] = useState('');
   const [price, setPrice] = useState('');
 
   //fetch my jobs
@@ -37,13 +35,9 @@ const EditJobPost = () => {
       setDescription(response.data.description)
       setPrice(response.data.price)
       /// Extract date and time from durationTime
-      const durationTime = new Date(response.data.durationTime);
-      const date = moment(durationTime).format('YYYY-MM-DD');
-      const time = moment(durationTime).format('HH:mm:ss');
-      
-      // Set the extracted date and time as the value for the respective input fields
-      setDate(date);
-      setTime(time);
+      const durationDateIso = response.data.durationTime;
+      const date = durationDateIso.substring(0, 10)
+      setDurationTime(date);
     }catch (error) {
       console.log(error);
     }
@@ -54,7 +48,7 @@ const EditJobPost = () => {
     e.preventDefault();
     try {
       await axios.put(`${baseUrl}/api/JobPosts/update jobpost?id=${id}`,{
-        title, description, price, durationTime : `${date}T${time}`
+        title, description, price, durationTime
       },
       {
         headers: {
@@ -90,13 +84,9 @@ const EditJobPost = () => {
 
           <div>
             <label htmlFor="durationDate" className="edit-job-post-label">Duration Date:</label>
-            <input type="date" id="durationDate" value={date} onChange={(e)=>setDate(e.target.value)} className="edit-job-post-input" required />
+            <input type="date" id="durationDate" value={durationTime} onChange={(e)=>setDurationTime(e.target.value)} className="edit-job-post-input" required />
           </div>
 
-          <div>
-            <label htmlFor="durationTime" className="edit-job-post-label">Duration Time:</label>
-            <input id="durationTime" type="time" value={time} onChange={(e) => setTime(e.target.value)} className="edit-job-post-input" required />
-          </div>
           <Link type='button' className='edit-job-post-cancel' to={'/myjobs'}>Cancel</Link>
           <button type="submit" className="edit-job-post-submit">Update Job Post</button>
         </form>

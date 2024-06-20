@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookie from 'cookie-universal';
 import { ToastContainer, toast } from 'react-toastify';
 import moment from 'moment';
+import './CSS.css'
 function AcceptesTasks() {
     const navigate = useNavigate();
     const [acceptedTasks, setAcceptedTasks] = useState([]);
@@ -41,34 +42,38 @@ function AcceptesTasks() {
   return (
     <div style={{minHeight:'87vh'}}>
       <div className="apply-tasks-container">
-        <h2 className="mt-2">Applied Tasks</h2>
+        <h2 className="mt-2">Accepted Tasks</h2>
         {acceptedTasks.length > 0 ? (
           <div className="apply-tasks-list">
             {acceptedTasks.map((acceptedTask) => (
               <div key={acceptedTask.id} className="apply-task-container">
-                <h3 className="apply-task-title">{acceptedTask.categoryName}</h3>
                 <div className="apply-task-details">
-                  <p>
-                    <span className="apply-task-label">Title:</span> {acceptedTask.tasktitle}
-                  </p>
+                  <div className='d-flex justify-content-center'>
+                    <h3 className="apply-task-title mt-1">{acceptedTask.tasktitle} </h3>
+                    <span className='apply-task-label' style={{marginTop:'2px'}}> ${acceptedTask.totalAmount}</span>
+                  </div>
                   <p>
                     <span className="apply-task-label">Description:</span> {acceptedTask.taskDescription}
                   </p>
-                  <p>
+                  <p className='accepted-price'>
                     <span className="apply-task-label">Price:</span> {acceptedTask.totalAmount}
                   </p>
-                  <p>
-                    <span className="apply-task-label">Order Date:</span> {moment(acceptedTask.orderDate).format('YYYY-MM-DDTHH:mm:ss')}
-                  </p>
-                  <p>
-                    <span className="apply-task-label">Delivery Date:</span> {moment(acceptedTask.deliveryDate).format('YYYY-MM-DDTHH:mm:ss')}
-                  </p>
-                  <p>
+                  <div className="d-flex justify-content-evenly">
+                    <p>
+                    <span className="apply-task-label">Order Date:</span>
+                    {moment(acceptedTask.orderDate).format('DD-MM-YYYY')}
+                    </p>
+                    <p>
+                    <span className="apply-task-label">Delivery Date:</span>
+                    {moment(acceptedTask.deliveryDate).format('DD-MM-YYYY')}
+                    </p>
+                  </div>
+                  <p className='appliebd-client-name'>
                     <span className="apply-task-label">Client Name:</span> {acceptedTask.clientFullName}
                   </p>
                 </div>
                 <div className="apply-task-actions">
-                  <button className="btn btn-primary" >Chat</button>
+                  <button className="chat-button" >Chat</button>
                 </div>
               </div>
             ))}

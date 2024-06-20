@@ -116,11 +116,11 @@ export default function ProfileFree() {
             <div className="Skills col-lg-5 py-3">
               <div className='py-2'>
                 <h4>Skills</h4>
-                {selectedSkills.map((skill)=><span key={skill}>{skill}</span>)}
+                {selectedSkills.map((skill)=><span className='skills' key={skill}>{skill}</span>)}
               </div>  
               <div className='py-3'>
                 <h4>Languages:</h4>
-                {selectedLangueges.map((lang)=><span key={lang}>{lang}</span>)}
+                {selectedLangueges.map((lang)=><span className='languages' key={lang}>{lang}</span>)}
               </div>
             </div>
             <div className="about col-lg-7 ">

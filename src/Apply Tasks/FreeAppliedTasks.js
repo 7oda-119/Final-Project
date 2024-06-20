@@ -64,31 +64,36 @@ function FreeAppliedTasks() {
         {appliedTasks.map((appliedTask) => (
           <div key={appliedTask.taskId} className="apply-task-container">
             <div className="apply-task-header">
-            <h3 className="apply-task-title">{appliedTask.categoryName}</h3>
-            <span className={`apply-task-label ${appliedTask.status === 'Rejected' ? 'text-danger' : appliedTask.status === 'Accepted' ? 'text-primary' : appliedTask.status === 'Pending' ? 'text-success' : ''}`}>( {appliedTask.status} )</span>
+              <h3 className="apply-task-title">{appliedTask.categoryName}</h3>
+              <span className={`apply-task-label mb-2 ${appliedTask.status === 'Rejected' ? 'text-danger' : appliedTask.status === 'Accepted' ? 'text-primary' : appliedTask.status === 'Pending' ? 'text-success' : ''}`}>( {appliedTask.status} )</span>
             </div>
             <div className="apply-task-details">
+              <div className='d-flex justify-content-center '>
+                <h3 className="apply-task-title mt-1">{appliedTask.tasktitle} </h3>
+                <span className="apply-task-label" style={{marginTop:'2px'}}> offer( ${appliedTask.totalAmount} )</span>
+              </div>
               <p>
-                <span className="apply-task-label">Title:</span> {appliedTask.tasktitle}
+                <span className="apply-task-label">Job description:</span> {appliedTask.taskDescription}
               </p>
               <p>
-                <span className="apply-task-label">Description:</span> {appliedTask.taskDescription}
+                <span className="apply-task-label">Offer description:</span>{appliedTask.offerDescription}
               </p>
-              <p>
-                <span className="apply-task-label">Price:</span> {appliedTask.totalAmount}
-              </p>
-              <p>
-                <span className="apply-task-label">Order Date:</span> {moment(appliedTask.orderDate).format('YYYY-MM-DDTHH:mm:ss')}
-              </p>
-              <p>
-                <span className="apply-task-label">Delivery Date:</span> {moment(appliedTask.deliveryDate).format('YYYY-MM-DDTHH:mm:ss')}
-              </p>
-              <p>
-                <span className="apply-task-label">User Name:</span> {appliedTask.clientFullName}
+              <div className="d-flex justify-content-evenly">
+                <p>
+                <span className="apply-task-label">Order Date:</span>
+                {moment(appliedTask.orderDate).format('DD-MM-YYYY')}
+                </p>
+                <p>
+                <span className="apply-task-label">Delivery Date:</span>
+                {moment(appliedTask.deliveryDate).format('DD-MM-YYYY')}
+                </p>
+              </div>
+              <p className='appliebd-client-name'>
+                <span className="apply-task-label">Client Name:</span> {appliedTask.clientFullName}
               </p>
             </div>
             <div className="apply-task-actions">
-              <button className="cancel-button" >Cancel</button>
+              <button className="cancel-button" onClick={() => deleteTask(appliedTask.taskId, appliedTask.tasktitle)} >Cancel</button>
             </div>
           </div>
         ))}

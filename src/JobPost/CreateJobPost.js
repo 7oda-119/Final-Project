@@ -25,26 +25,23 @@ const JobPostForm = () => {
     }
   };
 
-
   const [title, setTitle] = useState('')
   const [description, setDEscription] = useState('')
   const [price, setPrice] = useState()
   const [categoryId, setCategoryId] = useState()
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+  const [durationTime, setDurationTime] = useState('')
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
   
   const handleSubmit = async (e) => {
-    console.log(`${date}T${time}`)
     try {
       const res = await axios.post(`${baseUrl}/api/JobPosts/Cliend  PostJob`, { 
         title, 
         description,
         price,
         categoryId,
-        durationTime: date
+        durationTime
       }, {
         headers: { Authorization : `Bearer ${token}` }
       });
@@ -57,10 +54,10 @@ const JobPostForm = () => {
   };
 
   return (
-    <div style={{minHeight:'86vh'}}>
+    <div style={{minHeight:'90vh'}}>
       <div className='create-job'>
-        <h3 className='create-job-title'>Creating Job</h3>
         <div className="form-create-job mt-3">
+          <h3 className='create-job-title'>Creating Job</h3>
           <form >
             <label htmlFor="title" className="form-label">Title:</label>
             <input type="text" id="title" name="title" value={title} onChange={(e)=>setTitle(e.target.value)} className="form-input" required />
@@ -77,9 +74,7 @@ const JobPostForm = () => {
               {categories.map((item)=>(<option key={item.id} value={item.id}>{item.name}</option>))}
             </select> 
             <label htmlFor="durationDate" className="form-label">Duration Date:</label>
-            <input className='form-input' id='durationDate' type="date" value={date} onChange={(e)=>setDate(e.target.value)} />
-            <label htmlFor="durationTime" className="form-label">Duration Time:</label>
-            <input className='form-input' id='durationTime' type="time" value={time} onChange={(e)=>setTime(e.target.value)} />
+            <input className='form-input' id='durationDate' type="date" value={durationTime} onChange={(e)=>setDurationTime(e.target.value)} />
             
             <button className='form-submit' onClick={handleSubmit} type='button'>CREATE</button>
           </form>

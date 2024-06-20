@@ -82,7 +82,6 @@ const FreelancersPage = () => {
    };
   return (
     <div className='find-freelancers'>
-        <div className="freelancers-container">
           <div className=' my-2 '>
             <div className="search-fraalancer">
               <div>
@@ -93,32 +92,36 @@ const FreelancersPage = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div style={{display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center'}}>
             {freelancers ?(<> {freelancers.map((data)=>
-              <div key={data.id} className="freelancer">
-              <img src={data.profilePicture} alt="Profile" className="profile-picture" />
-                <div className="freelancer-info">
-                  <div className="title-container">
-                    <Link to={`Profile/${data.id}`} className="full-name">{data.fullName}</Link>
-                  </div>
-                  <p className="title">{data.yourTitle}</p>
-                  <p className="hourly-rate">Hourly Rate: ${data.hourlyRate}/houre</p>
-                  <p className="description">{data.description}</p>
-                  <div className="free-fav-s-buttons">
-                    <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>
-                    <button className='fav-s-button'>
-                    <Heart isActive={data.isFav} onClick={()=>addAndDeleteFav(data.id)} />
-                    </button>
-                  </div>
+            <div key={data.id} className="cardPrf">
+            
+              <div className="card-image">
+                <img src={data.profilePicture} alt="Profile" />
+              </div>
+              <div className="card-content">
+                <h3>{data.fullName}</h3>
+                <p>Position: {data.yourTitle}</p>
+                <p>Hourly rate: {data.hourlyRate}$</p>
+                <p style={{ marginLeft:'69px' }}><Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/></p>
+              </div>
+
+              <div className="card-buttons">
+                <Link to={`Profile/${data.id}`}>Show More</Link>
+                <div className='heart'>
+                <Heart isActive={data.isFav} onClick={()=>addAndDeleteFav(data.id)} />
                 </div>
               </div>
+
+            </div>
             )}</>) : (
               <div  className='no-freelancer'>
                   <h1>We Are Sorry There Are No Freelancers With This Name</h1>
               </div>
             )}
           </div>
-        </div>
     </div>
   );
 }; 

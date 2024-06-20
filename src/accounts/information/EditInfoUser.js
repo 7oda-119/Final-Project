@@ -95,7 +95,7 @@ export default function EditInfoUser({ isOpen, closeModal }) {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-center"/>
     </div>
   )
 }

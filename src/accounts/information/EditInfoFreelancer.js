@@ -11,7 +11,10 @@ import { BsCashCoin } from "react-icons/bs";
 import { BsGeoAlt } from "react-icons/bs";
 import { BsLink45Deg } from "react-icons/bs";
 import cityData from '../../cityData.json'
+import { Link, useNavigate } from 'react-router-dom';
 export default function EditInfoFreelancer() {
+
+  const navigate = useNavigate();
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [Age, setAge] = useState('');
@@ -118,7 +121,7 @@ export default function EditInfoFreelancer() {
           },
         }
       );
-      window.location.reload();
+      navigate('/account-freelancer')
     } catch (err) {
       console.log(err);
     }
@@ -221,9 +224,9 @@ export default function EditInfoFreelancer() {
             <textarea className="form-control" placeholder="Your work experience" value={Experience} onChange={(e) => setExperience(e.target.value)} />
           </div>
         </div>
-        
+
         <div className="row mb-3">
-          <div className="col-md-12">
+          <div className="col-md-4 offset-md-4"> 
             <label className="form-label">Portfolio URL</label>
             <div className="input-group">
               <span className="input-group-text"><BsLink45Deg /></span>
@@ -231,9 +234,14 @@ export default function EditInfoFreelancer() {
             </div>
           </div>
         </div>
-        
-        <div className="text-center">
-          <button className="btn btn-primary btn-lg" onClick={updateProfileInfo}>Update Profile</button>
+
+        <div className="row">
+          <div className="col-md-6 text-start"> {/* Left side for "Back to Profile" button */}
+            <Link className="btn btn-secondary btn-lg" to={'/account-freelancer'}>Back to Profile</Link>
+          </div>
+          <div className="col-md-6 text-end"> {/* Right side for "Update Profile" button */}
+            <button className="btn btn-primary btn-lg" onClick={updateProfileInfo}>Update Profile</button>
+          </div>
         </div>
       </div>
     </div>

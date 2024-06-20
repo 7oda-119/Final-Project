@@ -128,7 +128,7 @@ export default function Password({ show, onHide }) {
         </div>
       </div>
       )}
-      <ToastContainer />
+      <ToastContainer position="top-center"/>
     </div>
   )
 }

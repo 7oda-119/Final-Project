@@ -4,8 +4,8 @@ import axios from 'axios';
 import { baseUrl } from '.././Api/Api';
 import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 const JobPostPage = () => {
   const [myJobs, setMyJobs] = useState([]);
 
@@ -48,20 +48,19 @@ const JobPostPage = () => {
     }
   };
 
-
   return (
-    <div className='container' style={{minHeight:'86vh'}}>
+    <div style={{minHeight:'86vh'}}>
       <div>
       <h3 className='my-jobs-Title '>My Jobs</h3>
       {myJobs ? (<div>
-        {myJobs.map((job)=><div className='d-flex justify-content-center mt-2' key={job.id}>
-        <div style={{minWidth:'750px'}} >
+        {myJobs.map((job)=><div key={job.id}>
+        <div >
           <div  className="job-post-container">
             <h3 className="job-post-s-title">{job.categoryName}</h3>
-            <p className="job-post-detail"><span className="job-post-label">Title:</span> {job.title}</p>
-            <p className="job-post-detail"><span className="job-post-label">Description:</span>  {job.description}</p>
-            <p className="job-post-detail"><span className="job-post-label">Price :</span> {job.price}</p>
-            <p className="job-post-detail"><span className="job-post-label">Duration:</span> {job.durationTime}</p>
+            <p className="job-post-detail"><span className="job-post-label">Title: </span> {job.title}</p>
+            <p className="job-post-detail"><span className="job-post-label">Description: </span>  {job.description}</p>
+            <p className="job-post-detail"><span className="job-post-label">Price: </span> ${job.price}</p>
+            <p className="job-post-detail"><span className="job-post-label">Duration: </span> {moment(job.durationTime).format('DD-MM-YYYY')}</p>
             <div className="job-post-s-buttons btn-group">
               <Link className="btn btn-success" to={`editjob/${job.id}`} >Update</Link>
               <button className="btn btn-danger" onClick={() => handleDeleteJob(job.id)}>

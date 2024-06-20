@@ -60,16 +60,30 @@ function FavFreelancers() {
    
 
   return (
-    <div className='find-freelancers'>
-      <div className='fav-title-fraalancer'>
-        <h4 className='m-auto'>Favorites Freelancers</h4>
-      </div>
-      <div className="freelancers-container">
+      <div className="favcard">
         {Array.isArray(myFavFree) && myFavFree.length > 0?(
           <> 
             {myFavFree.map((data)=>(
-              <div key={data.freelancerID} className="freelancer">
-              <img src={data.profilePicture} alt="Profile" className="profile-picture" />
+              <div key={data.freelancerID} className="fav-free-card">
+                <div className="profile-picture">
+                  <img src={data.profilePicture} alt={data.fullName} />
+                </div>
+                <div className="info">
+                  <button onClick={()=>goToProfile(data.freelancerID)}>
+                    <p className='name'>{data.fullName}</p>
+                  </button>
+                  <p className='position'>{data.yourTitle}</p>
+                  <p>{data.description}</p>
+                  <div className="free-fav-s-buttons">
+                    <Rating readOnly  style={{ maxWidth: '100px' }} value={data.rate}/>
+                    <button className='fav-s-button'>
+                    <Heart isActive={data.isFav} onClick={()=>addAndDeleteFav(data.freelancerID)} />
+                    </button>
+                  </div>
+                  <p className='hourly-rate'>hourly Rate</p>
+                </div>
+        {/*
+                <img src={data.profilePicture} alt="Profile" className="profile-picture" />
                 <div className="freelancer-info">
                   <div className="title-container">
                     <button onClick={()=>goToProfile(data.freelancerID)} className="full-name">{data.fullName}</button>
@@ -84,6 +98,7 @@ function FavFreelancers() {
                     </button>
                   </div>
                 </div>
+                 */}
               </div>
             ))}
           </>
@@ -93,7 +108,6 @@ function FavFreelancers() {
           </div>
         )}
       </div>
-    </div>
   )
 }
 

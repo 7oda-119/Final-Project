@@ -35,8 +35,7 @@ function FreelanceSignUp() {
     const [Address, setAddress] = useState();
     const [PhoneNumber, setPhoneNumber] = useState();
 
-    const [SelectedLanguages, setSelectedLanguages] = useState()
-
+    const [SelectedLanguages, setSelectedLanguages] = useState([])
     const [SelectedSkills, setSelectedSkills] = useState([])
 
     const [step, setStep] = useState(1);
@@ -101,10 +100,10 @@ function FreelanceSignUp() {
     }
   };
     
-      const handleLSkillChange = (skillOptions) => {
-        const selectedSkillID = skillOptions.map((option) => option.id);
-        setSelectedSkills(selectedSkillID);
-      };
+    const handleLSkillChange = (skillOptions) => {
+      const selectedSkillID = skillOptions.map((option) => option.id);
+      setSelectedSkills(selectedSkillID);
+    };
     
     const handleImageChange = (event) => {
         setProfilePicture(event.target.files[0]);
@@ -230,8 +229,12 @@ function FreelanceSignUp() {
         formData.append('Address', Address);
         formData.append('PhoneNumber', PhoneNumber);
         formData.append('file', ProfilePicture);
-        formData.append('SelectedLanguages', SelectedLanguages);
-        formData.append('SelectedSkills', SelectedSkills) ;
+        SelectedSkills.forEach((skill, index) => {
+            formData.append('SelectedSkills', skill); 
+          });
+        SelectedLanguages.forEach((skill, index) => {
+            formData.append('SelectedLanguages', skill); 
+          });
         
         try{
             const response = await axios.post(`${baseUrl}/Register-Freelance`, formData, {

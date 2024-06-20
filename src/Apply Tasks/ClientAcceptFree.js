@@ -8,81 +8,91 @@ import moment from 'moment';
 function ClientAcceptFree() {
 
   const navigate = useNavigate();
-    const [acceptedFrees, setAcceptedFrees] = useState([]);
-    const cookies = Cookie();
-    const token = cookies.get('freelanceCookie');
-
-    useEffect(() => {
-        fetchAcceptedFrees();
-    }, []);
-
-    //fetch the accepts tasks to do them
-    const fetchAcceptedFrees = async () => {
-        try {
-        const response = await axios.get(`${baseUrl}/api/ApplyTasks/Get-Accept-Client- Applicants`, {
-            headers: {
-            Authorization: `Bearer ${token}`,
-            },
-        });
-        console.log(response.data);
-        setAcceptedFrees(response.data);
-        } catch (error) {
-        const errorPages = error.response.status;
-        if (errorPages === 403) {
-            navigate('/error403');
-        } else if (errorPages === 401) {
-            navigate('/error401');
-        } else if (errorPages === 500) {
-            navigate('/error500');
-        } else {
-            console.log(error.response);
-        }
-        }
+  const [acceptedFrees, setAcceptedFrees] = useState([]);
+  const cookies = Cookie();
+  const token = cookies.get('freelanceCookie');
+  useEffect(() => {
+      fetchAcceptedFrees();
+  }, []);
+  //fetch the accepts tasks to do them
+  const fetchAcceptedFrees = async () => {
+      try {
+      const response = await axios.get(`${baseUrl}/api/ApplyTasks/Get-Accept-Client- Applicants`, {
+          headers: {
+          Authorization: `Bearer ${token}`,
+          },
+      });
+      console.log(response.data);
+      setAcceptedFrees(response.data);
+      } catch (error) {
+      const errorPages = error.response.status;
+      if (errorPages === 403) {
+          navigate('/error403');
+      } else if (errorPages === 401) {
+          navigate('/error401');
+      } else if (errorPages === 500) {
+          navigate('/error500');
+      } else {
+          console.log(error.response);
+      }
+      }
     };
+    
+    const navigateToContract = (FreelancerId, JobPostId)=>{
+      navigate(`/create-contract/${FreelancerId}/${JobPostId}`);
+    }
   return (
-    <div style={{minHeight:'87vh'}}>
-      <div className="apply-tasks-container">
-        <h2 className="mt-2">Accepted Applicants</h2>
-        {acceptedFrees.length > 0 ? (
-          <div className="apply-tasks-list">
-            {acceptedFrees.map((acceptedTask) => (
-              <div key={acceptedTask.taskId} className="apply-task-container">
-                <h3 className="apply-task-title">{acceptedTask.categoryName}</h3>
-                <div className="apply-task-details">
-                  <p>
-                    <span className="apply-task-label">Title:</span> {acceptedTask.tasktitle}
-                  </p>
-                  <p>
-                    <span className="apply-task-label">Description:</span> {acceptedTask.taskDescription}
-                  </p>
-                  <p>
-                    <span className="apply-task-label">Price:</span> {acceptedTask.totalAmount}
-                  </p>
-                  <p>
-                    <span className="apply-task-label">Order Date:</span> {moment(acceptedTask.orderDate).format('YYYY-MM-DDTHH:mm:ss')}
-                  </p>
-                  <p>
-                    <span className="apply-task-label">Delivery Date:</span> {moment(acceptedTask.deliveryDate).format('YYYY-MM-DDTHH:mm:ss')}
-                  </p>
-                  <p>
-                    <span className="apply-task-label">Freelancer Name:</span> {acceptedTask.freelancerFullName}
-                  </p>
-                </div>
-                <div className="apply-task-actions ">
-                  <Link className="contract-button" >Create contract</Link>
-                  <button className="chat-button" >Chat</button>
-                </div>
+    <div style={{ minHeight: '87vh' }}>
+  <div className="apply-tasks-container">
+    <h2 className="mt-2">Accepted Applicants</h2>
+    {acceptedFrees.length > 0 ? (
+      <div className="apply-tasks-list">
+        {acceptedFrees.map((acceptedTask) => (
+          <div key={acceptedTask.taskId} className="apply-task-container">
+            <div className="apply-task-details">
+              <p className='d-flex justify-content-center'>
+                <h3 className="apply-task-title mt-1">{acceptedTask.tasktitle} </h3>
+                <span className="apply-task-label" style={{marginTop:'2px'}}> ( ${acceptedTask.totalAmount} )</span>
+              </p>
+              <p>
+                <span className="apply-task-label">Job description:</span> {acceptedTask.taskDescription}
+              </p>
+              <p>
+                <span className="apply-task-label">Offer description:</span> {acceptedTask.offerDescription}
+              </p>
+              <div className="d-flex justify-content-evenly">
+                <p>
+                <span className="apply-task-label">Order Date:</span>
+                {moment(acceptedTask.orderDate).format('DD-MM-YYYY')}
+                </p>
+                <p>
+                <span className="apply-task-label">Delivery Date:</span>
+                {moment(acceptedTask.deliveryDate).format('DD-MM-YYYY')}
+                </p>
               </div>
-            ))}
+              <p className='accepted-freelancer-name'>
+                <span className="apply-task-label">Freelancer Name:</span>{acceptedTask.freelancerFullName}
+              </p>
+            </div>
+            <div className="apply-task-actions ">
+              {acceptedTask.isContract === false ? (
+                <button className="contract-button" onClick={()=>{navigateToContract(acceptedTask.freelancerId, acceptedTask.jobPostId)}} >Create contract</button>
+              ) : (
+                null
+              )}
+              <Link className="chat-button" >Chat</Link>
+            </div>
           </div>
-        ) : (
-          <div className="no-jobs">
-            <h1>Please check the jobs first and apply on the tasks you want</h1>
-          </div>
-        )}
+        ))}
       </div>
-      <ToastContainer position="top-center"/>
-    </div>
+    ) : (
+      <div className="no-jobs">
+        <h1>Please check the jobs first and apply on the tasks you want</h1>
+      </div>
+    )}
+  </div>
+  <ToastContainer position="top-center" />
+</div>
   )
 }
 

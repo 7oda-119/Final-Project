@@ -2,72 +2,32 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { baseUrl } from '../Api/Api';
 import axios from 'axios';
-export default function Selected() {
-
-  const [selectedSkills, setSelectedSkills] = useState([]);
-
-  const handleSkillChange = (event) => {
-    const selectedSkill = event.target.value;
-    setSelectedSkills([...selectedSkills, selectedSkill]);
-    
-  };
-
-  const languageOptionss = [
-    { id: 'en', name: 'English' },
-    { id: 'mer', name: 'Meru' },
-    { id: 'pt_BR', name: 'Brazilian Portuguese' },
-    { id: 'hi', name: 'Hindi' },
-    { id: 'ar', name: 'Arabic' },
-  ];
-  const handleLSkillChange = (skillOptions) => {
-    const selectedSkillID = skillOptions.map((option) => option.id);
-    setSelectedSkills(selectedSkillID);
-  };
-  
-  const handleSub=()=>{
-    console.log(selectedSkills);
-  }
-
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
-
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const [languageOptions, setLanguageOptions] = useState();
-  const [selectedLanguages, setSelectedLanguages] = useState();
-    //fetch skills
-    useEffect(() => {
-        fetchLanguages();
-    }, []);
-  
-    const fetchLanguages = async () => {
-        try {
-            const response = await axios.get(`${baseUrl}/api/Language/Get-All-Language-With-Id`);
-            console.log(response.data);
-            setLanguageOptions(response.data)
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleLanguageChange = (languageOptions) => {
-        const selectedLanguageID = languageOptions.map((option) => option.id);
-        setSelectedLanguages(selectedLanguageID);
-    };
-
+import './ProfileCard.css';
+import Heartt from 'react-heart'
+import { Rating } from '@smastrom/react-rating'
+export default function Selected({ name, location, price, rate, image, id }) {
+  const [active, setActive] = useState(false)
+    const handleClich =()=>{
+        setActive(!active)
+      }
+      
   return (
-    <div style={{width:'400px'}}>
-      <div className="App">
-      <Select
-        defaultValue={selectedLanguages}
-        options={languageOptions}
-        onChange={handleLanguageChange}
-        isMulti
-      />
-    </div>
+    <div className="cardPrf">
+      <div className="card-image">
+        <img src={image} alt={name} />
+      </div>
+      <div className="card-content">
+        <h3>{name}</h3>
+        <p>Position: {location}</p>
+        <p>Hourly rate: {price}$</p>
+        <p style={{ marginLeft:'140px' }}><Rating readOnly  style={{ maxWidth: '100px' }} value={rate}/></p>
+      </div>
+      <div className="card-buttons">
+        <button>Show More</button>
+      <div style={{width:'50px', height:'50px'}}>
+        <Heartt isActive={active}  style={{ width: "10x" }}/>
+      </div>
+      </div>
     </div>
   );
 }
