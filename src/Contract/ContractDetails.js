@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './ContractForm.css'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { baseUrl } from '../Api/Api';
 import axios from 'axios';
 import Cookie from 'cookie-universal'
 import { ToastContainer, toast } from 'react-toastify';
 const ContractDetails = () => {
 
-  const {id} = useParams();
+  //const {id} = useParams();
+  const location = useLocation();
+  const params = useParams();
+  const id = params.id;
+
+  const Id = id.split('=')[1];
+console.log(Id);
+  
   const navigate = useNavigate();
   const [contract, setContract] = useState({});
 
@@ -21,7 +28,7 @@ const ContractDetails = () => {
   
   const fetcContract = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/Contract/findByJobPostId?id=${id}`, {
+      const response = await axios.get(`${baseUrl}/api/Contract/findByJobPostId?id=${Id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

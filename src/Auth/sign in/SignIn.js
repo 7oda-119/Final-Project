@@ -43,9 +43,15 @@ function SignIn() {
           const role = res.data.role;
           cookies.set('freelanceCookie', token);
           cookies.set('role', role);
-          window.location.pathname='/'; 
+          if(role === 'Freelancer'){
+            window.location.pathname='/findwork';
+          }else if(role === 'User'){
+            window.location.pathname='/myjobs'; 
+          }else{
+            window.location.pathname='/categories'; 
+          }
+          
           setLoading(false)
-          toast('Login successful!');
           
         } catch (error) {
             setLoading(false)

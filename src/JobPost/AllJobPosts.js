@@ -63,6 +63,7 @@ const JobPostsPage = () => {
       )
     }
   }
+  
   //add and delete fav job
   const addAndDeleteFav= async(jobId)=>{
     try{
@@ -78,8 +79,6 @@ const JobPostsPage = () => {
       }
    };
 
-  
-   
 
    //open modal for apply task
    const [jobPostId, setJobPostId] = useState();
@@ -125,7 +124,7 @@ const JobPostsPage = () => {
         </div>
       </div>
       <div className="job-posts-container">
-        <h2 className='mt-2'>All Job Posts</h2>
+        <h2 className='mt-2'>Find Work</h2>
         {jobPosts ? (
           <div>{jobPosts.map(jobPost => (
             <div key={jobPost.id} className="job-post-container">

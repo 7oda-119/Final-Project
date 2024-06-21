@@ -199,14 +199,6 @@
   background-color: rgb(66, 66, 176);
   transform: scale(1.08 );
 }
-.contract-details {
-  max-width: 700px;
-  height: 350px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  animation: slideInRight 1s ease-in-out;
-}
 
 @keyframes slideInRight {
   from {
@@ -253,6 +245,10 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 40px;
   position: relative;
+  transition: 0.4s;
+}
+.contract-details-container:hover{
+  transform: scale(1.02);
 }
 
 .job-description-container,

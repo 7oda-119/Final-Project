@@ -82,13 +82,13 @@ function JobApplicants() {
                 </Link>
                 <p className="title">( {data.freelancertitle} )</p>
               </div>
-              <p className="description">{data.freelancerDescription}</p>
-              <p>
+              <p>{data.freelancerDescription}</p>
+              <p className='description'>
                 <span className="apply-task-label">Offer description:</span>{data.offerDescription}
               </p>
               <div>
-                <label>Price offer: </label>
-                <p className="ofer-description"> ${data.totalAmount}</p>
+                <p className="ofer-description"><span className="apply-task-label">Price offer:</span>${data.totalAmount}</p>
+                
               </div>
             </div>
             <div className="btn-Applicants ">

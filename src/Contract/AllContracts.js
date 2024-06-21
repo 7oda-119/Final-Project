@@ -12,7 +12,6 @@ function AllContracts() {
     const cookies = Cookie();
     const token = cookies.get('freelanceCookie')
     useEffect(() => {
-      
       fetchContracts();
     }, []);
 
@@ -41,14 +40,23 @@ function AllContracts() {
     };
   
     const handleDelete = async (id) => {
-      try{
-        await axios.delete(`${baseUrl}/api/Contract/CancelContract?id=${id}`, {id}, {
+      try {
+        await axios.delete(`${baseUrl}/api/Contract/CancelContract?id=${id}`, { id }, {
           headers: {
             Authorization: `Bearer ${token}`
-         }
-        })
-        fetchContracts();
-      }catch(error){
+          }
+        });
+        const response = await axios.get(`${baseUrl}/api/Contract/Get-My-All-Contracts-User-Freelancer`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        const newContracts = response.data.sort((a, b) => b.contractID - a.contractID);
+        setContracts(newContracts);
+        if (newContracts.length === 0) {
+          setNocontracts("Looks like there are no contracts to display yet. Create a new contract to get started.");
+        }
+      } catch (error) {
         console.log(error.response);
       }
     };
