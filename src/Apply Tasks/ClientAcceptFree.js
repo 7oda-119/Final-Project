@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookie from 'cookie-universal';
 import { ToastContainer, toast } from 'react-toastify';
 import moment from 'moment';
+import ChatModal from '../Chat/ChatModal';
 function ClientAcceptFree() {
 
   const navigate = useNavigate();
@@ -41,6 +42,21 @@ function ClientAcceptFree() {
     const navigateToContract = (FreelancerId, JobPostId)=>{
       navigate(`/create-contract/${FreelancerId}/${JobPostId}`);
     }
+
+    //open chat modal
+    const [modalOpen, setModalOpen] = useState(false);
+    const [userId, setUserId] = useState();
+    const [recipientId, setRecipientId] = useState();
+    const [recipient, setRecipient] = useState(false);
+    const openChatModal = (clientId, freelancerId, freelancerName) => {
+      setUserId(clientId);
+      setRecipientId(freelancerId);
+      setRecipient(freelancerName);
+      setModalOpen(true);
+    };
+    const closeChatModal = () => {
+      setModalOpen(false);
+    };
   return (
     <div style={{ minHeight: '87vh' }}>
   <div className="apply-tasks-container">
@@ -80,7 +96,7 @@ function ClientAcceptFree() {
               ) : (
                 null
               )}
-              <Link className="chat-button" >Chat</Link>
+              <Link className="chat-button" onClick={()=>{openChatModal(acceptedTask.clientId, acceptedTask.freelancerId, acceptedTask.freelancerFullName)}}>Chat</Link>
             </div>
           </div>
         ))}
@@ -91,6 +107,7 @@ function ClientAcceptFree() {
       </div>
     )}
   </div>
+  <ChatModal isOpen={modalOpen} closeModal={closeChatModal} userId={userId} recipientId={recipientId} recipient={recipient} token={token} />
   <ToastContainer position="top-center" />
 </div>
   )

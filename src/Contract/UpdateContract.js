@@ -41,73 +41,73 @@ function UpdateContract({ isOpen, closeModal, contract, JopPostId, FreelancerId 
 
   return (
     <div className={`modal ${isOpen ? 'show' : ''}`} style={{ display: isOpen ? 'block' : 'none' }}>
-  <div className="modal-dialog" style={{ minWidth: '700px', marginLeft: '440px' }}>
-    <div className="modal-content" style={{ marginLeft: '80px', marginTop: '100px' }}>
-      <div className="modal-header">
-        <h5 className="modal-title">Update Contract</h5>
-        <button type="button" className="btn-close" onClick={() => {
-            closeModal();
-            }}>
-        </button>
-      </div>
-      <div className="modal-body">
-        <div className="form-group">
-          <label className='form-label' htmlFor="price">Price:</label>
-          <input
-            type="number"
-            className='form-control'
-            id="price"
-            name="price"
-            value={Price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        
-        <div className="row"> 
-        <div className='form-group col-6'>
-        <label className='form-label' htmlFor="startDate">Start Date:</label>
-        <input
-            type="date"
-            className='form-control me-2' 
-            id="startDate"
-            name="startDate"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-        />
-        </div>
-          <div className='form-group col-6'>
-              <label className='form-label' htmlFor="endDate">End Date:</label>
-              <input
-                  type="date"
-                  className='form-control me-2' 
-                  id="endDate"
-                  name="endDate"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-              />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className='form-label' htmlFor="termsAndConditions">Terms & Conditions:</label>
-          <textarea
-            className='form-control'
-            id="termsAndConditions"
-            name="termsAndConditions"
-            value={TremsAndCondetions}
-            onChange={(e) => setTremsAndCondetions(e.target.value)}
-          />
-        </div>
-
-      </div>
-      <div className="modal-footer">
-        <button type="button" className='btn btn-secondary' onClick={() => {
+    <div className="modal-dialog" style={{ minWidth: '700px', marginLeft: '440px' }}>
+      <div className="modal-content" style={{ marginLeft: '80px', marginTop: '100px' }}>
+        <div className="modal-header">
+          <h5 className="modal-title">Update Contract</h5>
+          <button type="button" className="btn-close" onClick={() => {
               closeModal();
-              }}>Close</button>
-        <button type="button" className='btn btn-primary' onClick={handleUpdate}>Save</button>
+              }}>
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="form-group">
+            <label className='form-label' htmlFor="price">Price:</label>
+            <input
+              type="number"
+              className='form-control'
+              id="price"
+              name="price"
+              value={Price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          
+          <div className="row"> 
+          <div className='form-group col-6'>
+          <label className='form-label' htmlFor="startDate">Start Date:</label>
+          <input
+              type="date"
+              className='form-control me-2' 
+              id="startDate"
+              name="startDate"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+          />
+          </div>
+            <div className='form-group col-6'>
+                <label className='form-label' htmlFor="endDate">End Date:</label>
+                <input
+                    type="date"
+                    className='form-control me-2' 
+                    id="endDate"
+                    name="endDate"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className='form-label' htmlFor="termsAndConditions">Terms & Conditions:</label>
+            <textarea
+              className='form-control'
+              id="termsAndConditions"
+              name="termsAndConditions"
+              value={TremsAndCondetions}
+              onChange={(e) => setTremsAndCondetions(e.target.value)}
+            />
+          </div>
+
+        </div>
+        <div className="modal-footer">
+          <button type="button" className='btn btn-secondary' onClick={() => {
+                closeModal();
+                }}>Close</button>
+          <button type="button" className='btn btn-primary' onClick={handleUpdate}>Save</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
   )
 }
 

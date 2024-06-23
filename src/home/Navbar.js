@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import logo from '..//image/logo.png'
+import logo from '../Auth/image/logo.png'
 import Cookie from 'cookie-universal'
 import './Home.css'
 function Navbar() {

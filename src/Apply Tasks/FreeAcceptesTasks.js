@@ -6,6 +6,7 @@ import Cookie from 'cookie-universal';
 import { ToastContainer, toast } from 'react-toastify';
 import moment from 'moment';
 import './CSS.css'
+import ChatModal from '../Chat/ChatModal';
 function AcceptesTasks() {
     const navigate = useNavigate();
     const [acceptedTasks, setAcceptedTasks] = useState([]);
@@ -39,6 +40,22 @@ function AcceptesTasks() {
         }
         }
     };
+
+    //open chat modal
+    const [modalOpen, setModalOpen] = useState(false);
+    const [userId, setUserId] = useState();
+    const [recipientId, setRecipientId] = useState();
+    const [recipient, setRecipient] = useState(false);
+    const openChatModal = (clientId, freelancerId, freelancerName) => {
+      setUserId(clientId);
+      setRecipientId(freelancerId);
+      setRecipient(freelancerName);
+      setModalOpen(true);
+    };
+    const closeChatModal = () => {
+      setModalOpen(false);
+    };
+
   return (
     <div style={{minHeight:'87vh'}}>
       <div className="apply-tasks-container">
@@ -73,7 +90,7 @@ function AcceptesTasks() {
                   </p>
                 </div>
                 <div className="apply-task-actions">
-                  <button className="chat-button" >Chat</button>
+                  <button className="chat-button" onClick={()=>{openChatModal(acceptedTask.freelancerId,acceptedTask.clientId,acceptedTask.clientFullName)}} >Chat</button>
                 </div>
               </div>
             ))}
@@ -84,6 +101,7 @@ function AcceptesTasks() {
           </div>
         )}
       </div>
+      <ChatModal isOpen={modalOpen} closeModal={closeChatModal} userId={userId} recipientId={recipientId} recipient={recipient} token={token}/>
       <ToastContainer position="top-center"/>
     </div>
   )

@@ -1,9 +1,9 @@
 
 import { Route, Routes } from 'react-router';
 import './App.css';
-import Navbar from './Auth/home/Navbar';
+import Navbar from './home/Navbar';
 import SignIn from './Auth/sign in/SignIn';
-import Home from './Auth/home/Home';
+import Home from './home/Home';
 import Choose from './Auth/client or freelancer/Choose';
 import ClientSignUp from './Auth/client sign up/ClientSignUp';
 import FreelanceSignUp from './Auth/freelancer sign up/FreelanceSignUp';
@@ -34,7 +34,7 @@ import CategoriesList from './Admin/CategoriesList';
 import SkillList from './Admin/SkillList';
 import LanguageList from './Admin/LanguageList';
 import EditJobPost from './JobPost/EditJobPost';
-import Sidebar from './Auth/home/Sidebar';
+import Sidebar from './home/Sidebar';
 
 import Cookie from 'cookie-universal'
 import MyFavJobs from './Favorites/MyFavJobs';
@@ -51,6 +51,7 @@ import EditLandSkill from './accounts/information/EditLandSkill';
 import CardProf from './components/CardProf';
 import Cardd from './components/Card';
 import AllContracts from './Contract/AllContracts';
+import Chat from './Chat/Chat';
 function App() {
   
   const cookies = Cookie();
@@ -95,6 +96,12 @@ function App() {
               <Route path='acceptedApplicantsClient' element={<ClientAcceptedFrees />}/>
               <Route path='myjobs/applicants/:jobId' element={<JobApplicants />}/>
 
+              <Route path='all-contracts' element={<AllContracts />}/>
+              <Route path='ContractDetails/:id' element={<ContractDetails />}/>
+              <Route path='create-contract/:FreelancerId/:JopPostId' element={<CreateContract />}/>
+              
+              <Route path='chat/:userId/:recipientId/:recipient' element={<Chat />}/>
+
               <Route path='categories' element={<CategoriesList />}/>
               <Route path='skills' element={<SkillList />}/>
               <Route path='Languages' element={<LanguageList />}/>
@@ -103,9 +110,6 @@ function App() {
             <Route path='select' element={<Select />}/>
             <Route path='selectimage' element={<SelectImage />}/>
             <Route path='heart' element={<Heart />}/>
-            <Route path='all-contracts' element={<AllContracts />}/>
-            <Route path='ContractDetails/:id' element={<ContractDetails />}/>
-            <Route path='create-contract/:FreelancerId/:JopPostId' element={<CreateContract />}/>
 
             <Route path='cardprof' element={<CardProf />}/>
             <Route path='error403' element={<Error403 />}/>
