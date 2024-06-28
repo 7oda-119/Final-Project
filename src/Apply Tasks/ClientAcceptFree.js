@@ -76,16 +76,6 @@ function ClientAcceptFree() {
               <p>
                 <span className="apply-task-label">Offer description:</span> {acceptedTask.offerDescription}
               </p>
-              <div className="d-flex justify-content-evenly">
-                <p>
-                <span className="apply-task-label">Order Date:</span>
-                {moment(acceptedTask.orderDate).format('DD-MM-YYYY')}
-                </p>
-                <p>
-                <span className="apply-task-label">Delivery Date:</span>
-                {moment(acceptedTask.deliveryDate).format('DD-MM-YYYY')}
-                </p>
-              </div>
               <p className='accepted-freelancer-name'>
                 <span className="apply-task-label">Freelancer Name:</span>{acceptedTask.freelancerFullName}
               </p>
@@ -96,7 +86,7 @@ function ClientAcceptFree() {
               ) : (
                 null
               )}
-              <Link className="chat-button" onClick={()=>{openChatModal(acceptedTask.clientId, acceptedTask.freelancerId, acceptedTask.freelancerFullName)}}>Chat</Link>
+              <button className="chat-button" onClick={()=>{openChatModal(acceptedTask.clientId, acceptedTask.freelancerId, acceptedTask.freelancerFullName)}}>Chat</button>
             </div>
           </div>
         ))}

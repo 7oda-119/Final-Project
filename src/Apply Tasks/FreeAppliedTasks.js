@@ -78,16 +78,7 @@ function FreeAppliedTasks() {
               <p>
                 <span className="apply-task-label">Offer description:</span>{appliedTask.offerDescription}
               </p>
-              <div className="d-flex justify-content-evenly">
-                <p>
-                <span className="apply-task-label">Order Date:</span>
-                {moment(appliedTask.orderDate).format('DD-MM-YYYY')}
-                </p>
-                <p>
-                <span className="apply-task-label">Delivery Date:</span>
-                {moment(appliedTask.deliveryDate).format('DD-MM-YYYY')}
-                </p>
-              </div>
+              
               <p className='appliebd-client-name'>
                 <span className="apply-task-label">Client Name:</span> {appliedTask.clientFullName}
               </p>

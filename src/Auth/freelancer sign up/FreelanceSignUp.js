@@ -65,12 +65,12 @@ function FreelanceSignUp() {
     }
 
     const [languageOptions, setLanguageOptions] = useState();
-    //fetch skills
+    
     useEffect(() => {
         fetchLanguages();
         fetchSkills();
     }, []);
-  
+  //fetch languages
     const fetchLanguages = async () => {
         try {
             const response = await axios.get(`${baseUrl}/api/Language/Get-All-Language-With-Id`);
@@ -232,8 +232,8 @@ function FreelanceSignUp() {
         SelectedSkills.forEach((skill, index) => {
             formData.append('SelectedSkills', skill); 
           });
-        SelectedLanguages.forEach((skill, index) => {
-            formData.append('SelectedLanguages', skill); 
+        SelectedLanguages.forEach((lang, index) => {
+            formData.append('SelectedLanguages', lang); 
           });
         
         try{
@@ -358,7 +358,7 @@ function FreelanceSignUp() {
 
                 </div> 
                 )}
-                <ToastContainer />
+                <ToastContainer position="top-center"/>
             </form>
         </div>
         <div className="toggle-sec">

@@ -140,7 +140,7 @@ const LanguageList = () => {
             <button className="btn btn-success mx-2" type="button" onClick={handleAddLanguage}>Add</button>
           </div> 
         </div>
-      <table className="languages-table">
+      <table className="table table-striped table-bordered table-hover text-center">
         <thead>
           <tr>
             <th>Index</th>

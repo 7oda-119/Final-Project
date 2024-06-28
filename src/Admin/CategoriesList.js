@@ -134,19 +134,19 @@ const CategoriesList = () => {
           <button className="btn btn-success mx-2" type="button" onClick={handleAddCategory}>Add</button>
         </div> 
       </div>
-      <table className="categories-table">
+      <table className=" table table-striped table-bordered table-hover text-center">
         <thead>
           <tr>
-            <th>ID</th>
+            <th></th>
             <th >category Name</th>
             <th>Isdeleted</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <tr key={category.id}>
-              <td>{category.id}</td>
+              <td>{index+1}</td>
               <td >
                 {editingCategoryId === category.id ? (
                   <input className='form-control'
@@ -177,7 +177,7 @@ const CategoriesList = () => {
           ))}
         </tbody>
       </table>
-      <ToastContainer />
+      <ToastContainer position="top-center"/>
     </div>
   );
 };

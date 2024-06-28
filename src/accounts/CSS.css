@@ -137,7 +137,7 @@
 .AccFree .rate .edit-img{
     position: absolute;
     top: 90px;
-    right: 115px;
+    right: 105px;
     font-size: 20px;
     color: rgb(25, 137, 25);
     transition: 0.3s;
@@ -188,6 +188,15 @@
 .AccFree .FreeInfo .edit-info:hover{
     transform: scale(1.5);
 }
+.AccFree .FreeInfo .money{
+    position: absolute;
+    top: 110px;
+    right: 20px;
+}
+.FreeInfo .money h5{
+    font-weight: 600;
+    color: rgb(74, 74, 74);
+}
 .AccFree .Skill-lang{
     background-color: #fff;
     margin-bottom: 10px;
@@ -225,11 +234,20 @@
     color: #fff;
     cursor: default;
 }
-.AccFree .Skill-lang .edit-skill-lang{
+.AccFree .Skill-lang .edit-lang{
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 22px;
+    top: 14px;
+    left: 110px;
+    font-size: 20px;
+    color: rgb(25, 137, 25);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.AccFree .Skill-lang .edit-skill{
+    position: absolute;
+    bottom: 61px;
+    left: 70px;
+    font-size: 20px;
     color: rgb(25, 137, 25);
     cursor: pointer;
     transition: 0.3s;

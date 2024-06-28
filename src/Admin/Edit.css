@@ -1,7 +1,7 @@
 /*Category List css*/
 .categories-list-container {
-  max-width: 750px;
-  min-height: 90vh;
+  max-width: 850px;
+  min-height: 89vh;
   margin: 0 auto; 
 }
 
@@ -11,26 +11,10 @@
   margin-bottom: 20px;
 }
 
-.categories-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.categories-table th,
-.categories-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.categories-table th {
-  background-color: #f2f2f2;
-}
-
 /*Skills List Css*/
 .skills-list-container {
-  max-width: 750px;
-  min-height: 90vh;
+  max-width: 850px;
+  min-height: 89vh;
   margin: 0 auto;
    
 }
@@ -41,26 +25,11 @@
   margin-bottom: 20px;
 }
 
-.skills-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.skills-table th,
-.skills-table td {
-  border: 1px solid #ddd;
-  padding: 5px;
-  text-align: left;
-}
-
-.skills-table th {
-  background-color: #f2f2f2;
-}
 
 /*Language List Css*/
 .languages-list-container {
-  max-width: 780px;
-  min-height: 90vh;
+  max-width: 850px;
+  min-height: 89vh;
   margin: 0 auto;
    
 }
@@ -69,22 +38,6 @@
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-}
-
-.languages-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.languages-table th,
-.languages-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.languages-table th {
-  background-color: #f2f2f2;
 }
 
 /*Buttons css*/

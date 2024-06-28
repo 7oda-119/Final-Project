@@ -5,7 +5,7 @@ import { Rating } from '@smastrom/react-rating'
 import { useNavigate, useParams } from 'react-router-dom';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
-import { baseUrl } from '../Api/Api';
+import { baseUrl, server } from '../Api/Api';
 import Heart from 'react-heart'
 export default function ProfileFree() {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function ProfileFree() {
     const [yourTitle, setYourTitle] = useState('');
     const [zip, setZip] = useState('');
     const [portfolioURL, setPortfolioURL] = useState('');
-    const [profilePicture, setProfilePicture] = useState();
+    const [profilePicture, setProfilePicture] = useState('');
     const [selectedLangueges, setSelectedLangueges] = useState([]);
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [rating, setRating] = useState();
@@ -100,7 +100,8 @@ export default function ProfileFree() {
         <div className="account-info col-lg-10 row "> 
           <div className="head d-flex py-3 " > 
             <div>
-              <img className='user-photo' src={profilePicture} alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}}/>
+              {console.log(`${server}${profilePicture.replace(/\\/g, '/')}}`)}
+              <img className='user-photo' src={`${server}${profilePicture.replace(/\\/g, '/')}`}alt="photo" style={{width:'100px', height:'100px', borderRadius:'50%'}} />
             </div>
             <div className='px-3' >
               <span className='d-block my-1' style={{fontWeight:'500'}}>{fullName}</span>

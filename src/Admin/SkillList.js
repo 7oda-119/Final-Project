@@ -136,7 +136,7 @@ const SkillsList = () => {
             <button className="btn btn-success mx-2" type="button" onClick={handleAddSkill}>Add</button>
           </div> 
         </div>
-        <table className="skills-table">
+        <table className="table table-striped table-bordered table-hover text-center">
           <thead>
             <tr>
               <th>ID</th>

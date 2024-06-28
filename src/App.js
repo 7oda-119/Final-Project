@@ -52,6 +52,9 @@ import CardProf from './components/CardProf';
 import Cardd from './components/Card';
 import AllContracts from './Contract/AllContracts';
 import Chat from './Chat/Chat';
+import Payment from './Payment/Payment';
+import ManagePay from './Admin/ManagePay';
+import ChatAI from './AI/ChatAI';
 function App() {
   
   const cookies = Cookie();
@@ -100,11 +103,16 @@ function App() {
               <Route path='ContractDetails/:id' element={<ContractDetails />}/>
               <Route path='create-contract/:FreelancerId/:JopPostId' element={<CreateContract />}/>
               
-              <Route path='chat/:userId/:recipientId/:recipient' element={<Chat />}/>
+              <Route path='chat/:senderId/:recipientId/:recipient' element={<Chat />}/>
+              
+              <Route path='payment/:freelancerId/:price' element={<Payment />}/>
 
               <Route path='categories' element={<CategoriesList />}/>
               <Route path='skills' element={<SkillList />}/>
               <Route path='Languages' element={<LanguageList />}/>
+              <Route path='manage-pay' element={<ManagePay />}/>
+
+              <Route path='gpt' element={<ChatAI />}/>
             </Route>
 
             <Route path='select' element={<Select />}/>

@@ -1,7 +1,12 @@
 import React from 'react';
 import './Home.css';
-
+import Join from '../Auth/image/Discord Button.gif'
+import { useNavigate } from 'react-router-dom';
 const WebsitePrivileges = () => {
+  const navigate = useNavigate();
+  const navToSign =()=>{
+    navigate('/Signin')
+  }
   return (
     <div className="privileges-section">
       <h2>Why Choose Us?</h2>
@@ -37,7 +42,7 @@ const WebsitePrivileges = () => {
           <p>Experience peace of mind with our secure transaction system that protects your payments and data.</p>
         </div>
       </div>
-      <button className="join-us-btn">Join Us</button>
+      <button ><img src={Join} alt='join' className='join-us-btn' onClick={navToSign}/></button>
     </div>
   );
 };

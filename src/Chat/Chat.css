@@ -37,6 +37,10 @@
   .chat-message.sent {
     justify-content: flex-end;
   }
+  .chat-message.received {
+    justify-content: flex-start;
+  }
+ 
   
   .chat-message .chat-message-content {
     max-width: 60%;

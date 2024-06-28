@@ -30,8 +30,8 @@ export default function ReconfirmEmail() {
           <form onSubmit={handleSubmit}>
               <div>
                   <h1 className='mb-3'><img src={logo} alt='logo'/>Task Sync</h1>
-                  <p className='fw-bold'>Check your email box first we send a confirmation link there.</p>
-                  <p>If you don't receive the link please enter your email here.</p>
+                  <p className='fw-bold' >Check your email box first we send a confirmation link there.</p>
+                  <p style={{color:'crimson'}}>If you don't receive the link please enter your email here.</p>
               </div>
               <div className='row d-flex justify-content-center'>
               <input className='form-control ' type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
@@ -44,7 +44,7 @@ export default function ReconfirmEmail() {
           </form>
           </div>
       </div>
-        <ToastContainer />
+      <ToastContainer position="top-center"/>
     </div>
   )
 }

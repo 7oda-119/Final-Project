@@ -46,9 +46,9 @@ function AcceptesTasks() {
     const [userId, setUserId] = useState();
     const [recipientId, setRecipientId] = useState();
     const [recipient, setRecipient] = useState(false);
-    const openChatModal = (clientId, freelancerId, freelancerName) => {
-      setUserId(clientId);
-      setRecipientId(freelancerId);
+    const openChatModal = (freelancerId, clientId, freelancerName) => {
+      setUserId(freelancerId);
+      setRecipientId(clientId);
       setRecipient(freelancerName);
       setModalOpen(true);
     };
@@ -75,22 +75,13 @@ function AcceptesTasks() {
                   <p className='accepted-price'>
                     <span className="apply-task-label">Price:</span> {acceptedTask.totalAmount}
                   </p>
-                  <div className="d-flex justify-content-evenly">
-                    <p>
-                    <span className="apply-task-label">Order Date:</span>
-                    {moment(acceptedTask.orderDate).format('DD-MM-YYYY')}
-                    </p>
-                    <p>
-                    <span className="apply-task-label">Delivery Date:</span>
-                    {moment(acceptedTask.deliveryDate).format('DD-MM-YYYY')}
-                    </p>
-                  </div>
+                  
                   <p className='appliebd-client-name'>
                     <span className="apply-task-label">Client Name:</span> {acceptedTask.clientFullName}
                   </p>
                 </div>
                 <div className="apply-task-actions">
-                  <button className="chat-button" onClick={()=>{openChatModal(acceptedTask.freelancerId,acceptedTask.clientId,acceptedTask.clientFullName)}} >Chat</button>
+                  <button className="chat-button" onClick={()=>{openChatModal(acceptedTask.freelancerId, acceptedTask.clientId, acceptedTask.clientFullName)}}  >Chat</button>
                 </div>
               </div>
             ))}

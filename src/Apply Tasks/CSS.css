@@ -63,7 +63,9 @@
   margin-top: 20px;
   text-align: center;
 }
-
+.apply-task-actions .cancel-button{
+  background-color: crimson;
+}
 .contract-button {
   background-color: rgb(122, 70, 245);
   color: #fff;

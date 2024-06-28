@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { baseUrl } from '../Api/Api';
 import axios from 'axios';
-function UpdateContract({ isOpen, closeModal, contract, JopPostId, FreelancerId , token, fetchContracts }) {
+function UpdateContract({ isOpen, closeModal, contract, JopPostId, FreelancerId , token, fetchContracts,jopName }) {
   const [Price, setPrice] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [TremsAndCondetions, setTremsAndCondetions] = useState('');
 
   useEffect(() => {
+    
     if (contract) {
       setPrice(contract.price);
       setTremsAndCondetions(contract.tremsAndCondetions);
@@ -44,7 +45,7 @@ function UpdateContract({ isOpen, closeModal, contract, JopPostId, FreelancerId 
     <div className="modal-dialog" style={{ minWidth: '700px', marginLeft: '440px' }}>
       <div className="modal-content" style={{ marginLeft: '80px', marginTop: '100px' }}>
         <div className="modal-header">
-          <h5 className="modal-title">Update Contract</h5>
+          <h5 className="modal-title">Update {jopName} Contract</h5>
           <button type="button" className="btn-close" onClick={() => {
               closeModal();
               }}>

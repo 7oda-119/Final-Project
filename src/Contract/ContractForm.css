@@ -337,6 +337,24 @@
   background-color: #c82333;
   transform: scale(1.1);
 }
+.contract-details-container .pay{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: #0d6efd;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  width: 70px;
+  text-align: center;
+  padding: 7px 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+.contract-details-container .pay:hover{
+  background-color: #1f65cd;
+  transform: scale(1.1);
+}
 .no-contracts{
   display: flex;
   justify-content: center;

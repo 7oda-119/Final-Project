@@ -8,46 +8,112 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [lastTime, setLastTime] = useState(''); // Store lastTime in state
     const messagesRef = useRef(null);
+    //const id = recipientId
 
-    const fetchMessages = async () => {
-        try {
-            const response = await axios.get(`${baseUrl}/api/Chat/GetAllMyMessage?id=${recipientId}`, {
-            headers: {
-            Authorization: `Bearer ${token}`,
-            },
-            });
-            const messageData = response.data;
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
-            const messagesArray = Object.entries(messageData).map(([timestamp, message]) => {
-                const [senderId, content] = message.split(': '); // Split by colon
-                return {
-                id: `${timestamp}-${senderId}`, // Generate a unique ID
-                timestamp: timestamp,
-                senderId: senderId,
-                content: content.trim() // Trim any extra spaces
-                };
-            });
-      
-            setMessages(messagesArray);
-            messagesRef.current.scrollTop = messagesRef.current.scrollHeight; // Scroll to the bottom
-        } catch (error) {
-        console.error('Error fetching messages:', error);
+    const scrollToBottom = () => {
+        if (messagesRef.current) {
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
         }
     };
 
-  // Start fetching messages when modal opens
-  useEffect(() => {
-    let intervalId;
-    if (isOpen) {
-      intervalId = setInterval(fetchMessages, 500); // Fetch every 0.5 second
-    }
+    const fetchMessages = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/api/Chat/GetAllMyMessage?id=${recipientId}`, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+                });
+                const messageData = response.data;
+    
+                const messagesArray = Object.entries(messageData).map(([time, message]) => {
+                    const [userId, content] = message.split(': '); // Split by colon
+                    return {
+                    time: time,
+                    userId: userId,
+                    content: content.trim() // Trim any extra spaces
+                    };
+                });
+          
+                setMessages(messagesArray);
+                if (messagesArray.length > 0) {
+                    setLastTime(messagesArray[messagesArray.length-1].time);
+                }
+                console.log('last time after fetch all', messagesArray[messagesArray.length].time)
+    
+    
+                // Scroll to the bottom AFTER the state is updated and content is rendered
+                //setTimeout(() => {
+                  //  messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+                //}, 0); 
+            } catch (error) {
+            console.error('Error fetching messages:', error);
+            }
+        };
+    useEffect(()=>{
+        
+        fetchMessages();
+    },[isOpen])
+    
 
-    return () => clearInterval(intervalId); // Clear interval when modal closes
-  }, [isOpen]);
+    
+
+  // Start fetching messages when modal opens
+  console.log('messages' ,messages)
+  useEffect(() => {
+      const fetchLastMessage = async()=>{
+        if (messages) {
+            try {
+                const response = await axios.get(`${baseUrl}/api/Chat/GetNewMessages?id=${recipientId}&date=${lastTime}`, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data"
+                },
+                });
+                const newMessageData = Object.entries(response.data).map(([time, message]) => {
+                    const [userId, content] = message.split(': ');
+                    return {
+                    time: time,
+                    senderId: userId,
+                    content: content.trim()
+                    };
+                });
+
+                if(newMessageData.length > 0){
+                    const lastMessage = newMessageData[newMessageData.length - 1];
+                    const updatedMessages = [...messages, lastMessage];
+                    setMessages(updatedMessages);
+                    setLastTime(newMessageData[newMessageData.length-1].time);
+                }
+                    
+                
+                /*const lastMessage = [...messages, newMessageData[newMessageData.length - 1]]
+                if((messages.length-1 !== lastMessage)){
+                    setMessages(lastMessage); 
+                }*/
+
+                // Scroll to the bottom AFTER the state is updated and content is rendered
+                setTimeout(() => {
+                    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+                }, 0); 
+                
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        }
+    }
+        if (isOpen) {
+            const intervalId = setInterval(fetchLastMessage, 1000);
+            return () => clearInterval(intervalId);
+        }
+    }, [isOpen, lastTime ]);
 
   const handleSendMessage = async () => {
-    if (newMessage.trim() === '') return;
     try {
         const response = await axios.post(`${baseUrl}/api/Chat/SendMessage`, { id: recipientId, message: newMessage }, {
             headers: {
@@ -55,20 +121,31 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
             "Content-Type": "multipart/form-data"
             },
         });
-
-        const newMessageData = Object.entries(response.data).map(([timestamp, message]) => {
-            const [senderId, content] = message.split(': ');
+        setNewMessage('');
+        const newMessageData = Object.entries(response.data).map(([time, message]) => {
+            const [userId, content] = message.split(': ');
             return {
-            id: `${timestamp}-${senderId}`,
-            timestamp: timestamp,
-            senderId: senderId,
+            time: time,
+            senderId: userId,
             content: content.trim()
             };
         });
-    
+        const lastMessage = newMessageData[newMessageData.length - 1];
+        setMessages([...messages, lastMessage]);
+        setLastTime(newMessageData[newMessageData.length-1].time);
+          
+        console.log('last time after send', lastTime)
+
+        //fetchLastMessage();
+        //const lastMessage = newMessageData[newMessageData.length - 1];
+
         // Update the messages state
-        setMessages([...messages, ...newMessageData]); 
-        setNewMessage('');
+        //setMessages(newMessageData); // Add only the last message
+        // Scroll to the bottom AFTER the state is updated and content is rendered
+        setTimeout(() => {
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+        }, 0); 
+        console.log(messages);
     } catch (error) {
       console.error('Error sending message to api:', error);
     }
@@ -91,11 +168,13 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
                     Chat with {recipient}
                 </div>
                 <div className="chat-messages" ref={messagesRef}>
-                    {messages.map((msg) => (
-                    <div key={msg.id} className={`chat-message ${msg.senderId === recipientId ?  'received' : 'sent' }`}>
+                    {console.log(messages)}
+                    {messages.map((msg) => ( 
+                    <div key={msg.id} className={`chat-message ${msg.userId === recipientId ?  'received' : 'sent' }`}>
+                        
                         <div className="chat-message-content">
                         <p>{msg.content}</p>
-                        <span className="chat-timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
+                        <span className="chat-timestamp">{new Date(msg.time).toLocaleTimeString()}</span>
                         </div>
                     </div>
                     ))}

@@ -35,7 +35,7 @@ function ResetPassword() {
         toast.success('The reset password has been successfully')
         navigate('/signin')
       }catch(err){
-        console.log(err.response.data)
+        toast.error(err.response.data.errors.ConfirmPassword[0])
       }
 
     }
@@ -54,7 +54,7 @@ function ResetPassword() {
               </form>
           </div>
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-center"/>
     </div>
   )
 }

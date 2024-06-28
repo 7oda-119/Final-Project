@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { FaHeart, FaRegHeart, FaStar } from 'react-icons/fa';
 import './Home.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import axios from 'axios';
+import { baseUrl, server } from '../Api/Api';
+import { Rating } from '@smastrom/react-rating';
+import { Link } from 'react-router-dom';
 
-const freelancers = [
-  { id: 1, name: 'John Doe', title: 'Frontend Developer', description: 'Experienced in React and Angular.', hourlyRate: 40, rating: 4, profilePic: 'https://via.placeholder.com/100', isFavorite: false },
-  { id: 2, name: 'Jane Smith', title: 'Backend Developer', description: 'Specializes in Node.js and Python.', hourlyRate: 50, rating: 5, profilePic: 'https://via.placeholder.com/100', isFavorite: true },
-  { id: 3, name: 'Sam Johnson', title: 'Full Stack Developer', description: 'Proficient in MERN stack.', hourlyRate: 45, rating: 3, profilePic: 'https://via.placeholder.com/100', isFavorite: false },
-  // Add more freelancers as needed
-];
 
 const Freelancers = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  /*const freelancers = [
+    { id: 1, name: 'John Doe', title: 'Frontend Developer', description: 'Experienced in React and Angular.', hourlyRate: 40, rating: 4, profilePic: 'https://via.placeholder.com/100', isFavorite: false },
+    { id: 2, name: 'Jane Smith', title: 'Backend Developer', description: 'Specializes in Node.js and Python.', hourlyRate: 50, rating: 5, profilePic: 'https://via.placeholder.com/100', isFavorite: true },
+    { id: 3, name: 'Sam Johnson', title: 'Full Stack Developer', description: 'Proficient in MERN stack.', hourlyRate: 45, rating: 3, profilePic: 'https://via.placeholder.com/100', isFavorite: false },
+    // Add more freelancers as needed
+  ];*/
+  
+  const [freelancers, setFreelancers] = useState([]);
+
+   //fetch jobs
+   useEffect(() => {
+    fetcFreelancers();
+  }, []);
+  
+  const fetcFreelancers = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/Home/Get-All-Freelancers-For-Home-Page`);
+      console.log(response.data)
+      setFreelancers(response.data);
+      } catch (error) {
+          console.log(error.response);
+      }
+    };
 
   const settings = {
     dots: true,
@@ -30,20 +53,9 @@ const Freelancers = () => {
   };
 
   const handleAfterChange = (currentIndex) => {
-    setCurrentSlide(currentIndex);
     console.log(`After slide change to slide ${currentIndex}`);
   };
 
-  const toggleFavorite = (id) => {
-    const updatedFreelancers = freelancers.map(freelancer => {
-      if (freelancer.id === id) {
-        return { ...freelancer, isFavorite: !freelancer.isFavorite };
-      }
-      return freelancer;
-    });
-    // In a real app, you would update the state or make an API call
-    console.log(updatedFreelancers);
-  };
 
   return (
     <div className="freelancers">
@@ -52,26 +64,17 @@ const Freelancers = () => {
         {freelancers.map((freelancer) => (
           <div key={freelancer.id} className="freelancer-card">
             <div className="freelancer-profile-section">
-              <img src={freelancer.profilePic} alt={freelancer.name} className="freelancer-profile-pic" />
-              <p className="freelancer-profile-text">Profile</p>
+              <img src={`${server}${freelancer.profilePicture.replace(/\\/g, '/')}`} alt={freelancer.fullNamefullName} className="freelancer-profile-pic" />
             </div>
             <div className="freelancer-info">
-              <h3>{freelancer.name}</h3>
-              <p><strong>Position:</strong> {freelancer.title}</p>
+              <h3>{freelancer.fullName}</h3>
+              <p><strong>Position:</strong> {freelancer.yourTitle}</p>
               <p><strong>Hourly rate:</strong> ${freelancer.hourlyRate}</p>
               <div className="freelancer-rating">
-                {[...Array(5)].map((star, index) => (
-                  <FaStar
-                    key={index}
-                    color={index < freelancer.rating ? "#ffc107" : "#e4e5e9"}
-                  />
-                ))}
+                <Rating readOnly  style={{ maxWidth: '100px' }} value={freelancer.rate} />
               </div>
               <div className="freelancer-actions">
-                <button className="show-more-btn">Show More</button>
-                <button onClick={() => toggleFavorite(freelancer.id)} className="freelancer-fav-btn">
-                  {freelancer.isFavorite ? <FaHeart color="red" /> : <FaRegHeart />}
-                </button>
+                <Link className="show-more-btn" to={`/freelancers/Profile/${freelancer.id}`}>Show More</Link>
               </div>
             </div>
           </div>
@@ -81,22 +84,16 @@ const Freelancers = () => {
   );
 };
 
-const NextArrow = (props) => {
-  const { onClick } = props;
-  return (
-    <div className="custom-arrow custom-next-arrow" onClick={onClick}>
-      &gt;
-    </div>
-  );
-};
+const NextArrow = ({ onClick }) => (
+  <div className="custom-arrow custom-next-arrow" onClick={onClick}>
+    &gt;
+  </div>
+);
 
-const PrevArrow = (props) => {
-  const { onClick } = props;
-  return (
-    <div className="custom-arrow custom-prev-arrow" onClick={onClick}>
-      &lt;
-    </div>
-  );
-};
+const PrevArrow = ({ onClick }) => (
+  <div className="custom-arrow custom-prev-arrow" onClick={onClick}>
+    &lt;
+  </div>
+);
 
 export default Freelancers;

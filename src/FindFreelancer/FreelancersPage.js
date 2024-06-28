@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './FreelancersPage.css'; // Import CSS file
-import { baseUrl } from '../Api/Api';
+import { baseUrl, server } from '../Api/Api';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookie from 'cookie-universal'
@@ -99,7 +99,8 @@ const FreelancersPage = () => {
             <div key={data.id} className="cardPrf">
             
               <div className="card-image">
-                <img src={data.profilePicture} alt="Profile" />
+                
+                <img src={`${server}${data.profilePicture.replace(/\\/g, '/')}`} alt="Profile" />
               </div>
               <div className="card-content">
                 <h3>{data.fullName}</h3>

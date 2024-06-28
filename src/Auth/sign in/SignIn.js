@@ -4,8 +4,6 @@ import './SignIn.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookie from 'cookie-universal'
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '../../Api/Api';
 import Loader from '../../components/Loader';
 
@@ -77,7 +75,7 @@ function SignIn() {
                     <button className='forgetPass' onClick={navigateToForgetPass}>Forget Your Password?</button>
                     <button>Sign In</button>
                     <p className='error'>{error}</p>
-                    <ToastContainer />
+                    
                 </form>
             </div>
             <div className="toggle-section">

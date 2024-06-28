@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Heart from 'react-heart'
 import './Favorites.css'
 import axios from 'axios'
-import { baseUrl } from '../Api/Api'
+import { baseUrl, server } from '../Api/Api'
 import Cookie from 'cookie-universal'
 import { Rating } from '@smastrom/react-rating'
 function FavFreelancers() {
@@ -66,7 +66,7 @@ function FavFreelancers() {
             {myFavFree.map((data)=>(
               <div key={data.freelancerID} className="fav-free-card">
                 <div className="profile-picture">
-                  <img src={data.profilePicture} alt={data.fullName} />
+                  <img src={`${server}${data.profilePicture.replace(/\\/g, '/')}`} alt={data.fullName} />
                 </div>
                 <div className="info">
                   <button onClick={()=>goToProfile(data.freelancerID)}>
@@ -80,7 +80,7 @@ function FavFreelancers() {
                     <Heart isActive={data.isFav} onClick={()=>addAndDeleteFav(data.freelancerID)} />
                     </button>
                   </div>
-                  <p className='hourly-rate'>hourly Rate</p>
+                  <p className='hourly-rate'>hourly Rate: ${data.hourlyRate}</p>
                 </div>
         {/*
                 <img src={data.profilePicture} alt="Profile" className="profile-picture" />

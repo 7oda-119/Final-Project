@@ -78,7 +78,7 @@ export default function Password({ show, onHide }) {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="passwordModalLabel">Edit Password</h5>
+              <h5 className="modal-title" id="passwordModalLabel">Change Password</h5>
               <button className="btn-close" onClick={onHide}>
               </button>
             </div>

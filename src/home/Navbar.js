@@ -26,7 +26,7 @@ function Navbar() {
                     {!token?(
                         <Link className=" nav-link" to={'signin'}>Sign in</Link>
                     ) : (
-                        <button className=" nav-link" >Payment</button>
+                      <Link className=" nav-link" to={'/gpt'} >AI Assistant</Link>
                     )}
                   </ul>
                 </div>

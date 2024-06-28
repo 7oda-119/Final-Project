@@ -49,7 +49,7 @@ function Forget() {
                   <button className='btn btn-primary' type='submit'>Send</button>
                 </div>
               </div>
-              <ToastContainer />
+              <ToastContainer position="top-center"/>
           </form>
           </div>
       </div> 

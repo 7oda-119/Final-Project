@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookie from 'cookie-universal'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../Api/Api';
 import UpdateContract from './UpdateContract';
 import moment from 'moment';
@@ -70,7 +70,8 @@ function AllContracts() {
 
 
     const [Contract, setContract] = useState();
-    const fetcContract = async (id, jopPostId, freelancerId) => {
+    const [jobName, setJobName] = useState();
+    const fetcContract = async (id, jopPostId, freelancerId, jobname) => {
       try {
         const response = await axios.get(`${baseUrl}/api/Contract/findByJobPostId?id=${id}`, {
           headers: {
@@ -81,12 +82,13 @@ function AllContracts() {
         setJobid(jopPostId);
         setFreelancerId(freelancerId);
         setContract(response.data);
-        
+        setJobName(jobname)
         } catch (error) {
             console.log(error.response);
         }
       };
 
+      
     return (
       <div className="contract-page-container">
         <div className="contract-page-header">
@@ -116,7 +118,7 @@ function AllContracts() {
                 </div>
               </div>
               <div className="price-container">
-                <h3>Price</h3>
+                <h3 style={{marginTop:'2px'}}>{contract.jopPostName}</h3>
                 <p>${contract.price}</p>
               </div>
               <div className="job-description-container">
@@ -128,7 +130,7 @@ function AllContracts() {
                 <p>{contract.tremsAndCondetions}</p>
               </div>
               <div className="contract-actions">
-                <button className="update" onClick={() => fetcContract(contract.jopPostId, contract.jopPostId, contract.freelancerId)
+                <button className="update" onClick={() => fetcContract(contract.jopPostId, contract.jopPostId, contract.freelancerId, contract.jopPostName)
                 }>
                   Update
                 </button>
@@ -136,6 +138,9 @@ function AllContracts() {
                   Delete
                 </button>
               </div>
+                <Link className="pay" to={`/payment/${contract.freelancerId}/${contract.price}`}>
+                  Pay
+                </Link>
             </div>
           ))
         ) : (
@@ -143,7 +148,7 @@ function AllContracts() {
             <h2>{noContracts}</h2>
           </div>
         )}
-        <UpdateContract isOpen={modalOpen} closeModal={closeModal} contract={Contract} JopPostId={jobId} FreelancerId={FreelancerId} token={token} fetchContracts={fetchContracts} />
+        <UpdateContract isOpen={modalOpen} closeModal={closeModal} contract={Contract} JopPostId={jobId} FreelancerId={FreelancerId} token={token} fetchContracts={fetchContracts} jopName={jobName}Name/>
       </div>
     )
 }

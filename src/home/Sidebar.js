@@ -12,6 +12,7 @@ import { TbCircleLetterL } from "react-icons/tb";
 import { MdOutlineFavorite } from "react-icons/md";
 import { IoBagRemoveSharp } from "react-icons/io5";
 import { FaFileContract } from "react-icons/fa";
+import { LiaPaypal } from "react-icons/lia";
 import './Home.css'
 export default function Sidebar() {
 
@@ -50,7 +51,7 @@ export default function Sidebar() {
                             <Link className={active===1 ?"active nav-link " : "nav-link "} onClick={e=>setActive(1)} to={'/findwork'}><MdFindInPage className='d-inline'/>Find work</Link>
                             <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/favjobs'}><MdOutlineFavorite className='d-inline'/>Fav jobs</Link>
                             <Link className={active===3 ?"active nav-link " : "nav-link "} onClick={e=>setActive(3)} to={'/appliedTasks'}><IoBagRemoveSharp className='d-inline'/>Applied Tasks</Link>
-                            <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/acceptedApplicantsFree'}><IoBagRemoveSharp className='d-inline'/>Accepts Tasks</Link>
+                            <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/acceptedApplicantsFree'}><IoBagRemoveSharp className='d-inline'/>Accepted Tasks</Link>
                         </>
                     ) : (
                     token && role === 'User'? (
@@ -68,12 +69,17 @@ export default function Sidebar() {
                         <Link className={active===1 ?"active nav-link " : "nav-link "} onClick={e=>setActive(1)} to={'/categories'}><TbCircleLetterC className='d-inline'/> Categories</Link>
                         <Link className={active===2 ?"active nav-link " : "nav-link "} onClick={e=>setActive(2)} to={'/skills'}><TbCircleLetterS className='d-inline'/> Skills</Link>
                         <Link className={active===3 ?"active nav-link " : "nav-link "} onClick={e=>setActive(3)} to={'/Languages'}><TbCircleLetterL className='d-inline'/> Languages</Link>
+                        <Link className={active===4 ?"active nav-link " : "nav-link "} onClick={e=>setActive(4)} to={'/manage-pay'}><LiaPaypal className='d-inline'/> Pay mangement</Link>
                         </>
                     ) : null
                     )}
-                        {token?(
+                        {token ?(
                             <div className='bottom-sidebar'>
-                                <button className={active===7 ?"active nav-link " : "nav-link "} onClick={handleAccount}><MdAccountCircle className='d-inline'/> Account</button>
+                                <div>
+                                    {(role ==='User' || role === 'Freelancer')?(
+                                        <button className={active===7 ?"active nav-link " : "nav-link "} onClick={handleAccount}><MdAccountCircle className='d-inline'/> Account</button>
+                                    ) : null}
+                                </div>
                                 <button className="nav-link " onClick={handleSignOut}><RiLogoutCircleLine className='d-inline'/> Sign out</button>
                             </div>
                         ) : null}
