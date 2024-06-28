@@ -16,6 +16,7 @@ export default function ProfileFree() {
     const [email, setEmail] = useState('');
     const [username, setusername] = useState('');
     const [address, setAddress] = useState('');
+    const [country, setCountry] = useState('');
     const [age, setAge] = useState('');
     const [description, setDescription] = useState('');
     const [education, setEducation] = useState('');
@@ -52,6 +53,7 @@ export default function ProfileFree() {
       setEmail(response.data.email);
       setusername(response.data.username);
       setAddress(response.data.address);
+      setCountry(response.data.country);
       setAge(response.data.age);
       setPoneNumber(response.data.phoneNumber);
       setHourlyRate(response.data.hourlyRate);
@@ -106,7 +108,7 @@ export default function ProfileFree() {
             <div className='px-3' >
               <span className='d-block my-1' style={{fontWeight:'500'}}>{fullName}</span>
               <span className='d-block my-1'>{username}</span>
-              <span className='d-block my-1'><IoLocationOutline className='d-inline'/>{address}</span>
+              <span className='d-block my-1'><IoLocationOutline className='d-inline'/>{country} {address}</span>
               <Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/>
             </div>  
             <button className='pro-fav-s-button'>

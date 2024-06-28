@@ -14,7 +14,7 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages]);
+    }, [messages, recipientId]);
 
     const scrollToBottom = () => {
         if (messagesRef.current) {
@@ -35,7 +35,7 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
                     const [userId, content] = message.split(': '); // Split by colon
                     return {
                     time: time,
-                    userId: userId,
+                    senderId: userId,
                     content: content.trim() // Trim any extra spaces
                     };
                 });
@@ -111,9 +111,10 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
             const intervalId = setInterval(fetchLastMessage, 1000);
             return () => clearInterval(intervalId);
         }
-    }, [isOpen, lastTime ]);
+    }, [isOpen, lastTime, recipientId ]);
 
   const handleSendMessage = async () => {
+    setNewMessage('');
     try {
         const response = await axios.post(`${baseUrl}/api/Chat/SendMessage`, { id: recipientId, message: newMessage }, {
             headers: {
@@ -121,7 +122,7 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
             "Content-Type": "multipart/form-data"
             },
         });
-        setNewMessage('');
+        
         const newMessageData = Object.entries(response.data).map(([time, message]) => {
             const [userId, content] = message.split(': ');
             return {
@@ -170,7 +171,7 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
                 <div className="chat-messages" ref={messagesRef}>
                     {console.log(messages)}
                     {messages.map((msg) => ( 
-                    <div key={msg.id} className={`chat-message ${msg.userId === recipientId ?  'received' : 'sent' }`}>
+                    <div key={msg.id} className={`chat-message ${msg.senderId === recipientId ?  'received' : 'sent' }`}>
                         
                         <div className="chat-message-content">
                         <p>{msg.content}</p>
