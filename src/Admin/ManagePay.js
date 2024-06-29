@@ -57,6 +57,7 @@ function ManagePay() {
                     <th>Client Name</th>
                     <th>Freelancer Name</th>
                     <th>Payment</th>
+                    <th>Job name</th>
                     <th>Date</th>
                     </tr>
                 </thead>
@@ -67,6 +68,7 @@ function ManagePay() {
                         <td>{item.clientId}</td>
                         <td>{item.freelancerId}</td>
                         <td>$ {item.price}</td>
+                        <td>$ {item.jopName}</td>
                         <td>{`${moment(item.payTime).format('DD-MM-YYYY')} - ${moment(item.payTime).format('HH-MM-SS')}`}</td>
                     </tr>
                     ))}

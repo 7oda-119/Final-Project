@@ -138,7 +138,7 @@ function AllContracts() {
                   Delete
                 </button>
               </div>
-                <Link className="pay" to={`/payment/${contract.freelancerId}/${contract.price}`}>
+                <Link className="pay" to={`/payment/${contract.freelancerId}/${contract.jopPostId}/${contract.price}`}>
                   Pay
                 </Link>
             </div>

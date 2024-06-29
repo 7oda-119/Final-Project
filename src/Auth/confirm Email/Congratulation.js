@@ -1,5 +1,4 @@
 import React from 'react';
-import './Congratulation.css';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { baseUrl } from '../../Api/Api';

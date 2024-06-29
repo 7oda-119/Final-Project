@@ -163,7 +163,7 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
                 }}>
             </button>
             </div>
-            <div className="modal-body"  style={{height: 'auto', maxHeight: '600px', overflowY: 'auto'}}>
+            <div className="modal-body"  style={{height: 'auto', maxHeight: '650px', overflowY: 'auto'}}>
             <div className="chat-container" >
                 <div className="chat-header">
                     Chat with {recipient}

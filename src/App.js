@@ -55,6 +55,7 @@ import Chat from './Chat/Chat';
 import Payment from './Payment/Payment';
 import ManagePay from './Admin/ManagePay';
 import ChatAI from './AI/ChatAI';
+import RatingAndFeedbackForm from './Rating/SetRating';
 function App() {
   
   const cookies = Cookie();
@@ -62,11 +63,11 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div style={{ display: 'flex', flexDirection: 'row', width: token ? '' : '90%' }} >
+      <div style={{ display: 'flex', flexDirection: 'row', width: token ? '' : '100%' }} >
         {token && <div style={{ flexBasis: '20%' }}>
           <Sidebar />
         </div>}
-        <div style={{ flexBasis: token ? '90%' : '90%' }}>
+        <div style={{ flexBasis: token ? '90%' : '100%' }}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='signin' element={<SignIn />}/>
@@ -105,7 +106,8 @@ function App() {
               
               <Route path='chat/:senderId/:recipientId/:recipient' element={<Chat />}/>
               
-              <Route path='payment/:freelancerId/:price' element={<Payment />}/>
+              <Route path='payment/:freelancerId/:jobPostId/:price' element={<Payment />}/>
+              <Route path='rating/:freelancerId' element={<RatingAndFeedbackForm />}/>
 
               <Route path='categories' element={<CategoriesList />}/>
               <Route path='skills' element={<SkillList />}/>

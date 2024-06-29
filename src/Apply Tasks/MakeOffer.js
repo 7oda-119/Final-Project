@@ -23,7 +23,6 @@ const MakeOffer = ({ isOpen, closeModal, jobId, jobTitle, token, fetchJobs }) =>
             Authorization: `Bearer ${token}`
             }
         })
-        navigate('/appliedTasks')
         toast.success(`The applying on ${jobTitle} has been successfully.`);
         fetchJobs();
         closeModal();

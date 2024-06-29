@@ -6,7 +6,7 @@ import Cookie from 'cookie-universal'
 import axios from 'axios';
 import { baseUrl } from '../Api/Api';
 function Payment() {
-  const { freelancerId, price } = useParams();
+  const { freelancerId, jobPostId, price } = useParams();
   const amount = parseFloat(price)
   const [totalAmount, setTotalAmount] = useState(amount); 
   const deduction = totalAmount * 0.10;
@@ -23,17 +23,16 @@ function Payment() {
   const token = cookies.get('freelanceCookie');
 
   const createContract = async() =>{
-    
     try{
       const response = await axios.post(`${baseUrl}/api/PaymentTest/Add-New-Payment`, {
-        Owner, CardNumber, MM, YY, CVV, price:totalAmount, FreelancerId:freelancerId
+        Owner, CardNumber, MM, YY, CVV, price:totalAmount, FreelancerId:freelancerId, jobId:jobPostId
       }  ,{
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data"
         }
       })
-      navigate(`/all-contracts`);
+      navigate(`/rating/${freelancerId}`);
     }catch(error){
       console.log(error);
     }

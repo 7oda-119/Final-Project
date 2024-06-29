@@ -1,20 +1,32 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from '../Auth/image/logo.png'
 import Cookie from 'cookie-universal'
 import './Home.css'
 function Navbar() {
 
+  const navigate = useNavigate();
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie');
+  const role = cookies.get('role');
 
-  
+  const logoNav = ()=>{
+    if(role === 'User'){
+      navigate('/myjobs')
+    }else if(role === 'Freelancer'){
+      navigate('/findwork')
+    }else if(role === 'Admin'){
+      navigate('/categories')
+    }else{
+      navigate('/')
+    }
+  }
 
   return ( 
     <>
         <nav className="navbar navbar-expand-lg sticky-top nav shadow-sm" >
             <div className="container">
-                <Link className="navbar-brand" to={'/'}><img style={{width:'70px', height:'50px',}} src={logo}/></Link>
+                <a className="navbar-brand" onClick={logoNav}><img style={{width:'70px', height:'50px',}} src={logo}/></a>
                 {!token ? (
                   <Link className="nav-link " aria-current="page" to={'/'}>Home</Link>
                 ) : null}

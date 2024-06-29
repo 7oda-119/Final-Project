@@ -11,7 +11,6 @@ const FreelancersPage = () => {
   const navigate = useNavigate();
   const [freelancers, setFreelancers] = useState([]); 
   const [name, setName] = useState('');
-  const [rating, setRating] = useState()
 
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie')
@@ -106,7 +105,7 @@ const FreelancersPage = () => {
                 <h3>{data.fullName}</h3>
                 <p>Position: {data.yourTitle}</p>
                 <p>Hourly rate: {data.hourlyRate}$</p>
-                <p style={{ marginLeft:'69px' }}><Rating readOnly  style={{ maxWidth: '100px' }} value={rating} onChange={setRating}/></p>
+                <p style={{ marginLeft:'69px' }}><Rating readOnly  style={{ maxWidth: '100px' }} value={data.rate} /></p>
               </div>
 
               <div className="card-buttons">

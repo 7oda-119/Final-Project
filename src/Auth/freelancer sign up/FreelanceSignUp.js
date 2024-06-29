@@ -258,9 +258,6 @@ function FreelanceSignUp() {
         <div className="sign-up">
             <form onSubmit={handleSubmit}>
                 <h1>Create Account</h1>
-                <div className="social-icons">
-                <a href="#" className="icon"><FaGoogle /></a>
-                </div>
                 <div>
                     <div className='progressbar'>
                         <div style={{width: step === 1 ? "25%" : step === 2 ? "50%" : step === 3 ? "75%" : "100%"}}></div>
@@ -350,7 +347,7 @@ function FreelanceSignUp() {
                     <div className='steps'>
                     <input type="number" name='hourlyRate' value={HourlyRate} onChange={(e) => setHourlyRate(e.target.value)} placeholder="hourlyRate($.. per hour)"/>
                     <textarea className="form-control" name='education' value={Education} onChange={(e) => setEducation(e.target.value)} placeholder="Education"></textarea>
-                    <textarea className="form-control" name='exprirnces' value={Experience} onChange={(e) => setExperience(e.target.value)} placeholder="Exprirnces"></textarea>
+                    <textarea className="form-control" name='exprirnces' value={Experience} onChange={(e) => setExperience(e.target.value)} placeholder="Experience"></textarea>
                     <input type="url" name='protfolioUrl' value={PortfolioURl} onChange={(e) => setPortfolioURl(e.target.value)} placeholder="Protfolio Url"/>
                     
                     <button onClick={handleBack}>Back</button>

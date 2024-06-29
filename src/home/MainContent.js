@@ -35,6 +35,7 @@ const MainContent = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [SearchForCategory, setCategories] = useState([]);
+  const [notFound, setNotFound] = useState('');
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -47,16 +48,20 @@ const MainContent = () => {
   }, []);
 
   const handleSearch = async () => {
-    if (searchTerm.trim() === '') {
-      setCategories([]);
-      return;
-    }
+    
     try {
       const response = await axios.get(`${baseUrl}/api/Home/Category-Search?name=${searchTerm}`);
       console.log(response.data)
       setCategories(response.data);
     } catch (error) {
-      console.log(error.response);
+      if(error.response.data === 'No categories found matching the criteria'){
+        setNotFound('Not exist !')
+      }
+      else{
+        if(error.response.status === 400){
+          setNotFound(null)
+        }
+      }
     }
     
   };
@@ -127,11 +132,15 @@ const MainContent = () => {
             onKeyPress={handleKeyPress}
           />
           {/*<button className='search-category'>Search</button>*/}
-          {SearchForCategory.map((cat)=> (
-            <p className='showsearch-category' key={cat.id}>
-              <span>{cat.name}</span>
-            </p>
-          ))}
+          {SearchForCategory.length > 0 ? (
+            SearchForCategory.map((cat) => (
+              <p className='showsearch-category' key={cat.id}>
+                <span>{cat.name}</span>
+              </p>
+            ))
+          ) : (
+            <p className='not-found'>{notFound}</p>
+          )}
         </div>
       </div>
       <div className="popular-categories">

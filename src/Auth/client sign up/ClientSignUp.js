@@ -105,10 +105,6 @@ function ClientSignUp() {
             <div className="sign-up">
                 <form onSubmit={handleSubmit}>
                     <h1>Create Account</h1>
-                    <div className="social-icons">
-                    <a href="#" className="icon"><FaGoogle /></a>
-                    </div>
-                    <span>or use your Email for registeration</span>
                     <input type="text" placeholder="FirstName" name='FirstName' value={FirstName} onChange={(e) => setFirstName(e.target.value)}/>
                     {errors.FirstName && <span className='erorr'>{errors.FirstName}</span>}
                     <input type="text" placeholder="LastName" name='LastName' value={LastName} onChange={(e) => setLastName(e.target.value)}/>

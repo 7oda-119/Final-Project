@@ -65,11 +65,7 @@ function SignIn() {
         <div className="section">        
             <div className="form-section sign-in">
                 <form onSubmit={handleSubmit}>
-                    <h1>Sign In</h1>
-                    <div className="social-icons">
-                        <a href="#" className="icon"><FaGoogle /></a>
-                    </div>
-                    <span>or use your email password</span>
+                    <h1 className='mb-5'>Sign In</h1>
                     <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} required />
                     <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} required />
                     <button className='forgetPass' onClick={navigateToForgetPass}>Forget Your Password?</button>

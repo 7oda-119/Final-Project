@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const WebsitePrivileges = () => {
   const navigate = useNavigate();
   const navToSign =()=>{
-    navigate('/Signin')
+    navigate('/clientOrfreelance')
   }
   return (
     <div className="privileges-section">

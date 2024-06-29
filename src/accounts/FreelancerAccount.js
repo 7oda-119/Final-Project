@@ -3,7 +3,7 @@ import ConfirmPass from './password/ConfirmPass'
 import FreelancerInformation from './information/FreelancerInformation'
 export default function FreelancerAccount() {
   return (
-    <div >
+    <div>
         <div className='d-flex justify-content-center mt-3 row' >
             <nav className='d-flex justify-content-center'>
                 <div className="nav nav-tabs" id="nav-tab" role="tablist">

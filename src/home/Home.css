@@ -109,7 +109,11 @@
     top: 0;
     right: 15px;
   }
-  
+  .search-input-container .not-found{
+    color: crimson;
+    font-size: 18px;
+    font-weight: 500;
+  }
   /* Popular categories section styles */
   .popular-categories {
     padding: 2rem;
