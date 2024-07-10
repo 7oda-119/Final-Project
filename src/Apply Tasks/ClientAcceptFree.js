@@ -47,7 +47,7 @@ function ClientAcceptFree() {
     const [modalOpen, setModalOpen] = useState(false);
     const [userId, setUserId] = useState();
     const [recipientId, setRecipientId] = useState();
-    const [recipient, setRecipient] = useState(false);
+    const [recipient, setRecipient] = useState('');
     const openChatModal = (clientId, freelancerId, freelancerName) => {
       setUserId(clientId);
       setRecipientId(freelancerId);

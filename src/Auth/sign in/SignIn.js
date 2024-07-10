@@ -42,9 +42,9 @@ function SignIn() {
           cookies.set('freelanceCookie', token);
           cookies.set('role', role);
           if(role === 'Freelancer'){
-            window.location.pathname='/findwork';
+            window.location.pathname='/account-freelancer';
           }else if(role === 'User'){
-            window.location.pathname='/myjobs'; 
+            window.location.pathname='/account-user'; 
           }else{
             window.location.pathname='/categories'; 
           }

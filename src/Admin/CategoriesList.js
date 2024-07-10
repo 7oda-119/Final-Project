@@ -41,9 +41,11 @@ const CategoriesList = () => {
       }
     };
 
-  const [addCategory, setAddCategory] = useState();
+  const [addCategory, setAddCategory] = useState('');
   //handle adding category
   const handleAddCategory = async() => {
+    if(addCategory === '' || addCategory.trim()==='')return;
+    
     try{
       const response = await axios.post(`${baseUrl}/api/Category/Add-New-Category`, {name: addCategory}, {
         headers: {

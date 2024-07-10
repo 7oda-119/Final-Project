@@ -48,6 +48,10 @@ const MainContent = () => {
   }, []);
 
   const handleSearch = async () => {
+    if(searchTerm === '' || searchTerm.trim()===''){
+      setCategories([]);
+        setNotFound('');
+    }
     
     try {
       const response = await axios.get(`${baseUrl}/api/Home/Category-Search?name=${searchTerm}`);
@@ -55,12 +59,10 @@ const MainContent = () => {
       setCategories(response.data);
     } catch (error) {
       if(error.response.data === 'No categories found matching the criteria'){
+        setCategories([])
         setNotFound('Not exist !')
-      }
-      else{
-        if(error.response.status === 400){
-          setNotFound(null)
-        }
+      }else{
+        console.log(error.response);
       }
     }
     

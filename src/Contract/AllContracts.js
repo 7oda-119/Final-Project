@@ -56,6 +56,7 @@ function AllContracts() {
         if (newContracts.length === 0) {
           setNocontracts("Looks like there are no contracts to display yet. Create a new contract to get started.");
         }
+        fetchContracts();
       } catch (error) {
         console.log(error.response);
       }

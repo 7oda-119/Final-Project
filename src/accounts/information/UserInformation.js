@@ -78,7 +78,7 @@ function Information() {
           </div>
           <FaUserEdit className='edit-user' onClick={openInfoModal}/>
         </div>
-        <EditInfoUser isOpen={modalInfoOpen} closeModal={closeInfoModal} />
+        <EditInfoUser isOpen={modalInfoOpen} closeModal={closeInfoModal} fetchUserData={fetchData}/>
     </div>
   )
 }

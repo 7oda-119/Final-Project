@@ -106,13 +106,13 @@
     height: 50px;
 }
   
-.no-jobs{
+.no-jobs, .no-freelancer{
     display: flex;
     justify-content: center;
     margin-top: 50px;
   }
   
-  .no-jobs h1{
+  .no-jobs h1, .no-freelancer h1{
     max-width: 500px;
     color: crimson;
     font-weight: 500;

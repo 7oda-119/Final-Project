@@ -42,7 +42,7 @@ const CreateContract = () => {
 
   return (
     <div className='contract'>
-      <div style={{marginLeft:'-200px'}}>
+      <div style={{marginLeft:'-180px'}}>
         {loading && <Loader />}
       </div>
       <div className="form-container">

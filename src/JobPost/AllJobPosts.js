@@ -72,7 +72,6 @@ const JobPostsPage = () => {
            Authorization: `Bearer ${token}`
         }
       })
-      toast.success('success. Check your Favorite Box.');
       fetcJobs();
     } catch(error){
       console.log(error.response)
@@ -105,7 +104,6 @@ const JobPostsPage = () => {
         },
       });
       fetcJobs();
-      toast.success(`The deleting ${title} has been successfully.`);
     } catch (error) {
       console.log(error.response);
     }

@@ -41,16 +41,17 @@ const SkillsList = () => {
     }
   };
 
-  const [addSkill, setAddSkill] = useState();
+  const [addSkill, setAddSkill] = useState('');
   //handle adding skill
   const handleAddSkill = async() => {
+    if(addSkill === '' || addSkill.trim() === '')return;
     try{
       const response = await axios.post(`${baseUrl}/api/Skill/Add-New-Skill`, {name: addSkill}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      toast.success(`${addSkill} Category added successfully!`);
+      toast.success(`${addSkill} Skill added successfully!`);
       setAddSkill("");
       fetchData();
     }catch(error){

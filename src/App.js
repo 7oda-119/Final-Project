@@ -19,10 +19,7 @@ import Error403 from './errorPages/Error403';
 
 import Error401 from './errorPages/Error401';
 import Error500 from './errorPages/Error500';
-import Select from './components/Select';
-import SelectImage from './components/SelectImage';
 import RequireAuth from './Auth/RequireAuth';
-import Heart from './components/Heart';
 import AllJobPosts from './JobPost/AllJobPosts';
 import ProfileFree from './FindFreelancer/ProfileFree';
 import FreelancersPage from './FindFreelancer/FreelancersPage';
@@ -40,18 +37,12 @@ import Cookie from 'cookie-universal'
 import MyFavJobs from './Favorites/MyFavJobs';
 import FavFreelancers from './Favorites/FavFreelancers';
 import JobDetails from './Favorites/JobDetails';
-import Loader from './components/Loader';
 import FreeAppliedTasks from './Apply Tasks/FreeAppliedTasks';
 import EditInfoFreelancer from './accounts/information/EditInfoFreelancer';
 import JobApplicants from './Apply Tasks/JobApplicants';
 import FreeAcceptedForTasks from './Apply Tasks/FreeAcceptesTasks';
 import ClientAcceptedFrees from './Apply Tasks/ClientAcceptFree';
-import SkillSelectionForm from './components/SkillSelectionForm';
-import EditLandSkill from './accounts/information/EditLandSkill';
-import CardProf from './components/CardProf';
-import Cardd from './components/Card';
 import AllContracts from './Contract/AllContracts';
-import Chat from './Chat/Chat';
 import Payment from './Payment/Payment';
 import ManagePay from './Admin/ManagePay';
 import ChatAI from './AI/ChatAI';
@@ -104,8 +95,6 @@ function App() {
               <Route path='ContractDetails/:id' element={<ContractDetails />}/>
               <Route path='create-contract/:FreelancerId/:JopPostId' element={<CreateContract />}/>
               
-              <Route path='chat/:senderId/:recipientId/:recipient' element={<Chat />}/>
-              
               <Route path='payment/:freelancerId/:jobPostId/:price' element={<Payment />}/>
               <Route path='rating/:freelancerId' element={<RatingAndFeedbackForm />}/>
 
@@ -117,18 +106,10 @@ function App() {
               <Route path='gpt' element={<ChatAI />}/>
             </Route>
 
-            <Route path='select' element={<Select />}/>
-            <Route path='selectimage' element={<SelectImage />}/>
-            <Route path='heart' element={<Heart />}/>
-
-            <Route path='cardprof' element={<CardProf />}/>
             <Route path='error403' element={<Error403 />}/>
             <Route path='error401' element={<Error401 />}/>
             <Route path='error500' element={<Error500 />}/>
             <Route path='*' element={<Error404 />}/>
-            <Route path='loader' element={<Loader />}/>
-            <Route path='SkillSelectionForm' element={<SkillSelectionForm />}/>
-            <Route path='EditLandSkill' element={<EditLandSkill/>}/>
 
           </Routes>
 

@@ -421,6 +421,10 @@
   }
   
   /* Join us button styles */
+  .privileges-section button{
+    background-color: transparent;
+    border: none;
+  }
   .join-us-btn {
     height: 250px;
   }

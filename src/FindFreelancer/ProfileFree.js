@@ -138,7 +138,7 @@ export default function ProfileFree() {
                 }
               </div>
               <h4>PortfolioURL:</h4>
-              <a href={portfolioURL} className='linkedin'>portfolioURL</a>
+              <a href={portfolioURL} className='linkedin' target="_blank">portfolioURL</a>
             </div>
           </div>           
         </div>

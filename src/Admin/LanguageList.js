@@ -41,10 +41,11 @@ const LanguageList = () => {
     }
   };
 
-  const [addLanguage, setAddLanguage] = useState();
-  const [addID, setAddID] = useState();
+  const [addLanguage, setAddLanguage] = useState('');
+  const [addID, setAddID] = useState('');
   //handle adding language
   const handleAddLanguage = async() => {
+    if(addLanguage === '' || addLanguage.trim() === '' || addID === '' || addID.trim() === '')return;
     try{
       const response = await axios.post(`${baseUrl}/api/Language/Add-New-Language`, { id: addID, value: addLanguage }, {
         headers: {

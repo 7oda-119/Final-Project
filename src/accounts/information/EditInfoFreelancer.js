@@ -12,6 +12,7 @@ import { BsGeoAlt } from "react-icons/bs";
 import { BsLink45Deg } from "react-icons/bs";
 import cityData from '../../cityData.json'
 import { Link, useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader';
 export default function EditInfoFreelancer() {
 
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ export default function EditInfoFreelancer() {
   const [data, setData] = useState(cityData);
   const [getState, setState] = useState([]);
   const [cities, setCities] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
   const country = [...new Set(data.map((item) => item.country))];
   country.sort();
@@ -95,6 +98,7 @@ export default function EditInfoFreelancer() {
   };
 
   const updateProfileInfo = async () => {
+    setLoading(true)
     const formData = new FormData();
     formData.append('FirstName', FirstName);
     formData.append('LastName', LastName);
@@ -121,14 +125,19 @@ export default function EditInfoFreelancer() {
           },
         }
       );
+      setLoading(false)
       navigate('/account-freelancer')
     } catch (err) {
+      setLoading(false)
       console.log(err);
     }
   };
 
   return (
     <div className="container" style={{ minHeight: '90vh', paddingTop: '20px' }}>
+      <div style={{marginLeft:'-200px'}}>
+        {loading && <Loader />}
+      </div>
     <div className="row justify-content-center">
       <div className="col-md-12 col-lg-10">
         <h1 className="mb-4 text-center">Edit Profile</h1>

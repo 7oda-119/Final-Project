@@ -98,9 +98,9 @@ function ChatModal({isOpen, closeModal, userId, recipientId, recipient, token}) 
                 }*/
 
                 // Scroll to the bottom AFTER the state is updated and content is rendered
-                setTimeout(() => {
-                    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-                }, 0); 
+                //setTimeout(() => {
+               //     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+               // }, 0); 
                 
             } catch (error) {
                 console.error('Error fetching messages:', error);

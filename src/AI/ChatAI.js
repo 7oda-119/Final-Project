@@ -5,9 +5,12 @@ import { FaRocketchat } from "react-icons/fa";
 import logo from '../Auth/image/logo.png'
 import './AI.css'
 import { baseUrl } from '../Api/Api';
+import Blob from '../components/Blob';
 function ChatAI() {
-    const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');
   const [allMessages, setAllMessages] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
   const messagesRef = useRef(null);
 
@@ -27,6 +30,7 @@ function ChatAI() {
     // Add the user's message to the allMessages array
     setAllMessages((prevMessages) => [...prevMessages, { userMessage: message }]);
     setMessage('');
+    setLoading(true)
     try {
         // Using Axios to make the API call
         const response = await axios.post(`${baseUrl}/api/AIAssistant/Ask-Any-Question?quesiton=${message}`);
@@ -35,8 +39,9 @@ function ChatAI() {
         console.log(response.data);
         setAllMessages((prevMessages) => [...prevMessages, { aiResponse: response.data }]);
       console.log(message)
-        
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
         console.error('Error sending message:', error);
     }
   };
@@ -58,7 +63,7 @@ function ChatAI() {
                     {msg.aiResponse && (
                       <div className="response-container">
                         <FaRocketchat className="avatar" />
-                        <div className="response">{(msg.aiResponse).replace(/\*|`/g, "")}</div>
+                        <div className="response">{(msg.aiResponse).replace(/\*|`|"""|#/g, "")}</div>
                       </div>
                     )}
                   </div>
@@ -69,6 +74,9 @@ function ChatAI() {
                   <p className='text-center mt-1' style={{color:'crimson'}}>Waiting for your question....</p>
                 </div>
               )}
+              <div className='text-center'>
+                {loading && <Blob />}
+              </div>
             </div>
                 <div className="input-container">
                     <input

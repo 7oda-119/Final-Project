@@ -45,11 +45,11 @@ function AcceptesTasks() {
     const [modalOpen, setModalOpen] = useState(false);
     const [userId, setUserId] = useState();
     const [recipientId, setRecipientId] = useState();
-    const [recipient, setRecipient] = useState(false);
-    const openChatModal = (freelancerId, clientId, freelancerName) => {
+    const [recipient, setRecipient] = useState('');
+    const openChatModal = (freelancerId, clientId, ClientName) => {
       setUserId(freelancerId);
       setRecipientId(clientId);
-      setRecipient(freelancerName);
+      setRecipient(ClientName);
       setModalOpen(true);
     };
     const closeChatModal = () => {
@@ -88,7 +88,7 @@ function AcceptesTasks() {
           </div>
         ) : (
           <div className="no-jobs">
-            <h1>Please check the jobs first and apply on the tasks you want</h1>
+            <h1>there are no accepted Task yet.</h1>
           </div>
         )}
       </div>

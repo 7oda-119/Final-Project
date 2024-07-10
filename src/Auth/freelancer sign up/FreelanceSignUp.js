@@ -9,6 +9,7 @@ import PhoneInput from 'react-phone-number-input'
 import { ToastContainer, toast } from 'react-toastify';
 import { baseUrl } from '../../Api/Api';
 import cityData from '../../cityData.json'
+import Loader from '../../components/Loader';
 function FreelanceSignUp() {
 
     const navigate = useNavigate();
@@ -44,6 +45,8 @@ function FreelanceSignUp() {
     const [data, setData] = useState(cityData)
     const [getState, setState] = useState([])
     const [cities, setCities] = useState([])
+
+    const [loading, setLoading] = useState(false);
 
     
     const country = [...new Set(data.map(item=> item.country))];
@@ -210,6 +213,7 @@ function FreelanceSignUp() {
 
     const handleSubmit= async (e)=> {
         e.preventDefault();
+        setLoading(true)
         const formData = new FormData();
         formData.append('FirstName', FirstName);
         formData.append('LastName', LastName);
@@ -242,18 +246,19 @@ function FreelanceSignUp() {
                     'Content-Type': 'multipart/form-data',
                   },
             })
-            console.log(PhoneNumber)
-            console.log(response)
+            setLoading(false)
             navigate('/reconfirm-email')
             toast.success('Check your Email to confirm the Email')
         }
         catch(err){
+            setLoading(false)
             console.log(err)
         }
     }
 
   return (
     <div className='box'>
+        {loading && <Loader />}
         <div className="sec" id="sec">
         <div className="sign-up">
             <form onSubmit={handleSubmit}>

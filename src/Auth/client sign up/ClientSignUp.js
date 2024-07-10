@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { baseUrl } from '../../Api/Api';
+import Loader from '../../components/Loader';
 
 function ClientSignUp() {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ function ClientSignUp() {
     const [getState, setState] = useState([])
     const [errors, setErrors] = useState({});
 
+    const [loading, setLoading] = useState(false);
 
     const validateForm = () => {
         const newErrors = {};
@@ -81,6 +83,7 @@ function ClientSignUp() {
       };
     const handleSubmit = async(e)=>{
         e.preventDefault();
+        setLoading(true)
         const newErrors = validateForm();
         setErrors(newErrors);
         try{
@@ -89,11 +92,12 @@ function ClientSignUp() {
                     'Content-Type': 'multipart/form-data',
                 },
             })
-            console.log(response )
+            setLoading(false)
             navigate('/reconfirm-email')
             toast.success('Check your Email to confirm the Email');
         }
         catch(err){
+            setLoading(false)
             console.log(err)
         }
     }
@@ -101,6 +105,7 @@ function ClientSignUp() {
     
   return (
     <div className='box'>
+        {loading && <Loader />}
         <div className="sec" id="sec">
             <div className="sign-up">
                 <form onSubmit={handleSubmit}>

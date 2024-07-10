@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
 import { baseUrl } from '../../Api/Api';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
@@ -22,7 +21,7 @@ export default function Password({ show, onHide }) {
       newErrors.oldPassword = 'Password should be at least 8 characters long';
     }
 
-    if (!newPassword) {
+    if (!newPassword || newPassword.trim() === '') {
       newErrors.newPassword = 'Password is required';
     }  else if (newPassword.length < 8) {
       newErrors.newPassword = 'Password should be at least 8 characters long';
@@ -30,7 +29,7 @@ export default function Password({ show, onHide }) {
       newErrors.newPassword = "Password mut be at least one capital character, small character, number and special character.";
     }
 
-    if (!confirmNewPassword) {
+    if (!confirmNewPassword || confirmNewPassword.trim() === '') {
       newErrors.confirmNewPassword = 'Confirm Password is required';
     } else if (confirmNewPassword!== newPassword) {
       newErrors.confirmNewPassword = 'Passwords do not match';
@@ -47,27 +46,28 @@ export default function Password({ show, onHide }) {
     e.preventDefault();
     const newErrors = validateForm();
     setErrors(newErrors);
-    try{
-      const response = await axios.post(`${baseUrl}/api/Account/ChangePassword-All`, {oldPassword, newPassword, confirmNewPassword},{
-        headers: {
-          Authorization: `Bearer ${token}`,
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        const response = await axios.post(`${baseUrl}/api/Account/ChangePassword-All`, { oldPassword, newPassword, confirmNewPassword }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        onHide();
+        toast.success('Password Changed');
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmNewPassword('');
+        setErrorRes('');
+        setErrors({});
+      } catch (err) {
+        console.log(err.response.data);
+        if (err.response.data === "Failed to change password") {
+          setErrorRes('The old password not correct');
+        } else {
+          setErrorRes('');
         }
-      })
-      onHide();
-      toast.success('Password Changed')
-      setOldPassword('');
-      setNewPassword('');
-      setConfirmNewPassword('');
-      setErrorRes('');
-      setErrors();
-    }catch(err){
-      console.log(err.response.data)
-      if(err.response.data === "Failed to change password"){
-        setErrorRes('The old password not correct')
-      }else{
-        setErrorRes('')
       }
-      
     }
   };
 

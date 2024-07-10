@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Cookie from 'cookie-universal'
 import axios from 'axios';
 import { baseUrl } from '../Api/Api';
+import Loader from '../components/Loader';
 function Payment() {
   const { freelancerId, jobPostId, price } = useParams();
   const amount = parseFloat(price)
@@ -18,11 +19,14 @@ function Payment() {
   const [YY, setYY] = useState('')
   const [CVV, setCVV] = useState('')
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const cookies = Cookie();
   const token = cookies.get('freelanceCookie');
 
   const createContract = async() =>{
+    setLoading(true);
     try{
       const response = await axios.post(`${baseUrl}/api/PaymentTest/Add-New-Payment`, {
         Owner, CardNumber, MM, YY, CVV, price:totalAmount, FreelancerId:freelancerId, jobId:jobPostId
@@ -32,13 +36,18 @@ function Payment() {
           "Content-Type": "multipart/form-data"
         }
       })
+      setLoading(false);
       navigate(`/rating/${freelancerId}`);
     }catch(error){
+      setLoading(false);
       console.log(error);
     }
   }
   return (
     <div className="payment py-3 ">
+      <div style={{marginLeft:'-200px'}}>
+        {loading && <Loader />}
+      </div>
       <div className="row mb-4">
         <div className="col-lg-8 mx-auto text-center">
           <h1 className="display-6">Payment</h1>

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Cookie from 'cookie-universal'
 import { baseUrl } from '../../Api/Api';
 import { ToastContainer, toast } from 'react-toastify';
-export default function EditInfoUser({ isOpen, closeModal }) {
+import Loader from '../../components/Loader';
+export default function EditInfoUser({ isOpen, closeModal, fetchUserData }) {
     
-
     //call country and sort it
     const [data, setData] = useState([])
     useEffect(()=>{
@@ -17,6 +17,8 @@ export default function EditInfoUser({ isOpen, closeModal }) {
     const [FirstName, setFirstName] = useState('');
     const [LastName, setLastName] = useState('');
     const [Country, setCountry] = useState();
+
+    const [loading, setLoading] = useState(false);
 
     //get token
     const cookies = Cookie();
@@ -44,6 +46,7 @@ export default function EditInfoUser({ isOpen, closeModal }) {
 
     //update user data
     const updateProfileInfo = async()=>{
+      setLoading(true)
       const formData = new FormData();
       formData.append('FirstName', FirstName);
       formData.append('LastName', LastName);
@@ -55,14 +58,20 @@ export default function EditInfoUser({ isOpen, closeModal }) {
             'Content-Type': 'multipart/form-data',
           }
       });
-      window.location.reload();
+      setLoading(false)
+      fetchUserData();
+      closeModal();
       }catch(err){
+        setLoading(false)
         console.log(err)
       }
     }
       
   return (
     <div>
+      <div style={{marginLeft:'-200px'}}>
+        {loading && <Loader />}
+      </div>
         <div className={`modal ${isOpen ? 'show' : ''}`} style={{ display: isOpen ? 'block' : 'none' }}>
         <div className="modal-dialog" > 
           <div className="modal-content" style={{marginLeft:'80px', marginTop:'100px'}}>

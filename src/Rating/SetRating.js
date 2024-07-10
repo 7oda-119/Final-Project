@@ -5,6 +5,7 @@ import '@smastrom/react-rating/style.css'
 import axios from 'axios';
 import Cookie from 'cookie-universal'
 import { baseUrl } from '../Api/Api';
+import Loader from '../components/Loader';
 
 const RatingAndFeedbackForm = () => {
     
@@ -13,6 +14,8 @@ const RatingAndFeedbackForm = () => {
     const cookies = Cookie();
     const token = cookies.get('freelanceCookie');
         
+    const [loading, setLoading] = useState(false);
+
     const [rating, setRating] = useState(0);
     const [feedback, setFeedback] = useState('');
     const [taskCompletionPercentage, setTaskCompletionPercentage] = useState(100);
@@ -27,11 +30,7 @@ const RatingAndFeedbackForm = () => {
 
     const handleSubmit = async(event) => {
         event.preventDefault();
-
-        console.log('Freelancer ID:', freelancerId);
-        console.log('Rating:', rating);
-        console.log('Feedback:', feedback);
-        console.log('Task Completion Percentage:', taskCompletionPercentage);
+        setLoading(true)
 
         try{
             const response = await axios.post(`${baseUrl}/api/Rating/Add-New-Rating`, {
@@ -42,16 +41,19 @@ const RatingAndFeedbackForm = () => {
                 "Content-Type": "multipart/form-data"
             }
             })
-            //setLoading(false)
+            setLoading(false)
             navigate('/myjobs');
         }catch(error){
-            //setLoading(false)
+            setLoading(false)
             console.log(error);
         }
     };
 
   return (
     <div className="container" style={{minHeight:'88vh'}}>
+      <div style={{marginLeft:'-200px'}}>
+        {loading && <Loader />}
+      </div>
       <div className="row justify-content-center mt-3">
         <div className="col-md-6">
           <h2 className="text-center mb-4">Rate and Provide Feedback</h2>
@@ -59,7 +61,7 @@ const RatingAndFeedbackForm = () => {
 
             <div className="form-group">
                 <label>Rating</label>
-                <Rating style={{ maxWidth: '150px' }} value={rating} onChange={setRating}/>
+                <Rating style={{ maxWidth: '150px' }} value={rating} onChange={setRating} isRequired/>
             </div>
 
             <div className="form-group mb-3">
